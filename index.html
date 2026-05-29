@@ -50,7 +50,9 @@
     <span class="pill on" onclick="togglePill(this)">For you</span>
     <span class="pill" onclick="togglePill(this)">Today's Deals</span>
     <span class="pill" onclick="togglePill(this)">Trending</span>
-    <span class="pill" onclick="togglePill(this)">Deals on now</span>
+    <span class="pill" onclick="togglePill(this)">Clothing</span>
+    <span class="pill" onclick="togglePill(this)">Accessories</span>
+    <span class="pill" onclick="togglePill(this)">Shoes</span>
   </div>
 
   <div class="stylist-bar fade-up delay-2" onclick="showSection('stylist')">
@@ -71,33 +73,24 @@
     <div>
       <div class="brand">Zara</div>
       <div class="sub">Summer sale — up to 30% off · 847 items match your profile</div>
-      <div class="cta">Shop now →</div>
+      <div class="cta" onclick="showSection('retailer')">Shop now →</div>
     </div>
     <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
   </div>
 
-  <div class="featured-card fade-up delay-2">
-    <div>
-      <div class="brand">Free People</div>
-      <div class="sub">649 items match your profile</div>
-      <div class="cta">Shop now →</div>
-    </div>
-    <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
-  </div
-
   <div class="section-label fade-up delay-3">All Retailers</div>
   <div class="retailers-grid fade-up delay-3">
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
-    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
+    <div class="retailer-tile"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
+    <div class="retailer-tile"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
+    <div class="retailer-tile"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
+    <div class="retailer-tile"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
+    <div class="retailer-tile"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
     <div class="retailer-tile" style="border-style:dashed;cursor:default;"><div class="r-name" style="color:var(--text-muted);">+ More coming</div><div class="r-count">Stay tuned</div></div>
   </div>
 
