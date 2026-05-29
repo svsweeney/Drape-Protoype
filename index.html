@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div style="height:28px;"></div>
+  <div class="feed-content">
 
   <div class="search-wrapper fade-up delay-1">
     <input class="search-input" type="text" placeholder="Search retailers, brands, styles…">
@@ -73,26 +73,121 @@
     <div>
       <div class="brand">Zara</div>
       <div class="sub">Summer sale — up to 30% off · 847 items match your profile</div>
-      <div class="cta" onclick="showSection('retailer')">Shop now →</div>
+      <div class="cta" onclick="openRetailer('zara')">Shop now →</div>
     </div>
     <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
   </div>
 
   <div class="section-label fade-up delay-3">All Retailers</div>
   <div class="retailers-grid fade-up delay-3">
-    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
-    <div class="retailer-tile"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
-    <div class="retailer-tile"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
-    <div class="retailer-tile"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
-    <div class="retailer-tile"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
-    <div class="retailer-tile"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
-    <div class="retailer-tile" style="border-style:dashed;cursor:default;"><div class="r-name" style="color:var(--text-muted);">+ More coming</div><div class="r-count">Stay tuned</div></div>
+    <div class="retailer-tile" onclick="openRetailer('hm')"><div class="r-name">H&M</div></div>
+    <div class="retailer-tile" onclick="openRetailer('asos')"><div class="r-name" style="color:var(--gold);">ASOS</div></div>
+    <div class="retailer-tile" onclick="openRetailer('mango')"><div class="r-name" style="color:#c0392b;">Mango</div></div>
+    <div class="retailer-tile" onclick="openRetailer('uniqlo')"><div class="r-name" style="color:#c0392b;">Uniqlo</div></div>
+    <div class="retailer-tile" onclick="openRetailer('plt')"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div></div>
+    <div class="retailer-tile" onclick="openRetailer('riverisland')"><div class="r-name">River Island</div></div>
+    <div class="retailer-tile" onclick="openRetailer('arket')"><div class="r-name">ARKET</div></div>
+    <div class="retailer-tile" onclick="openRetailer('cos')"><div class="r-name">COS</div></div>
+    <div class="retailer-tile" onclick="openRetailer('monki')"><div class="r-name" style="color:#4a7c3f;">Monki</div></div>
+    <div class="retailer-tile" onclick="openRetailer('bershka')"><div class="r-name">Bershka</div></div>
+    <div class="retailer-tile" onclick="openRetailer('pullbear')"><div class="r-name" style="color:#4a7c3f;">Pull&Bear</div></div>
+    <div class="retailer-tile" onclick="openRetailer('zara')"><div class="r-name" style="color:var(--gold);">Zara</div></div>
   </div>
+
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+SECTION 5: RETAILER CATALOG
+══════════════════════════════════════ -->
+<section id="retailer" style="padding-top:64px;">
+ 
+  <!-- Inner nav: back arrow + DRAPE logo + retailer name + actions -->
+  <div class="rc-nav">
+    <button class="rc-back" onclick="showSection('feed')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back
+    </button>
+    <div class="rc-nav-divider"></div>
+    <span class="rc-nav-logo">DRAPE</span>
+    <div class="rc-nav-divider"></div>
+    <span class="rc-nav-brand" id="rc-brand-name">Zara</span>
+    <div class="rc-nav-right">
+      <div class="rc-matched-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span id="rc-matched-text">847 items matched to you</span>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+  </div>
+ 
+  <!-- Brand hero -->
+  <div class="rc-hero">
+    <div class="rc-logo-box"><span class="rc-logo-text" id="rc-logo-text">ZARA</span></div>
+    <div class="rc-brand-info">
+      <div class="rc-brand-title-row">
+        <h2 class="rc-brand-name" id="rc-hero-name">Zara</h2>
+        <button class="rc-follow-btn"
+          onmouseenter="this.style.background='var(--gold)';this.style.color='var(--cream)';"
+          onmouseleave="this.style.background='transparent';this.style.color='var(--gold)';">
+          + Follow
+        </button>
+      </div>
+      <p class="rc-brand-sub" id="rc-hero-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
+      <div class="rc-brand-tags" id="rc-hero-tags">
+        <span class="rc-brand-tag">Womenswear</span>
+        <span class="rc-brand-tag">Menswear</span>
+        <span class="rc-brand-tag">New in</span>
+        <span class="rc-brand-tag">Sale</span>
+        <span class="rc-brand-tag">Studio</span>
+      </div>
+    </div>
+    <div class="rc-overall-match">
+      <div class="rc-match-num" id="rc-match-num">73%</div>
+      <div class="rc-match-lbl">overall match<br>to your profile</div>
+    </div>
+  </div>
+ 
+  <!-- Toolbar: search + filters + sort -->
+  <div class="rc-toolbar">
+    <div class="rc-search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span id="rc-search-text">Search Zara…</span>
+    </div>
+    <div class="rc-filters">
+      <span class="rc-filter on">All</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">New in</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Tops</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Trousers</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Dresses</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Outerwear</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Sale</span>
+    </div>
+    <select class="rc-sort">
+      <option>Sort: Best match</option>
+      <option>Price: low–high</option>
+      <option>Price: high–low</option>
+      <option>Newest first</option>
+    </select>
+  </div>
+ 
+  <!-- Results bar -->
+  <div class="rc-results-bar">
+    <span class="rc-results-count" id="rc-results-count">1,247 items · showing best matches for you first</span>
+    <div class="rc-view-toggle">
+      <button class="rc-view-btn on" aria-label="Grid view">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </button>
+      <button class="rc-view-btn" aria-label="List view">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+ 
+  <!-- Product grid (rendered dynamically per retailer) -->
+  <div class="rc-grid" id="rcGrid"></div>
 
 </section>
 
@@ -833,6 +928,307 @@
     document.getElementById('cart-count').textContent = cartCount + (cartCount === 1 ? ' item' : ' items');
     document.getElementById('cart-cta').textContent = 'View cart — £' + cartTotal.toFixed(2);
   }
+
+  /* ─── RETAILER CATALOGS ───────────────────────────────
+     Each item: n=name, p=price, w=was(optional), m=match%, t=tags, k=image keyword */
+  const RETAILERS = {
+    zara: {
+      name: 'Zara', logo: 'ZARA', count: '1,247', matched: '847', match: 73,
+      sub: 'Summer sale · Up to 30% off · Free delivery over £50',
+      tags: ['Womenswear', 'Menswear', 'New in', 'Sale', 'Studio'],
+      items: [
+        { n: 'Linen wide-leg trousers', p: '£39.99', m: 94, t: ['Your size M', 'Loose tailoring', 'Neutral tone'], k: 'trousers' },
+        { n: 'Satin slip midi dress', p: '£49.99', w: '£69.99', m: 88, t: ['Your size M', 'Soft feminine', 'Sale'], k: 'dress' },
+        { n: 'Oversized linen blazer', p: '£69.99', m: 82, t: ['Your size M', 'Oversized fit', 'Neutral tone'], k: 'blazer' },
+        { n: 'Ribbed knit top', p: '£25.99', m: 78, t: ['Your size M', 'Fitted cut'], k: 'knit' },
+        { n: 'Pleated midi skirt', p: '£35.99', m: 76, t: ['Your size M', 'Soft feminine', 'Earthy tone'], k: 'skirt' },
+        { n: 'Cropped wool cardigan', p: '£45.99', m: 72, t: ['Your size M', 'Cosy knit'], k: 'cardigan' },
+        { n: 'Poplin shirt dress', p: '£39.99', m: 69, t: ['Your size M', 'Smart casual'], k: 'dress' },
+        { n: 'High-waist tailored trousers', p: '£39.99', m: 67, t: ['Your size M', 'Workwear'], k: 'trousers' },
+        { n: 'Floral print maxi dress', p: '£59.99', w: '£79.99', m: 61, t: ['Your size M', 'Bold print', 'Sale'], k: 'dress' },
+        { n: 'Faux-leather biker jacket', p: '£69.99', m: 55, t: ['Your size M', 'Statement'], k: 'jacket' },
+        { n: 'Knitted polo vest', p: '£29.99', m: 52, t: ['Your size M', 'Layering'], k: 'knit' },
+        { n: 'Neon orange crop jacket', p: '£55.99', m: 38, t: ['Avoids: orange', 'Bright colour'], k: 'jacket' }
+      ]
+    },
+    hm: {
+      name: 'H&M', logo: 'H&M', count: '2,880', matched: '612', match: 68,
+      sub: 'Conscious collection · New season · Free returns',
+      tags: ['Divided', 'H&M Man', 'Kids', 'Conscious', 'Sale'],
+      items: [
+        { n: 'Rib-knit jumper', p: '£19.99', m: 90, t: ['Your size M', 'Cosy knit', 'Neutral tone'], k: 'sweater' },
+        { n: 'Wide-leg twill trousers', p: '£27.99', m: 85, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Oversized cotton shirt', p: '£24.99', m: 80, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Linen-blend midi dress', p: '£34.99', m: 77, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Ribbed tank top', p: '£9.99', m: 74, t: ['Your size M', 'Layering'], k: 'top' },
+        { n: 'Tailored blazer', p: '£44.99', m: 70, t: ['Your size M', 'Smart casual'], k: 'blazer' },
+        { n: 'Pleated trousers', p: '£29.99', m: 66, t: ['Your size M', 'Workwear'], k: 'trousers' },
+        { n: 'Cropped denim jacket', p: '£34.99', m: 60, t: ['Your size M', 'Denim'], k: 'denim' },
+        { n: 'Floral wrap dress', p: '£29.99', m: 54, t: ['Your size M', 'Print'], k: 'dress' },
+        { n: 'Sequin mini dress', p: '£39.99', m: 44, t: ['Party', 'Bold'], k: 'dress' },
+        { n: 'Neon pink hoodie', p: '£24.99', m: 32, t: ['Avoids: neon', 'Bright colour'], k: 'hoodie' }
+      ]
+    },
+    asos: {
+      name: 'ASOS', logo: 'ASOS', count: '4,700', matched: '1,204', match: 64,
+      sub: 'ASOS DESIGN · Next-day delivery · Student discount',
+      tags: ['Women', 'Men', 'Edition', 'Petite', 'Sale'],
+      items: [
+        { n: 'ASOS DESIGN slouchy trousers', p: '£28.00', m: 88, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Ribbed midi dress', p: '£32.00', m: 84, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Oversized dad blazer', p: '£55.00', m: 80, t: ['Your size M', 'Oversized fit'], k: 'blazer' },
+        { n: 'Knitted lounge set', p: '£40.00', m: 76, t: ['Your size M', 'Cosy knit'], k: 'knit' },
+        { n: 'Straight-leg jeans', p: '£30.00', m: 73, t: ['Your size M', 'Denim'], k: 'jeans' },
+        { n: 'Linen shirt', p: '£26.00', m: 70, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Pleated maxi skirt', p: '£34.00', m: 66, t: ['Your size M', 'Soft feminine'], k: 'skirt' },
+        { n: 'Faux-leather trench', p: '£65.00', m: 58, t: ['Your size M', 'Statement'], k: 'coat' },
+        { n: 'Bias-cut slip dress', p: '£28.00', w: '£38.00', m: 55, t: ['Your size M', 'Sale'], k: 'dress' },
+        { n: 'Cargo mini skirt', p: '£25.00', m: 48, t: ['Trend-led'], k: 'skirt' },
+        { n: 'Bright orange co-ord', p: '£42.00', m: 34, t: ['Avoids: orange', 'Bold'], k: 'top' }
+      ]
+    },
+    mango: {
+      name: 'Mango', logo: 'MANGO', count: '2,100', matched: '720', match: 76,
+      sub: 'New collection · Mediterranean style · Free delivery over £35',
+      tags: ['Women', 'Man', 'Kids', 'Sale', 'Committed'],
+      items: [
+        { n: 'Linen-blend blazer', p: '£59.99', m: 92, t: ['Your size M', 'Relaxed tailoring', 'Neutral tone'], k: 'blazer' },
+        { n: 'Wide-leg flowy trousers', p: '£35.99', m: 88, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Satin midi slip skirt', p: '£39.99', m: 84, t: ['Your size M', 'Soft feminine'], k: 'skirt' },
+        { n: 'Knitted halter top', p: '£25.99', m: 80, t: ['Your size M', 'Fitted cut'], k: 'knit' },
+        { n: 'Oversized poplin shirt', p: '£29.99', m: 77, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Belted trench coat', p: '£79.99', m: 72, t: ['Your size M', 'Neutral tone'], k: 'coat' },
+        { n: 'Ribbed knit dress', p: '£45.99', m: 68, t: ['Your size M', 'Cosy knit'], k: 'dress' },
+        { n: 'Pleated palazzo trousers', p: '£39.99', m: 64, t: ['Your size M', 'Workwear'], k: 'trousers' },
+        { n: 'Floral midi dress', p: '£49.99', w: '£69.99', m: 60, t: ['Your size M', 'Print', 'Sale'], k: 'dress' },
+        { n: 'Leather-effect leggings', p: '£35.99', m: 52, t: ['Your size M', 'Statement'], k: 'leggings' },
+        { n: 'Fuchsia tailored suit', p: '£99.99', m: 40, t: ['Bold colour', 'Statement'], k: 'suit' }
+      ]
+    },
+    uniqlo: {
+      name: 'Uniqlo', logo: 'UNIQLO', count: '1,560', matched: '540', match: 82,
+      sub: 'LifeWear · HEATTECH & AIRism · Free delivery over £40',
+      tags: ['Women', 'Men', 'Kids', 'UT', 'Sale'],
+      items: [
+        { n: 'Smart ankle trousers', p: '£29.90', m: 93, t: ['Your size M', 'Relaxed tailoring', 'Neutral tone'], k: 'trousers' },
+        { n: 'Supima cotton crew tee', p: '£14.90', m: 89, t: ['Your size M', 'Relaxed fit'], k: 'tshirt' },
+        { n: 'Merino-blend jumper', p: '£34.90', m: 85, t: ['Your size M', 'Cosy knit'], k: 'sweater' },
+        { n: 'Linen-blend shirt', p: '£29.90', m: 81, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Pleated wide trousers', p: '£39.90', m: 77, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Rayon midi dress', p: '£39.90', m: 73, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Ultra Light Down jacket', p: '£69.90', m: 69, t: ['Your size M', 'Layering'], k: 'jacket' },
+        { n: 'Ribbed knit cardigan', p: '£34.90', m: 65, t: ['Your size M', 'Layering'], k: 'cardigan' },
+        { n: 'Wide straight jeans', p: '£39.90', m: 60, t: ['Your size M', 'Denim'], k: 'jeans' },
+        { n: 'Fleece half-zip', p: '£24.90', m: 55, t: ['Cosy', 'Casual'], k: 'sweater' }
+      ]
+    },
+    plt: {
+      name: 'Pretty Little Thing', logo: 'PLT', count: '3,400', matched: '410', match: 51,
+      sub: 'Up to 60% off everything · Next-day delivery',
+      tags: ['Dresses', 'Going out', 'Co-ords', 'Petite', 'Sale'],
+      items: [
+        { n: 'Ribbed bodycon midi dress', p: '£22.00', w: '£32.00', m: 72, t: ['Your size M', 'Fitted cut', 'Sale'], k: 'dress' },
+        { n: 'Oversized blazer dress', p: '£38.00', m: 68, t: ['Your size M', 'Statement'], k: 'blazer' },
+        { n: 'Knitted lounge co-ord', p: '£30.00', m: 64, t: ['Your size M', 'Cosy knit'], k: 'knit' },
+        { n: 'Satin cowl-neck top', p: '£16.00', m: 60, t: ['Your size M', 'Soft feminine'], k: 'top' },
+        { n: 'Wide-leg tailored trousers', p: '£28.00', m: 58, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Faux-leather mini skirt', p: '£22.00', m: 54, t: ['Your size M', 'Going out'], k: 'skirt' },
+        { n: 'Slinky maxi dress', p: '£26.00', m: 52, t: ['Your size M', 'Party'], k: 'dress' },
+        { n: 'Cropped puffer jacket', p: '£40.00', m: 48, t: ['Trend-led'], k: 'jacket' },
+        { n: 'Cut-out bandage dress', p: '£25.00', m: 42, t: ['Party', 'Bold'], k: 'dress' },
+        { n: 'Neon green co-ord set', p: '£35.00', m: 30, t: ['Avoids: neon', 'Bright colour'], k: 'top' },
+        { n: 'Hot pink corset top', p: '£18.00', m: 28, t: ['Bold colour', 'Going out'], k: 'top' }
+      ]
+    },
+    riverisland: {
+      name: 'River Island', logo: 'RI', count: '1,950', matched: '430', match: 70,
+      sub: 'New season · High-street edit · Free delivery over £40',
+      tags: ['Women', 'Men', 'Girls', 'Boys', 'Sale'],
+      items: [
+        { n: 'Tailored wide-leg trousers', p: '£40.00', m: 90, t: ['Your size M', 'Loose tailoring', 'Neutral tone'], k: 'trousers' },
+        { n: 'Satin slip midi dress', p: '£45.00', m: 85, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Oversized boyfriend blazer', p: '£65.00', m: 81, t: ['Your size M', 'Oversized fit', 'Neutral tone'], k: 'blazer' },
+        { n: 'Ribbed knit jumper', p: '£32.00', m: 77, t: ['Your size M', 'Cosy knit'], k: 'sweater' },
+        { n: 'Pleated midi skirt', p: '£38.00', m: 73, t: ['Your size M', 'Soft feminine', 'Earthy tone'], k: 'skirt' },
+        { n: 'Oversized poplin shirt', p: '£30.00', m: 69, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Straight-leg jeans', p: '£40.00', m: 64, t: ['Your size M', 'Denim'], k: 'jeans' },
+        { n: 'Belted trench coat', p: '£85.00', m: 60, t: ['Your size M', 'Neutral tone'], k: 'coat' },
+        { n: 'Bias-cut maxi dress', p: '£48.00', w: '£60.00', m: 55, t: ['Your size M', 'Sale'], k: 'dress' },
+        { n: 'Faux-leather mini skirt', p: '£35.00', m: 48, t: ['Going out', 'Trend-led'], k: 'skirt' },
+        { n: 'Bright orange blazer', p: '£70.00', m: 34, t: ['Avoids: orange', 'Bold colour'], k: 'blazer' }
+      ]
+    },
+    arket: {
+      name: 'ARKET', logo: 'ARKET', count: '840', matched: '360', match: 84,
+      sub: 'Modern essentials · Sustainable materials · Café in store',
+      tags: ['Women', 'Men', 'Kids', 'Home', 'Sale'],
+      items: [
+        { n: 'Heavyweight cotton tee', p: '£25.00', m: 95, t: ['Your size M', 'Relaxed fit', 'Neutral tone'], k: 'tshirt' },
+        { n: 'Wool-blend tailored trousers', p: '£89.00', m: 90, t: ['Your size M', 'Relaxed tailoring'], k: 'trousers' },
+        { n: 'Oversized wool coat', p: '£165.00', m: 86, t: ['Your size M', 'Neutral tone'], k: 'coat' },
+        { n: 'Merino crew-neck jumper', p: '£69.00', m: 83, t: ['Your size M', 'Cosy knit'], k: 'sweater' },
+        { n: 'Linen A-line dress', p: '£79.00', m: 79, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Organic poplin shirt', p: '£55.00', m: 75, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Pleated midi skirt', p: '£69.00', m: 71, t: ['Your size M', 'Earthy tone'], k: 'skirt' },
+        { n: 'Relaxed tapered jeans', p: '£75.00', m: 67, t: ['Your size M', 'Denim'], k: 'jeans' },
+        { n: 'Quilted liner jacket', p: '£115.00', m: 62, t: ['Your size M', 'Layering'], k: 'jacket' },
+        { n: 'Knitted polo shirt', p: '£49.00', m: 58, t: ['Your size M', 'Smart casual'], k: 'knit' }
+      ]
+    },
+    cos: {
+      name: 'COS', logo: 'COS', count: '1,200', matched: '430', match: 79,
+      sub: 'Timeless, modern, functional · Free delivery over £50',
+      tags: ['Women', 'Men', 'New arrivals', 'Sale'],
+      items: [
+        { n: 'Voluminous wide trousers', p: '£89.00', m: 92, t: ['Your size M', 'Loose tailoring', 'Neutral tone'], k: 'trousers' },
+        { n: 'Draped midi dress', p: '£115.00', m: 88, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Oversized wool-blend coat', p: '£190.00', m: 84, t: ['Your size M', 'Statement'], k: 'coat' },
+        { n: 'Cashmere roll-neck', p: '£125.00', m: 80, t: ['Your size M', 'Cosy knit'], k: 'sweater' },
+        { n: 'Organic-cotton poplin shirt', p: '£69.00', m: 76, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Sculpted A-line skirt', p: '£79.00', m: 72, t: ['Your size M', 'Earthy tone'], k: 'skirt' },
+        { n: 'Tailored straight-leg trousers', p: '£89.00', m: 68, t: ['Your size M', 'Workwear'], k: 'trousers' },
+        { n: 'Knitted column dress', p: '£99.00', m: 64, t: ['Your size M', 'Fitted cut'], k: 'dress' },
+        { n: 'Relaxed selvedge jeans', p: '£89.00', m: 60, t: ['Your size M', 'Denim'], k: 'jeans' },
+        { n: 'Structured leather tote', p: '£150.00', m: 55, t: ['Accessory', 'Neutral tone'], k: 'handbag' }
+      ]
+    },
+    monki: {
+      name: 'Monki', logo: 'MONKI', count: '920', matched: '220', match: 58,
+      sub: 'Bold, playful, sustainable · Free delivery over £30',
+      tags: ['Dresses', 'Denim', 'Tops', 'New', 'Sale'],
+      items: [
+        { n: 'Mom-fit jeans', p: '£35.00', m: 80, t: ['Your size M', 'Denim', 'Relaxed fit'], k: 'jeans' },
+        { n: 'Oversized graphic tee', p: '£15.00', m: 72, t: ['Your size M', 'Relaxed fit'], k: 'tshirt' },
+        { n: 'Ribbed knit midi dress', p: '£30.00', m: 70, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Cropped cardigan', p: '£28.00', m: 66, t: ['Your size M', 'Cosy knit'], k: 'cardigan' },
+        { n: 'Wide-leg cord trousers', p: '£32.00', m: 62, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Pleated mini skirt', p: '£22.00', m: 58, t: ['Your size M', 'Trend-led'], k: 'skirt' },
+        { n: 'Boxy denim jacket', p: '£45.00', m: 54, t: ['Your size M', 'Denim'], k: 'denim' },
+        { n: 'Slinky cami dress', p: '£25.00', m: 50, t: ['Your size M', 'Party'], k: 'dress' },
+        { n: 'Fluffy knit jumper', p: '£30.00', m: 46, t: ['Cosy knit', 'Statement'], k: 'sweater' },
+        { n: 'Bright orange cargo pants', p: '£36.00', m: 32, t: ['Avoids: orange', 'Bold colour'], k: 'trousers' }
+      ]
+    },
+    bershka: {
+      name: 'Bershka', logo: 'BERSHKA', count: '2,300', matched: '180', match: 49,
+      sub: 'Trend-led styles · Under £40 · Gen Z favourites',
+      tags: ['Women', 'Men', 'Trending', 'Denim', 'Sale'],
+      items: [
+        { n: 'Baggy carpenter jeans', p: '£29.99', m: 70, t: ['Your size M', 'Denim', 'Loose tailoring'], k: 'jeans' },
+        { n: 'Oversized poplin shirt', p: '£22.99', m: 66, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Knitted vest top', p: '£15.99', m: 62, t: ['Your size M', 'Layering'], k: 'knit' },
+        { n: 'Faux-leather trench', p: '£45.99', m: 58, t: ['Your size M', 'Statement'], k: 'coat' },
+        { n: 'Slinky halter midi dress', p: '£19.99', m: 54, t: ['Your size M', 'Going out'], k: 'dress' },
+        { n: 'Cargo parachute trousers', p: '£29.99', m: 50, t: ['Trend-led'], k: 'trousers' },
+        { n: 'Cropped boxy tee', p: '£12.99', m: 48, t: ['Your size M', 'Relaxed fit'], k: 'tshirt' },
+        { n: 'Pleated tennis skirt', p: '£19.99', m: 44, t: ['Trend-led'], k: 'skirt' },
+        { n: 'Acid-wash denim jacket', p: '£39.99', m: 40, t: ['Denim', 'Statement'], k: 'denim' },
+        { n: 'Neon green crop top', p: '£12.99', m: 28, t: ['Avoids: neon', 'Bright colour'], k: 'top' }
+      ]
+    },
+    pullbear: {
+      name: 'Pull&Bear', logo: 'P&B', count: '1,800', matched: '200', match: 55,
+      sub: 'Casual & street style · Free delivery over £30',
+      tags: ['Women', 'Men', 'Denim', 'Streetwear', 'Sale'],
+      items: [
+        { n: 'Relaxed straight jeans', p: '£29.99', m: 76, t: ['Your size M', 'Denim', 'Relaxed fit'], k: 'jeans' },
+        { n: 'Oversized hoodie', p: '£25.99', m: 70, t: ['Your size M', 'Casual'], k: 'hoodie' },
+        { n: 'Boxy knit jumper', p: '£27.99', m: 66, t: ['Your size M', 'Cosy knit'], k: 'sweater' },
+        { n: 'Flowy wide trousers', p: '£25.99', m: 62, t: ['Your size M', 'Loose tailoring'], k: 'trousers' },
+        { n: 'Cropped poplin shirt', p: '£19.99', m: 58, t: ['Your size M', 'Relaxed fit'], k: 'shirt' },
+        { n: 'Ribbed midi dress', p: '£22.99', m: 55, t: ['Your size M', 'Soft feminine'], k: 'dress' },
+        { n: 'Faux-leather bomber', p: '£45.99', m: 50, t: ['Your size M', 'Statement'], k: 'jacket' },
+        { n: 'Denim mini skirt', p: '£19.99', m: 46, t: ['Denim', 'Trend-led'], k: 'skirt' },
+        { n: 'Baggy cargo trousers', p: '£29.99', m: 42, t: ['Trend-led'], k: 'trousers' },
+        { n: 'Bright orange windbreaker', p: '£39.99', m: 34, t: ['Avoids: orange', 'Bright colour'], k: 'jacket' }
+      ]
+    }
+  };
+
+  const HEART_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+  /* ─── Minimalist garment illustrations (one per category) ─── */
+  const _svg = p => `<svg viewBox="0 0 120 150" fill="rgba(255,255,255,0.28)" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${p}</svg>`;
+  const GARMENT = {
+    trousers: _svg('<path d="M36 20 H84 L80 138 H62 L60 74 L58 138 H40 Z"/><path d="M36 30 H84" fill="none"/>'),
+    skirt:    _svg('<path d="M42 24 H78 L94 132 H26 Z"/><path d="M42 34 H78" fill="none"/><path d="M54 34 V130 M60 34 V132 M66 34 V130" fill="none"/>'),
+    dress:    _svg('<path d="M44 22 Q60 32 76 22 L70 70 L92 136 H28 L50 70 Z"/><path d="M50 70 H70" fill="none"/>'),
+    tee:      _svg('<path d="M44 26 Q60 36 76 26 L100 42 L90 58 L80 50 V122 H40 V50 L30 58 L20 42 Z"/>'),
+    sweater:  _svg('<path d="M42 26 Q60 36 78 26 L98 42 L86 70 L78 60 V124 H42 V60 L34 70 L22 42 Z"/>'),
+    shirt:    _svg('<path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/><path d="M46 22 L60 34 L74 22" fill="none"/><path d="M60 34 V124" fill="none"/>'),
+    hoodie:   _svg('<path d="M40 34 Q60 18 80 34 L98 46 L88 70 L80 60 V126 H40 V60 L32 70 L22 46 Z"/><path d="M48 34 Q60 48 72 34" fill="none"/><path d="M48 98 H72" fill="none"/>'),
+    jacket:   _svg('<path d="M44 22 L30 32 L36 58 V128 H54 L57 64 H63 L66 128 H84 V58 L90 32 L76 22 L60 36 Z"/><path d="M60 36 L54 64 M60 36 L66 64" fill="none"/>'),
+    bag:      _svg('<path d="M32 58 H88 L82 128 H38 Z"/><path d="M48 58 V46 A12 12 0 0 1 72 46 V58" fill="none"/><path d="M56 58 H64" fill="none"/>')
+  };
+  // Map every catalogue keyword to one of the drawn icons
+  const GARMENT_MAP = {
+    trousers: 'trousers', leggings: 'trousers', jeans: 'trousers', denim: 'trousers',
+    skirt: 'skirt', dress: 'dress', top: 'tee', tshirt: 'tee',
+    knit: 'sweater', sweater: 'sweater', cardigan: 'sweater',
+    shirt: 'shirt', blouse: 'shirt', hoodie: 'hoodie',
+    jacket: 'jacket', blazer: 'jacket', coat: 'jacket', suit: 'jacket',
+    handbag: 'bag'
+  };
+  const garmentIcon = cat => GARMENT[GARMENT_MAP[cat] || 'tee'];
+
+  function renderCard(it, brand) {
+    const high = it.m >= 75;
+    const badgeClass = it.m >= 75 ? 'rc-badge-high' : (it.m >= 50 ? 'rc-badge-mid' : 'rc-badge-low');
+    const save = it.m < 50;
+    const price = it.w ? `${it.p} <s>${it.w}</s>` : it.p;
+    const tags = it.t.map(t => `<span class="rc-tag">${t}</span>`).join('');
+    const btn = save
+      ? `<button class="rc-btn rc-btn-save"
+            onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
+            onmouseleave="this.style.background='';this.style.color='';">Save for later</button>`
+      : `<button class="rc-btn rc-btn-add"
+            onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+            onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">Add to cart</button>`;
+    return `
+      <div class="rc-card${high ? ' rc-high' : ''}">
+        <div class="rc-img">
+          <div class="rc-illustration">${garmentIcon(it.k)}</div>
+          <div class="rc-badge ${badgeClass}">${it.m}% match</div>
+          <button class="rc-wishlist" aria-label="Save to wishlist">${HEART_SVG}</button>
+        </div>
+        <div class="rc-info">
+          <div class="rc-brand-label">${brand}</div>
+          <div class="rc-item-name">${it.n}</div>
+          <div class="rc-price">${price}</div>
+          <div class="rc-tags">${tags}</div>
+          ${btn}
+        </div>
+      </div>`;
+  }
+
+  function renderRetailer(key) {
+    const r = RETAILERS[key];
+    if (!r) return;
+    document.getElementById('rc-brand-name').textContent = r.name;
+    document.getElementById('rc-matched-text').textContent = r.matched + ' items matched to you';
+    const logoEl = document.getElementById('rc-logo-text');
+    logoEl.textContent = r.logo;
+    // Scale the wordmark down for longer logos so it never crosses the box border
+    const len = r.logo.length;
+    logoEl.style.fontSize = (len <= 3 ? 20 : len === 4 ? 18 : len === 5 ? 16 : len === 6 ? 14 : 12) + 'px';
+    document.getElementById('rc-hero-name').textContent = r.name;
+    document.getElementById('rc-hero-sub').textContent = r.sub;
+    document.getElementById('rc-hero-tags').innerHTML = r.tags.map(t => `<span class="rc-brand-tag">${t}</span>`).join('');
+    document.getElementById('rc-match-num').textContent = r.match + '%';
+    document.getElementById('rc-search-text').textContent = 'Search ' + r.name + '…';
+    document.getElementById('rc-results-count').textContent = r.count + ' items · showing best matches for you first';
+    document.getElementById('rcGrid').innerHTML = r.items.map(it => renderCard(it, r.name)).join('');
+    // reset filter pills to "All"
+    document.querySelectorAll('#retailer .rc-filter').forEach((f, i) => f.classList.toggle('on', i === 0));
+  }
+
+  function openRetailer(key) {
+    renderRetailer(key);
+    showSection('retailer');
+  }
+
+  // Pre-render Zara so the catalog isn't empty on first open
+  renderRetailer('zara');
 </script>
 
 </body>
