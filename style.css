@@ -528,6 +528,13 @@ section.active { display: block; }
   border: 1px solid var(--gold); color: var(--gold); background: transparent;
   cursor: pointer; font-family: var(--font-body); transition: all 0.15s;
 }
+.rc-brand-sub { font-size: 13px; color: var(--text-mid); margin-bottom: 10px; }
+.rc-brand-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.rc-brand-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 10px;
+  background: var(--gold-faint); border: 0.5px solid var(--gold-border);
+  color: var(--gold);
+}
 .rc-visit-btn {
   font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px;
   border: 1px solid var(--gold-border); color: var(--text-mid); background: var(--gold-faint);
