@@ -73,7 +73,7 @@
     <div>
       <div class="brand">Zara</div>
       <div class="sub">Summer sale — up to 30% off · 847 items match your profile</div>
-      <div class="cta" onclick="openRetailer('zara')">Shop now →</div>
+      <div class="cta" onclick="showSection('retailer')">Shop now →</div>
     </div>
     <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
   </div>
@@ -95,99 +95,6 @@
   </div>
 
   </div>
-
-</section>
-
-<!-- ══════════════════════════════════════
-SECTION 5: RETAILER CATALOG
-══════════════════════════════════════ -->
-<section id="retailer" style="padding-top:64px;">
- 
-  <!-- Inner nav: back arrow + DRAPE logo + retailer name + actions -->
-  <div class="rc-nav">
-    <button class="rc-back" onclick="showSection('feed')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back
-    </button>
-    <div class="rc-nav-divider"></div>
-    <span class="rc-nav-logo">DRAPE</span>
-    <div class="rc-nav-divider"></div>
-    <span class="rc-nav-brand" id="rc-brand-name">Zara</span>
-    <div class="rc-nav-right">
-      <div class="rc-matched-pill">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span id="rc-matched-text">847 items matched to you</span>
-      </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-    </div>
-  </div>
- 
-  <!-- Brand hero -->
-  <div class="rc-hero">
-    <div class="rc-logo-box"><span class="rc-logo-text" id="rc-logo-text">ZARA</span></div>
-    <div class="rc-brand-info">
-      <div class="rc-brand-title-row">
-        <h2 class="rc-brand-name" id="rc-hero-name">Zara</h2>
-        <button class="rc-follow-btn"
-          onmouseenter="this.style.background='var(--gold)';this.style.color='var(--cream)';"
-          onmouseleave="this.style.background='transparent';this.style.color='var(--gold)';">
-          + Follow
-        </button>
-      </div>
-      <p class="rc-brand-sub" id="rc-hero-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
-      <div class="rc-brand-tags" id="rc-hero-tags">
-        <span class="rc-brand-tag">Womenswear</span>
-        <span class="rc-brand-tag">Menswear</span>
-        <span class="rc-brand-tag">New in</span>
-        <span class="rc-brand-tag">Sale</span>
-        <span class="rc-brand-tag">Studio</span>
-      </div>
-    </div>
-    <div class="rc-overall-match">
-      <div class="rc-match-num" id="rc-match-num">73%</div>
-      <div class="rc-match-lbl">overall match<br>to your profile</div>
-    </div>
-  </div>
- 
-  <!-- Toolbar: search + filters + sort -->
-  <div class="rc-toolbar">
-    <div class="rc-search">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <span id="rc-search-text">Search Zara…</span>
-    </div>
-    <div class="rc-filters">
-      <span class="rc-filter on">All</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">New in</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Tops</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Trousers</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Dresses</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Outerwear</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Sale</span>
-    </div>
-    <select class="rc-sort">
-      <option>Sort: Best match</option>
-      <option>Price: low–high</option>
-      <option>Price: high–low</option>
-      <option>Newest first</option>
-    </select>
-  </div>
- 
-  <!-- Results bar -->
-  <div class="rc-results-bar">
-    <span class="rc-results-count" id="rc-results-count">1,247 items · showing best matches for you first</span>
-    <div class="rc-view-toggle">
-      <button class="rc-view-btn on" aria-label="Grid view">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      </button>
-      <button class="rc-view-btn" aria-label="List view">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      </button>
-    </div>
-  </div>
- 
-  <!-- Product grid (rendered dynamically per retailer) -->
-  <div class="rc-grid" id="rcGrid"></div>
 
 </section>
 
