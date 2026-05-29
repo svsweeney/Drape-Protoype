@@ -384,6 +384,13 @@
   <div id="cartRoot"></div>
 </section>
 
+<!-- ══════════════════════════════════════
+     SECTION 7: PRODUCT DETAIL PAGE (PDP)
+══════════════════════════════════════ -->
+<section id="product">
+  <div id="productRoot"></div>
+</section>
+
 <!-- ─── BOTTOM NAV ─── -->
 <nav class="bottom-nav">
   <button class="bnav-item active" id="bnav-feed" onclick="showSection('feed')">
@@ -417,7 +424,7 @@
 </button>
 
 <script>
-  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart'];
+  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product'];
 
   function showSection(id) {
     sections.forEach(s => {
@@ -772,18 +779,18 @@
     const price = it.w ? `${it.p} <s>${it.w}</s>` : it.p;
     const tags = it.t.map(t => `<span class="rc-tag">${t}</span>`).join('');
     const btn = save
-      ? `<button class="rc-btn rc-btn-save" onclick="saveRetailerItem('${key}', ${idx}, this)"
+      ? `<button class="rc-btn rc-btn-save" onclick="event.stopPropagation(); saveRetailerItem('${key}', ${idx}, this)"
             onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
             onmouseleave="this.style.background='';this.style.color='';">Save for later</button>`
-      : `<button class="rc-btn rc-btn-add" onclick="addRetailerItem('${key}', ${idx}, this)"
+      : `<button class="rc-btn rc-btn-add" onclick="event.stopPropagation(); addRetailerItem('${key}', ${idx}, this)"
             onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
             onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">Add to cart</button>`;
     return `
-      <div class="rc-card${high ? ' rc-high' : ''}">
+      <div class="rc-card${high ? ' rc-high' : ''}" onclick="openProductFromRetailer('${key}', ${idx})">
         <div class="rc-img">
           <div class="rc-illustration">${garmentIcon(it.k)}</div>
           <div class="rc-badge ${badgeClass}">${it.m}% match</div>
-          <button class="rc-wishlist" aria-label="Save to wishlist">${HEART_SVG}</button>
+          <button class="rc-wishlist" aria-label="Save to wishlist" onclick="event.stopPropagation(); saveRetailerItem('${key}', ${idx}); this.classList.toggle('saved')">${HEART_SVG}</button>
         </div>
         <div class="rc-info">
           <div class="rc-brand-label">${brand}</div>
@@ -919,7 +926,7 @@
 
   function renderReel(post, i) {
     const garments = post.items.map(it => `<div class="post-garment">${garmentIcon(it.k)}</div>`).join('');
-    const chips    = post.items.map(it => `<div class="reel-chip">${it.n} · ${it.p}</div>`).join('');
+    const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
     const hashtags = post.hashtags.map(h => `<span class="hashtag">${h}</span>`).join('');
     const capName  = post.handle.replace('@', '');
     return `
@@ -1389,6 +1396,243 @@
     renderCartBadges(state);
     if (document.getElementById('cart').classList.contains('active') && cartView === 'cart') renderCartPage();
   });
+
+  /* ══════════════════════════════════════════════════════
+     PRODUCT DETAIL PAGE — store cards AND social chips both
+     route here; the PDP feeds the same unified Cart.
+     ══════════════════════════════════════════════════════ */
+  const BRAND_KEY = {};
+  Object.keys(RETAILERS).forEach(k => { BRAND_KEY[RETAILERS[k].name.toLowerCase()] = k; });
+  const brandKey = name => BRAND_KEY[String(name).toLowerCase()] || null;
+
+  /* style tags inferred from garment type (social chips carry no tag data) */
+  const STYLE_TAGS = {
+    sweater: ['Cosy knit', 'Relaxed fit'], trousers: ['Loose tailoring', 'Neutral tone'],
+    dress: ['Soft feminine', 'Easy drape'], shirt: ['Relaxed fit', 'Breathable'],
+    tee: ['Everyday staple', 'Soft cotton'], skirt: ['Midi length', 'Soft feminine'],
+    jacket: ['Structured', 'Layering'], hoodie: ['Casual', 'Brushed-back'],
+    bag: ['Accessory', 'Neutral tone'], shoe: ['Comfortable sole', 'Versatile']
+  };
+  const styleTagsFor = k => STYLE_TAGS[GARMENT_MAP[k] || 'tee'] || ['Everyday', 'Versatile'];
+
+  function productFromRetailer(key, idx) {
+    const r = RETAILERS[key]; if (!r || !r.items[idx]) return null;
+    const it = r.items[idx];
+    const size = (it.t || []).find(t => /size/i.test(t)) || 'Your size M';
+    const tags = (it.t || []).filter(t => !/size/i.test(t));
+    return { id: 'i:' + r.name + ':' + it.n, retailer: r.name, retailerKey: key, name: it.n,
+             priceLabel: it.p, price: parsePrice(it.p), was: it.w, match: it.m, size, tags, k: it.k };
+  }
+  function productFromChip(i, j) {
+    const post = POSTS[i]; if (!post || !post.items[j]) return null;
+    const it = post.items[j]; const b = splitBrand(it.n);
+    return { id: 'i:' + b.retailer + ':' + b.name, retailer: b.retailer, retailerKey: brandKey(b.retailer),
+             name: b.name, priceLabel: it.p, price: parsePrice(it.p), match: post.match,
+             size: 'Your size M', tags: styleTagsFor(it.k), k: it.k };
+  }
+  function openProductFromRetailer(key, idx) { const p = productFromRetailer(key, idx); if (p) openProduct(p); }
+  function openProductFromChip(i, j) { const p = productFromChip(i, j); if (p) openProduct(p); }
+
+  let currentProduct = null, productBackTo = 'feed', pdpSize = 'M', pdpQty = 1;
+  function openProduct(p) {
+    const cur = sections.find(s => document.getElementById(s).classList.contains('active'));
+    if (cur && cur !== 'product') productBackTo = cur;
+    currentProduct = p; pdpSize = 'M'; pdpQty = 1;
+    renderProductPage();
+    showSection('product');
+    window.scrollTo(0, 0);
+  }
+  function goBackFromProduct() { showSection(productBackTo || 'feed'); }
+
+  /* deterministic per-product mock copy + reviews (stable, but varies by product) */
+  function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
+  const DESC_BY_TYPE = {
+    sweater: 'Knitted from a soft, mid-weight yarn that keeps its shape wash after wash.',
+    trousers: 'Cut with a fluid, relaxed leg that drapes cleanly from the hip.',
+    dress: 'A fluid silhouette that skims the body and moves beautifully as you walk.',
+    shirt: 'Crisp yet breathable, with a relaxed collar and an easy, untucked drape.',
+    tee: 'A wardrobe staple in a substantial, structured cotton that wears in nicely.',
+    skirt: 'A versatile midi cut that takes you from desk to dinner without a thought.',
+    jacket: 'Lightly structured shoulders with a soft, unlined finish for everyday layering.',
+    hoodie: 'Brushed-back fleece with a roomy, lived-in fit and a heavyweight feel.',
+    bag: 'Crafted in a wipe-clean finish with a structured, stand-up shape.',
+    shoe: 'A clean, contemporary shape set on a comfortable everyday sole.'
+  };
+  const STYLE_NOTES = [
+    'Style it back with relaxed tailoring and a flat mule for an easy day-to-night look.',
+    'Layer under a longline coat now, then wear it solo as the weather turns.',
+    'Pairs effortlessly with denim or wide-leg trousers for a put-together finish.',
+    'Tuck it in for a sharper line, or leave it loose for something more off-duty.'
+  ];
+  function renderDescription(p) {
+    const base = DESC_BY_TYPE[GARMENT_MAP[p.k] || 'tee'] || 'A considered everyday piece designed to layer into your existing wardrobe.';
+    const note = STYLE_NOTES[hashStr(p.id) % STYLE_NOTES.length];
+    return `
+      <div class="pdp-section">
+        <h3 class="pdp-h3">Description</h3>
+        <p class="pdp-desc">${base} ${note} Matched to your profile at <strong>${p.match || 80}%</strong> — we think the fit and tone are right for you.</p>
+        <div class="pdp-meta-row">
+          <span>Material · responsibly sourced blend</span><span class="pdp-dot">·</span>
+          <span>Model wears size M</span><span class="pdp-dot">·</span>
+          <a class="link-btn" onclick="toast('Size guide: runs true to size — take your usual fit.')">Size guide</a>
+        </div>
+      </div>`;
+  }
+
+  const REVIEW_NAMES = ['Sophie T.', 'Maya R.', 'Imani K.', 'Chloe B.', 'Hannah L.', 'Priya S.', 'Elena G.', 'Ruby M.', 'Noor A.', 'Daria V.', 'Freya W.', 'Aisha M.'];
+  const REVIEW_TEXTS = [
+    'Exactly as pictured — the fit is spot on and the quality feels premium.',
+    'Obsessed. Wore it twice already this week. True to size.',
+    'Lovely material and it drapes really nicely. Sizing runs slightly large.',
+    'Great everyday piece, and the colour is even better in person.',
+    'Comfortable and versatile — dressed it up and down with no effort.',
+    'Good value. Already thinking about buying it in another colour.',
+    'Soft and well made. Took off a star only because delivery was slow.',
+    'Perfect for the season. It matches half my wardrobe already.',
+    'Flattering cut and not see-through at all. Would recommend.',
+    'Nice weight to the fabric — feels like it will last.'
+  ];
+  const REVIEW_AGES = ['3 days ago', '1 week ago', '2 weeks ago', '3 weeks ago', '1 month ago', '2 months ago'];
+  function starRow(n, cls) { return `<span class="pdp-stars ${cls || ''}">${'★'.repeat(n)}<span class="pdp-stars-empty">${'★'.repeat(5 - n)}</span></span>`; }
+  function renderReviews(p) {
+    const h = hashStr(p.id);
+    const avg = (4.1 + (h % 8) / 10).toFixed(1);   // 4.1–4.8
+    const count = 23 + (h % 280);
+    const r5 = 56 + (h % 18), r4 = 16 + ((h >> 3) % 12), r3 = 6 + ((h >> 6) % 6), r2 = 3 + ((h >> 9) % 4);
+    const r1 = Math.max(1, 100 - r5 - r4 - r3 - r2);
+    const bars = [['5', r5], ['4', r4], ['3', r3], ['2', r2], ['1', r1]]
+      .map(([s, w]) => `<div class="pdp-bar-row"><span class="pdp-bar-lbl">${s}★</span><div class="pdp-bar"><div class="pdp-bar-fill" style="width:${w}%"></div></div></div>`).join('');
+    const n = 3 + (h % 2);
+    let list = '';
+    for (let i = 0; i < n; i++) {
+      const nm = REVIEW_NAMES[(h + i * 5) % REVIEW_NAMES.length];
+      const tx = REVIEW_TEXTS[(h + i * 7) % REVIEW_TEXTS.length];
+      const ag = REVIEW_AGES[(h + i * 3) % REVIEW_AGES.length];
+      const st = Math.max(3, i === 0 ? 5 : 5 - ((h >> (i * 2)) % 2) - (((h >> (i + 4)) % 5 === 0) ? 1 : 0));
+      list += `
+        <div class="pdp-review">
+          <div class="pdp-review-head">
+            <span class="pdp-review-name">${nm}</span>
+            ${starRow(st)}
+          </div>
+          <div class="pdp-review-date">${ag} · Verified purchase</div>
+          <div class="pdp-review-text">${tx}</div>
+        </div>`;
+    }
+    return `
+      <div class="pdp-section">
+        <h3 class="pdp-h3">Reviews</h3>
+        <div class="pdp-reviews-top">
+          <div class="pdp-rating-big">
+            <div class="pdp-rating-num">${avg}</div>
+            ${starRow(Math.round(avg), 'pdp-stars-lg')}
+            <div class="pdp-rating-count">${count} reviews</div>
+          </div>
+          <div class="pdp-bars">${bars}</div>
+        </div>
+        <div class="pdp-review-list">${list}</div>
+      </div>`;
+  }
+
+  function renderRecs(p) {
+    const pool = [];
+    if (p.retailerKey && RETAILERS[p.retailerKey]) {
+      RETAILERS[p.retailerKey].items.forEach((it, idx) => { if (it.n !== p.name) pool.push([p.retailerKey, idx]); });
+    }
+    if (pool.length < 4) {
+      [['arket', 0], ['cos', 0], ['uniqlo', 1], ['mango', 1], ['zara', 2], ['hm', 1]].forEach(pr => {
+        const r = RETAILERS[pr[0]];
+        if (r && r.items[pr[1]] && r.items[pr[1]].n !== p.name && !pool.some(x => x[0] === pr[0] && x[1] === pr[1])) pool.push(pr);
+      });
+    }
+    const picks = pool.slice(0, 4);
+    if (!picks.length) return '';
+    const cards = picks.map(([key, idx]) => {
+      const r = RETAILERS[key], it = r.items[idx];
+      return `
+        <div class="pdp-rec" onclick="openProductFromRetailer('${key}', ${idx})">
+          <div class="pdp-rec-img"><div class="pdp-rec-ill">${garmentIcon(it.k)}</div></div>
+          <div class="pdp-rec-brand">${r.name}</div>
+          <div class="pdp-rec-name">${it.n}</div>
+          <div class="pdp-rec-price">${it.p}</div>
+        </div>`;
+    }).join('');
+    return `<div class="pdp-section"><h3 class="pdp-h3">You might also like</h3><div class="pdp-recs">${cards}</div></div>`;
+  }
+
+  function renderProductPage() {
+    const p = currentProduct;
+    const root = document.getElementById('productRoot');
+    if (!root) return;
+    if (!p) { root.innerHTML = ''; return; }
+    const priceHtml = p.was ? `${p.priceLabel} <s>${p.was}</s>` : p.priceLabel;
+    const matchBadge = p.match ? `<span class="pdp-match">${p.match}% match for you</span>` : '';
+    const tagChips = [p.size].concat(p.tags || []).filter(Boolean).map(t => `<span class="pdp-tag">${t}</span>`).join('');
+    const sizeBtns = ['S', 'M', 'L'].map(s => `<button class="pdp-size-btn${s === 'M' ? ' on' : ''}" onclick="setPdpSize('${s}', this)">${s}</button>`).join('');
+    root.innerHTML = `
+      <div class="pdp-bar">
+        <button class="rc-back" onclick="goBackFromProduct()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </button>
+        <span class="rc-nav-divider"></span>
+        <span class="pdp-bar-crumb">${p.retailer} · ${p.name}</span>
+      </div>
+      <div class="pdp-main">
+        <div class="pdp-media">
+          <div class="pdp-illustration">${garmentIcon(p.k)}</div>
+          ${p.match ? `<div class="pdp-media-badge">${p.match}% match</div>` : ''}
+        </div>
+        <div class="pdp-info">
+          <div class="pdp-retailer">${p.retailer}</div>
+          <h1 class="pdp-name">${p.name}</h1>
+          <div class="pdp-price">${priceHtml}</div>
+          ${matchBadge}
+          <div class="pdp-tags">${tagChips}</div>
+          <div class="pdp-field">
+            <div class="pdp-field-label">Size <span class="pdp-size-note">${p.size || 'Your size M'}</span></div>
+            <div class="pdp-sizes">${sizeBtns}</div>
+          </div>
+          <div class="pdp-field">
+            <div class="pdp-field-label">Quantity</div>
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="pdpQtyChange(-1)">−</button>
+              <span class="qty-val" id="pdpQtyVal">1</span>
+              <button class="qty-btn" onclick="pdpQtyChange(1)">+</button>
+            </div>
+          </div>
+          <div class="pdp-actions">
+            <button class="btn-primary pdp-add" onclick="pdpAddToCart(this)">Add to cart</button>
+            <button class="btn-outline pdp-buy" onclick="pdpBuyNow()">Buy now</button>
+          </div>
+          <div class="pdp-reassure">Free returns · Ships with your other Drape items · One checkout</div>
+        </div>
+      </div>
+      ${renderDescription(p)}
+      ${renderReviews(p)}
+      ${renderRecs(p)}
+    `;
+  }
+
+  function setPdpSize(s, btn) { pdpSize = s; document.querySelectorAll('.pdp-size-btn').forEach(b => b.classList.remove('on')); if (btn) btn.classList.add('on'); }
+  function pdpQtyChange(d) { pdpQty = Math.max(1, pdpQty + d); const el = document.getElementById('pdpQtyVal'); if (el) el.textContent = pdpQty; }
+  function pdpCartLine() {
+    const p = currentProduct;
+    return { id: p.id, retailer: p.retailer, name: p.name, priceLabel: p.priceLabel, price: p.price, size: 'Size ' + pdpSize, match: p.match, k: p.k, qty: pdpQty };
+  }
+  function pdpAddToCart(btn) {
+    if (!currentProduct) return;
+    Cart.add(pdpCartLine());
+    if (btn) flashBtn(btn, 'Added ✓');
+    toast(currentProduct.name + ' added to cart');
+  }
+  function pdpBuyNow() {
+    if (!currentProduct) return;
+    Cart.add(pdpCartLine());
+    toast('Added — taking you to checkout');
+    showSection('cart');
+    goCheckout();
+  }
 </script>
 
 </body>
