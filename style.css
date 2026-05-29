@@ -541,10 +541,12 @@ section.active { display: block; }
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
+  overflow: hidden; padding: 0 6px;
 }
 .rc-logo-text {
   font-family: var(--font-display);
   font-size: 20px; font-weight: 600; color: var(--text-dark);
+  white-space: nowrap; line-height: 1;
 }
 .rc-brand-info { flex: 1; }
 .rc-brand-title-row {
@@ -652,6 +654,9 @@ section.active { display: block; }
   border-radius: 5px;
   border: 0.5px solid rgba(184,149,63,0.2);
 }
+.rc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rc-illustration { width: 56%; max-width: 124px; color: var(--gold); opacity: 0.92; }
+.rc-illustration svg { width: 100%; height: auto; display: block; }
 .rc-badge {
   position: absolute; top: 10px; right: 10px;
   border-radius: 12px; font-size: 11px; font-weight: 600; padding: 3px 9px;
