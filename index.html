@@ -87,18 +87,261 @@
 
   <div class="section-label fade-up delay-3">All Retailers</div>
   <div class="retailers-grid fade-up delay-3">
-    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
-    <div class="retailer-tile"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
-    <div class="retailer-tile"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
-    <div class="retailer-tile"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
-    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
-    <div class="retailer-tile"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
-    <div class="retailer-tile"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
+    <div class="retailer-tile" onclick="showSection('retailer')"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
     <div class="retailer-tile" style="border-style:dashed;cursor:default;"><div class="r-name" style="color:var(--text-muted);">+ More coming</div><div class="r-count">Stay tuned</div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 5: RETAILER CATALOG
+══════════════════════════════════════ -->
+<section id="retailer" style="padding-top:64px;">
+ 
+  <!-- Inner nav: back arrow + DRAPE logo + retailer name + actions -->
+  <div class="rc-nav">
+    <button class="rc-back" onclick="showSection('feed')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back
+    </button>
+    <div class="rc-nav-divider"></div>
+    <span class="rc-nav-logo">DRAPE</span>
+    <div class="rc-nav-divider"></div>
+    <span class="rc-nav-brand" id="rc-brand-name">Zara</span>
+    <div class="rc-nav-right">
+      <div class="rc-matched-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        847 items matched to you
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+  </div>
+ 
+  <!-- Brand hero -->
+  <div class="rc-hero">
+    <div class="rc-logo-box"><span class="rc-logo-text">ZARA</span></div>
+    <div class="rc-brand-info">
+      <div class="rc-brand-title-row">
+        <h2 class="rc-brand-name">Zara</h2>
+        <button class="rc-follow-btn"
+          onmouseenter="this.style.background='var(--gold)';this.style.color='var(--cream)';"
+          onmouseleave="this.style.background='transparent';this.style.color='var(--gold)';">
+          + Follow
+        </button>
+      </div>
+      <p class="rc-brand-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
+      <div class="rc-brand-tags">
+        <span class="rc-brand-tag">Womenswear</span>
+        <span class="rc-brand-tag">Menswear</span>
+        <span class="rc-brand-tag">New in</span>
+        <span class="rc-brand-tag">Sale</span>
+        <span class="rc-brand-tag">Studio</span>
+      </div>
+    </div>
+    <div class="rc-overall-match">
+      <div class="rc-match-num">73%</div>
+      <div class="rc-match-lbl">overall match<br>to your profile</div>
+    </div>
+  </div>
+ 
+  <!-- Toolbar: search + filters + sort -->
+  <div class="rc-toolbar">
+    <div class="rc-search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Search Zara…</span>
+    </div>
+    <div class="rc-filters">
+      <span class="rc-filter on">All</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">New in</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Tops</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Trousers</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Dresses</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Outerwear</span>
+      <span class="rc-filter" onclick="toggleRcFilter(this)">Sale</span>
+    </div>
+    <select class="rc-sort">
+      <option>Sort: Best match</option>
+      <option>Price: low–high</option>
+      <option>Price: high–low</option>
+      <option>Newest first</option>
+    </select>
+  </div>
+ 
+  <!-- Results bar -->
+  <div class="rc-results-bar">
+    <span class="rc-results-count">1,247 items · showing best matches for you first</span>
+    <div class="rc-view-toggle">
+      <button class="rc-view-btn on" aria-label="Grid view">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </button>
+      <button class="rc-view-btn" aria-label="List view">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+ 
+  <!-- Product grid -->
+  <div class="rc-grid">
+ 
+    <div class="rc-card rc-high">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:52px;height:130px;"></div>
+        <div class="rc-badge rc-badge-high">94% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Linen wide-leg trousers</div>
+        <div class="rc-price">£39.99</div>
+        <div class="rc-tags">
+          <span class="rc-tag">Your size M</span>
+          <span class="rc-tag">Loose tailoring</span>
+          <span class="rc-tag">Neutral tone</span>
+        </div>
+        <button class="rc-btn rc-btn-add"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">
+          Add to cart
+        </button>
+      </div>
+    </div>
+ 
+    <div class="rc-card rc-high">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:48px;height:120px;"></div>
+        <div class="rc-badge rc-badge-high">88% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Satin slip midi dress</div>
+        <div class="rc-price">£49.99 <s>£69.99</s></div>
+        <div class="rc-tags">
+          <span class="rc-tag">Your size M</span>
+          <span class="rc-tag">Soft feminine</span>
+          <span class="rc-tag">Sale</span>
+        </div>
+        <button class="rc-btn rc-btn-add"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">
+          Add to cart
+        </button>
+      </div>
+    </div>
+ 
+    <div class="rc-card rc-high">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:56px;height:110px;"></div>
+        <div class="rc-badge rc-badge-high">82% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Oversized linen blazer</div>
+        <div class="rc-price">£69.99</div>
+        <div class="rc-tags">
+          <span class="rc-tag">Your size M</span>
+          <span class="rc-tag">Oversized fit</span>
+          <span class="rc-tag">Neutral tone</span>
+        </div>
+        <button class="rc-btn rc-btn-add"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">
+          Add to cart
+        </button>
+      </div>
+    </div>
+ 
+    <div class="rc-card">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:44px;height:100px;"></div>
+        <div class="rc-badge rc-badge-mid">67% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Ribbed knit top</div>
+        <div class="rc-price">£25.99</div>
+        <div class="rc-tags">
+          <span class="rc-tag">Your size M</span>
+          <span class="rc-tag">Fitted cut</span>
+        </div>
+        <button class="rc-btn rc-btn-add"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">
+          Add to cart
+        </button>
+      </div>
+    </div>
+ 
+    <div class="rc-card">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:60px;height:125px;"></div>
+        <div class="rc-badge rc-badge-mid">61% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Floral print maxi dress</div>
+        <div class="rc-price">£59.99 <s>£79.99</s></div>
+        <div class="rc-tags">
+          <span class="rc-tag">Your size M</span>
+          <span class="rc-tag">Bold print</span>
+          <span class="rc-tag">Sale</span>
+        </div>
+        <button class="rc-btn rc-btn-add"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">
+          Add to cart
+        </button>
+      </div>
+    </div>
+ 
+    <div class="rc-card">
+      <div class="rc-img">
+        <div class="rc-figure" style="width:44px;height:90px;"></div>
+        <div class="rc-badge rc-badge-low">38% match</div>
+        <button class="rc-wishlist" aria-label="Save to wishlist">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="rc-info">
+        <div class="rc-brand-label">Zara</div>
+        <div class="rc-item-name">Neon orange crop jacket</div>
+        <div class="rc-price">£55.99</div>
+        <div class="rc-tags">
+          <span class="rc-tag">Avoids: orange</span>
+          <span class="rc-tag">Bright colour</span>
+        </div>
+        <button class="rc-btn rc-btn-save"
+          onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
+          onmouseleave="this.style.background='';this.style.color='';">
+          Save for later
+        </button>
+      </div>
+    </div>
+
   </div>
 
 </section>
@@ -433,7 +676,7 @@
 </button>
 
 <script>
-  const sections = ['feed', 'stylist', 'social', 'profile'];
+  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer'];
 
   function showSection(id) {
     sections.forEach(s => {
@@ -524,6 +767,11 @@
     input.value = '';
     const cw = document.getElementById('chatWindow');
     cw.scrollTop = cw.scrollHeight;
+  }
+
+  function toggleRcFilter(el) {
+  document.querySelectorAll('.rc-filter').forEach(f => f.classList.remove('on'));
+  el.classList.add('on');
   }
 </script>
 
