@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRAPE — Wear What You Mean</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showSection('feed')">DRAPE</a>
+  <div class="nav-links">
+    <a href="#" onclick="showSection('feed')" id="nav-feed" class="active">Discover</a>
+    <a href="#" onclick="showSection('stylist')" id="nav-stylist">AI Stylist</a>
+    <a href="#" onclick="showSection('social')" id="nav-social">Social</a>
+    <a href="#" onclick="showSection('profile')" id="nav-profile">Profile</a>
+    <a href="#" class="nav-cta" onclick="showSection('stylist')">Get Started</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     SECTION 1: FEED
+══════════════════════════════════════ -->
+<section id="feed" class="active">
+
+  <div class="feed-hero fade-up">
+    <h1>One app.<br><em>Every retailer.</em><br>One AI that knows you.</h1>
+    <p>Discover fashion across ASOS, Zara, H&M and more — filtered to your size, style, and taste. No more switching tabs.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="showSection('stylist')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Talk to my stylist
+      </button>
+      <button class="btn-outline" onclick="showSection('social')">See what's trending</button>
+    </div>
+  </div>
+
+  <div style="height:28px;"></div>
+
+  <div class="search-wrapper fade-up delay-1">
+    <input class="search-input" type="text" placeholder="Search retailers, brands, styles…">
+    <button class="search-btn">Search</button>
+  </div>
+
+  <div class="pill-row fade-up delay-1">
+    <span class="pill on" onclick="togglePill(this)">For you</span>
+    <span class="pill" onclick="togglePill(this)">Fashion</span>
+    <span class="pill" onclick="togglePill(this)">Streetwear</span>
+    <span class="pill" onclick="togglePill(this)">Deals on now</span>
+    <span class="pill" onclick="togglePill(this)">New partners</span>
+    <span class="pill" onclick="togglePill(this)">Beauty</span>
+  </div>
+
+  <div class="stylist-bar fade-up delay-2" onclick="showSection('stylist')">
+    <div class="stylist-bar-left">
+      <div class="stylist-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div>
+        <div class="stylist-bar-title">Ask your AI Stylist</div>
+        <div class="stylist-bar-sub">Tell us what you need — we'll find the perfect look</div>
+      </div>
+    </div>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,245,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </div>
+
+  <div class="section-label fade-up delay-2">Featured Retailer</div>
+  <div class="featured-card fade-up delay-2">
+    <div>
+      <div class="brand">Zara</div>
+      <div class="sub">Summer sale — up to 30% off · 847 items match your profile</div>
+      <div class="cta">Shop now →</div>
+    </div>
+    <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
+  </div>
+
+  <div class="section-label fade-up delay-3">All Retailers</div>
+  <div class="retailers-grid fade-up delay-3">
+    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">ASOS</div><div class="r-count">4,700 items</div></div>
+    <div class="retailer-tile"><div class="r-name">H&M</div><div class="r-count">2,880 items</div></div>
+    <div class="retailer-tile"><div class="r-name">& Other Stories</div><div class="r-count">New</div></div>
+    <div class="retailer-tile"><div class="r-name">Palace</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div><div class="r-count">Sale on</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Nike</div><div class="r-count">1,000+ items</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Lookfantastic</div><div class="r-count">Beauty</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#c0392b;">Mango</div><div class="r-count">2,100 items</div></div>
+    <div class="retailer-tile"><div class="r-name" style="color:#4a7c3f;">Monki</div><div class="r-count">New</div></div>
+    <div class="retailer-tile"><div class="r-name">ARKET</div><div class="r-count">840 items</div></div>
+    <div class="retailer-tile"><div class="r-name">COS</div><div class="r-count">1,200 items</div></div>
+    <div class="retailer-tile" style="border-style:dashed;cursor:default;"><div class="r-name" style="color:var(--text-muted);">+ More coming</div><div class="r-count">Stay tuned</div></div>
+  </div>
+
+  <div class="section-label fade-up delay-4">Retail Insights</div>
+  <div class="insights-block fade-up delay-4">
+    <div class="insight-row"><span class="insight-label">Tops</span><div class="insight-track"><div class="insight-fill" style="width:72%"></div></div><span class="insight-pct">72%</span></div>
+    <div class="insight-row"><span class="insight-label">Dresses</span><div class="insight-track"><div class="insight-fill" style="width:48%"></div></div><span class="insight-pct">48%</span></div>
+    <div class="insight-row"><span class="insight-label">Outerwear</span><div class="insight-track"><div class="insight-fill" style="width:33%"></div></div><span class="insight-pct">33%</span></div>
+    <div class="insight-row"><span class="insight-label">Footwear</span><div class="insight-track"><div class="insight-fill" style="width:28%"></div></div><span class="insight-pct">28%</span></div>
+    <div class="insight-row"><span class="insight-label">Accessories</span><div class="insight-track"><div class="insight-fill" style="width:19%"></div></div><span class="insight-pct">19%</span></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 2: AI STYLIST
+══════════════════════════════════════ -->
+<section id="stylist" style="padding:0;">
+  <div class="stylist-page">
+    <div class="stylist-header">
+      <div>
+        <h2>Your AI Stylist</h2>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Powered by Parloa · Microsoft Azure AI</div>
+      </div>
+      <div class="advisor-toggle">
+        <button class="advisor-btn active" onclick="setAdvisor(this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          AI Stylist
+        </button>
+        <button class="advisor-btn" onclick="setAdvisor(this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.62 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l1.6-1.6a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Advisor
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-bubble bot fade-up">
+        <div class="bubble-tag">DRAPE AI</div>
+        Hey! What are we dressing you for today?
+      </div>
+      <div class="chat-bubble user fade-up delay-1">
+        got a dinner thing friday, nothing feels right
+      </div>
+      <div class="chat-bubble bot fade-up delay-2">
+        <div class="bubble-tag">DRAPE AI</div>
+        Ugh, that feeling. Okay — is it more sit-down restaurant or drinks-first kind of vibe?
+      </div>
+      <div class="chat-bubble user fade-up delay-3">
+        sit-down, nice but not too formal
+      </div>
+      <div class="chat-bubble bot fade-up delay-4">
+        <div class="bubble-tag">DRAPE AI</div>
+        Love that. Any colours you're feeling lately — or ones you'd rather avoid?
+      </div>
+      <div class="chat-bubble user" id="lastUserMsg" style="display:none;"></div>
+      <div class="chat-bubble bot" id="lastBotMsg" style="display:none;">
+        <div class="bubble-tag">DRAPE AI</div>
+        <span id="lastBotText"></span>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="chat-rating">
+        <span>Rate this response:</span>
+        <div class="stars">
+          <span onclick="setRating(1)">★</span>
+          <span onclick="setRating(2)">★</span>
+          <span onclick="setRating(3)">★</span>
+          <span onclick="setRating(4)">★</span>
+          <span onclick="setRating(5)" class="empty">★</span>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chatInput" placeholder="Reply to your stylist…" onkeydown="handleEnter(event)"></textarea>
+        <button class="chat-send" onclick="sendMessage()">Send →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 3: SOCIAL
+══════════════════════════════════════ -->
+<section id="social" style="padding:0;">
+  <div class="social-layout">
+
+    <!-- Left sidebar -->
+    <div class="social-sidebar">
+      <h3>People you follow</h3>
+      <div class="friend-row"><div class="friend-av">SC</div><div><div class="friend-name">Sofia Chen</div><div class="friend-handle">@sofiastyles</div></div><button class="follow-btn">Following</button></div>
+      <div class="friend-row"><div class="friend-av">JL</div><div><div class="friend-name">Jess Looks</div><div class="friend-handle">@jess.looks</div></div><button class="follow-btn">Following</button></div>
+      <div class="friend-row"><div class="friend-av">AM</div><div><div class="friend-name">Amy M</div><div class="friend-handle">@amyy.m</div></div><button class="follow-btn" onclick="this.textContent='Following'">Follow</button></div>
+      <div class="friend-row"><div class="friend-av">RK</div><div><div class="friend-name">Rachel K</div><div class="friend-handle">@rach</div></div><button class="follow-btn" onclick="this.textContent='Following'">Follow</button></div>
+
+      <div style="margin-top:24px;padding-top:20px;border-top:0.5px solid var(--gold-border);">
+        <h3 style="margin-bottom:12px;">Style tours</h3>
+        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Quiet Luxury</span>
+        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Coastal Chic</span>
+        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Y2K Revival</span>
+        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Office Siren</span>
+        <span style="display:inline-block;padding:5px 12px;font-size:12px;color:var(--gold);cursor:pointer;border:0.5px dashed var(--gold-border);border-radius:20px;margin:0 4px 6px 0;">+ Follow more</span>
+      </div>
+    </div>
+
+    <!-- Post feed -->
+    <div class="post-feed">
+
+      <!-- Post 1 -->
+      <div class="post-card fade-up">
+        <div class="post-card-header">
+          <div class="post-user-info">
+            <div class="post-av">SC</div>
+            <div>
+              <div class="post-username">Sofia Chen</div>
+              <div class="post-time">@sofiastyles · 2h ago</div>
+            </div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C8860" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+        <div class="post-img-area">
+          <div class="post-figure-placeholder"></div>
+          <div class="item-tags">
+            <div class="item-tag">Zara linen blouse · £35</div>
+            <div class="item-tag">Mango wide-leg trousers · £49</div>
+            <div class="item-tag">COS mule · £89</div>
+          </div>
+          <div class="match-ribbon">
+            <div class="match-pill">87% match for you</div>
+            <div class="match-sub">Based on your style profile</div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="action-btn liked" onclick="toggleLike(this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            142
+          </button>
+          <button class="action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            18
+          </button>
+          <button class="action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <button class="add-cart-btn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Add to cart
+          </button>
+        </div>
+        <div class="post-caption"><strong>sofiastyles</strong> dinner fit sorted ✨ obsessed with this combo — the linen shirt is everything rn</div>
+        <div class="hashtags">
+          <span class="hashtag">#Zara</span>
+          <span class="hashtag">#Mango</span>
+          <span class="hashtag">#DinnerOutfit</span>
+          <span class="hashtag">#OOTD</span>
+          <span class="hashtag">#QuietLuxury</span>
+        </div>
+        <div class="comments-section">
+          <div class="comment-row"><div class="comment-av">JL</div><div class="comment-text"><strong>jess.looks</strong> omg where's the shirt from exactly?? 😍</div></div>
+          <div class="comment-row"><div class="comment-av">AM</div><div class="comment-text"><strong>amyy.m</strong> this is so your vibe, adding to my wishlist right now</div></div>
+          <div class="comment-row"><div class="comment-av">R</div><div class="comment-text"><strong>rach</strong> wore something similar last week, it's SO good in person</div></div>
+        </div>
+        <div class="comment-input-row">
+          <div class="post-av" style="width:28px;height:28px;font-size:12px;flex-shrink:0;">AB</div>
+          <input class="comment-input" type="text" placeholder="Add a comment…">
+          <button class="comment-send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="post-card fade-up delay-2">
+        <div class="post-card-header">
+          <div class="post-user-info">
+            <div class="post-av">JL</div>
+            <div>
+              <div class="post-username">Jess Looks</div>
+              <div class="post-time">@jess.looks · 5h ago</div>
+            </div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C8860" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        </div>
+        <div class="post-img-area" style="height:280px;background:var(--gold-faint);">
+          <div class="post-figure-placeholder" style="height:200px;"></div>
+          <div class="item-tags">
+            <div class="item-tag">ARKET relaxed shirt · £65</div>
+            <div class="item-tag">& Other Stories bag · £79</div>
+          </div>
+          <div class="match-ribbon">
+            <div class="match-pill">94% match for you</div>
+            <div class="match-sub">Based on your style profile</div>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button class="action-btn" onclick="toggleLike(this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            89
+          </button>
+          <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 7</button>
+          <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share</button>
+          <button class="add-cart-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to cart</button>
+        </div>
+        <div class="post-caption"><strong>jess.looks</strong> finally found a work-to-dinner look that doesn't require a full change 🙌</div>
+        <div class="hashtags">
+          <span class="hashtag">#ARKET</span><span class="hashtag">#OfficeFit</span><span class="hashtag">#WorkwearInspo</span>
+        </div>
+        <div class="comment-input-row">
+          <div class="post-av" style="width:28px;height:28px;font-size:12px;flex-shrink:0;">AB</div>
+          <input class="comment-input" type="text" placeholder="Add a comment…">
+          <button class="comment-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right sidebar -->
+    <div class="social-right">
+      <h3>Trending now</h3>
+      <div style="margin-bottom:20px;">
+        <span class="trending-tag">#QuietLuxury</span>
+        <span class="trending-tag">#DinnerOutfit</span>
+        <span class="trending-tag">#OOTD</span>
+        <span class="trending-tag">#Y2K</span>
+        <span class="trending-tag">#OfficeSiren</span>
+        <span class="trending-tag">#CoastalGrandma</span>
+        <span class="trending-tag">#Minimalist</span>
+        <span class="trending-tag">#ArkettCore</span>
+      </div>
+      <div style="padding-top:20px;border-top:0.5px solid var(--gold-border);">
+        <h3 style="margin-bottom:12px;">Share your outfit</h3>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;">Post a look, tag the items, and let your friends shop directly from your post.</p>
+        <button class="btn-primary" style="font-size:13px;padding:10px 20px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New post
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 4: PROFILE
+══════════════════════════════════════ -->
+<section id="profile">
+  <div class="profile-layout">
+
+    <div class="profile-header fade-up">
+      <div class="profile-av-large">AB</div>
+      <div style="flex:1;">
+        <div class="profile-name">Alicia Baquero</div>
+        <div class="profile-sub">Size M · 5'4" · Colombian · London</div>
+        <div class="profile-stats">
+          <div class="stat-item"><div class="stat-num">314</div><div class="stat-lbl">Matched</div></div>
+          <div class="stat-item"><div class="stat-num">18</div><div class="stat-lbl">Saved</div></div>
+          <div class="stat-item"><div class="stat-num">5</div><div class="stat-lbl">Ordered</div></div>
+          <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Posts</div></div>
+        </div>
+      </div>
+      <button class="btn-outline" style="font-size:13px;padding:10px 20px;">Edit profile</button>
+    </div>
+
+    <div class="profile-grid fade-up delay-1">
+
+      <div class="profile-card">
+        <h3>What DRAPE knows</h3>
+        <div class="knows-row"><span class="knows-label">Neutral palettes</span><div class="knows-track"><div class="knows-fill" style="width:80%"></div></div><span class="knows-pct">80%</span></div>
+        <div class="knows-row"><span class="knows-label">Oversized fits</span><div class="knows-track"><div class="knows-fill" style="width:65%"></div></div><span class="knows-pct">65%</span></div>
+        <div class="knows-row"><span class="knows-label">Loose tailoring</span><div class="knows-track"><div class="knows-fill" style="width:55%"></div></div><span class="knows-pct">55%</span></div>
+        <div class="knows-row"><span class="knows-label">Minimal print</span><div class="knows-track"><div class="knows-fill" style="width:70%"></div></div><span class="knows-pct">70%</span></div>
+        <div class="knows-row"><span class="knows-label">Bold colour</span><div class="knows-track"><div class="knows-fill" style="width:22%"></div></div><span class="knows-pct">22%</span></div>
+        <div style="margin-top:6px;padding-top:10px;border-top:0.5px solid var(--divider);">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">You own everything DRAPE knows. Tap to edit or delete — instantly.</div>
+          <a class="export-link" href="#">Export my data</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <h3>Your style DNA</h3>
+        <div class="dna-tags" style="margin-bottom:16px;">
+          <span class="dna-tag">Soft feminine</span>
+          <span class="dna-tag">Relaxed tailoring</span>
+          <span class="dna-tag">Earthy pinks</span>
+          <span class="dna-tag">Minimal print</span>
+          <span class="dna-tag">Smart casual</span>
+          <span class="dna-tag">Streetwear-lite</span>
+        </div>
+        <h3>Colour palette</h3>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#D4A0A8;border:1px solid var(--gold-border);"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#A8B8D4;border:1px solid var(--gold-border);"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#E8D9C8;border:1px solid var(--gold-border);"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#C4A882;border:1px solid var(--gold-border);"></div>
+          <div style="font-size:12px;color:var(--text-muted);margin-left:4px;">Avoids: orange</div>
+        </div>
+        <h3 style="margin-bottom:8px;">Avoids</h3>
+        <div class="avoids-row">Neons · bright red<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
+        <div class="avoids-row">Fast fashion<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
+        <div class="avoids-row">Orange<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
+      </div>
+
+      <div class="profile-card" style="grid-column:1/-1;">
+        <h3>Body & fit</h3>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Height</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">5'4"</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Size</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">UK 10 / M</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Budget</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">£20–80 / item</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Next event</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">Dinner · Fri 23</div></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── BOTTOM NAV ─── -->
+<nav class="bottom-nav">
+  <button class="bnav-item active" id="bnav-feed" onclick="showSection('feed')">
+    <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    Feed
+  </button>
+  <button class="bnav-item" id="bnav-stylist" onclick="showSection('stylist')">
+    <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    Stylist
+  </button>
+  <button class="bnav-item" id="bnav-social" onclick="showSection('social')">
+    <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Social
+  </button>
+  <button class="bnav-item" id="bnav-profile" onclick="showSection('profile')">
+    <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profile
+  </button>
+</nav>
+
+<!-- Compose FAB (social only) -->
+<button class="compose-btn" id="composeFab" style="display:none;" title="New post">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+
+<script>
+  const sections = ['feed', 'stylist', 'social', 'profile'];
+
+  function showSection(id) {
+    sections.forEach(s => {
+      const el = document.getElementById(s);
+      el.classList.toggle('active', s === id);
+      if (s === 'stylist') el.style.display = s === id ? 'flex' : 'none';
+      else if (s === 'social') el.style.display = s === id ? 'block' : 'none';
+    });
+    sections.forEach(s => {
+      const navEl = document.getElementById('nav-' + s);
+      if (navEl) navEl.classList.toggle('active', s === id);
+      const bEl = document.getElementById('bnav-' + s);
+      if (bEl) bEl.classList.toggle('active', s === id);
+    });
+    document.getElementById('composeFab').style.display = id === 'social' ? 'flex' : 'none';
+    window.scrollTo(0, 0);
+    return false;
+  }
+
+  // Initial display state
+  document.getElementById('stylist').style.display = 'none';
+  document.getElementById('social').style.display = 'none';
+
+  function togglePill(el) {
+    el.classList.toggle('on');
+  }
+
+  function setAdvisor(btn) {
+    document.querySelectorAll('.advisor-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function toggleLike(btn) {
+    btn.classList.toggle('liked');
+    const svgPath = btn.querySelector('path');
+    if (btn.classList.contains('liked')) {
+      svgPath.setAttribute('fill', '#C0392B');
+      svgPath.setAttribute('stroke', '#C0392B');
+    } else {
+      svgPath.setAttribute('fill', 'none');
+      svgPath.setAttribute('stroke', 'currentColor');
+    }
+  }
+
+  function setRating(n) {
+    document.querySelectorAll('.stars span').forEach((s, i) => {
+      s.classList.toggle('empty', i >= n);
+    });
+  }
+
+  const botReplies = [
+    "Got it — earthy pinks and soft blues, no orange. Let me pull some looks together for you ✨",
+    "Perfect. Smart casual with a feminine edge — I'm thinking relaxed tailoring, maybe a linen piece. Give me a sec.",
+    "On it! Filtering now for pieces under £100 across Zara, Mango and ARKET. Back in a moment…",
+  ];
+  let replyIndex = 0;
+
+  function handleEnter(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const userEl = document.getElementById('lastUserMsg');
+    userEl.textContent = text;
+    userEl.style.display = 'block';
+    userEl.classList.add('fade-up');
+
+    const botEl = document.getElementById('lastBotMsg');
+    const botText = document.getElementById('lastBotText');
+    const response = botReplies[replyIndex % botReplies.length];
+    replyIndex++;
+
+    setTimeout(() => {
+      botText.textContent = response;
+      botEl.style.display = 'block';
+      botEl.classList.add('fade-up');
+      const cw = document.getElementById('chatWindow');
+      cw.scrollTop = cw.scrollHeight;
+    }, 800);
+
+    input.value = '';
+    const cw = document.getElementById('chatWindow');
+    cw.scrollTop = cw.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
