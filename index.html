@@ -622,9 +622,9 @@
         <div class="rc-item-name">Neon orange crop jacket</div>
         <div class="rc-price">£55.99</div>
         <div class="rc-item-tags"><span class="rc-item-tag">Avoids: orange</span><span class="rc-item-tag">Bright colour</span></div>
-        <button class="rc-btn rc-btn-save"
-          onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
-          onmouseleave="this.style.background='';this.style.color='';">Save for later</button>
+        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£59.99')"
+          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
+          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
       </div>
     </div>
 
