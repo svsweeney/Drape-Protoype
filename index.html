@@ -296,7 +296,10 @@
 ══════════════════════════════════════ -->
 <section id="product">
   <div id="productRoot"></div>
-     SECTION 5: RETAILER CATALOG
+
+</section>
+
+<!-- SECTION 5: RETAILER CATALOG
 ══════════════════════════════════════ -->
 <section id="retailer" style="padding-top:64px;padding-bottom:72px;">
 
@@ -612,9 +615,11 @@
     sections.forEach(s => {
       const el = document.getElementById(s);
       el.classList.toggle('active', s === id);
-      if (s === 'stylist') el.style.display = s === id ? 'flex' : 'none';
-      else if (s === 'social') el.style.display = s === id ? 'block' : 'none';
-      else if (s === 'retailer') el.style.display = s === id ? 'block' : 'none';
+      if (['stylist', 'social', 'retailer', 'cart', 'product'].includes(s)) {
+      el.style.display = s === id
+        ? (s === 'stylist' ? 'flex' : 'block')
+        : 'none';
+    }
     });
     sections.forEach(s => {
       const navEl = document.getElementById('nav-' + s);
@@ -636,6 +641,8 @@
   document.getElementById('stylist').style.display = 'none';
   document.getElementById('social').style.display = 'none';
   document.getElementById('retailer').style.display = 'none';
+  document.getElementById('cart').style.display = 'none';
+  document.getElementById('product').style.display = 'none';
 
   function togglePill(el) {
     el.classList.toggle('on');
