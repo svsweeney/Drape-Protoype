@@ -205,7 +205,7 @@ section.active { display: block; }
 .insight-pct { font-size: 12px; color: var(--gold); font-weight: 500; min-width: 32px; text-align: right; }
 
 /* ─── AI STYLIST ─── */
-.stylist-page { padding-top: 64px; display: flex; flex-direction: column; height: 100vh; padding-bottom: 0; width: 100%; flex: 1; }
+.stylist-page { padding-top: 64px; display: flex; flex-direction: column; height: 100vh; padding-bottom: 0; width: 100%;}
 .stylist-header {
   background: var(--gold-pale); border-bottom: 0.5px solid var(--gold-border);
   padding: 16px max(40px, calc((100% - 820px) / 2));
@@ -222,11 +222,6 @@ section.active { display: block; }
 .advisor-btn.active { background: var(--gold); color: var(--cream); border-color: var(--gold); }
 .advisor-btn:not(.active) { background: var(--gold-faint); color: var(--gold); }
 
-.chat-window {
-  flex: 1; overflow-y: auto; padding: 28px max(40px, calc((100% - 820px) / 2));
-  display: flex; flex-direction: column; gap: 14px;
-  background: var(--cream);
-}
 .chat-bubble {
   max-width: 78%; padding: 12px 16px;
   border-radius: 12px; font-size: 14px; line-height: 1.5;
@@ -1092,4 +1087,35 @@ section.active { display: block; }
   background: var(--gold); color: var(--cream); border: none;
   padding: 10px 28px; border-radius: 8px; font-size: 14px; font-weight: 500;
   font-family: var(--font-body); cursor: pointer; transition: background 0.15s; letter-spacing: 0.02em;
+}
+
+/* ─── STYLIST OVERRIDE ─── */
+#stylist.active { 
+  display: flex !important; 
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: unset !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.stylist-page { 
+  padding-top: 64px; 
+  display: flex; 
+  flex-direction: column; 
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-window {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 28px max(40px, calc((100% - 820px) / 2));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--cream);
 }
