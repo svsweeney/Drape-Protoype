@@ -18,6 +18,10 @@
     <a href="#" onclick="showSection('stylist')" id="nav-stylist">AI Stylist</a>
     <a href="#" onclick="showSection('social')" id="nav-social">Social</a>
     <a href="#" onclick="showSection('profile')" id="nav-profile">Profile</a>
+    <a href="#" onclick="showSection('cart')" id="nav-cart" class="nav-cart-link">
+      <svg class="nav-cart-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cart<span class="nav-cart-count" id="navCartCount" style="display:none;">0</span>
+    </a>
     <a href="#" class="nav-cta" onclick="showSection('stylist')">Get Started</a>
   </div>
 </nav>
@@ -168,163 +172,41 @@
 <!-- ══════════════════════════════════════
      SECTION 3: SOCIAL
 ══════════════════════════════════════ -->
-<section id="social" style="padding:0;">
-  <div class="social-layout">
+<section id="social" style="padding:64px 0 0;">
 
-    <!-- Left sidebar -->
-    <div class="social-sidebar">
-      <h3>People you follow</h3>
-      <div class="friend-row"><div class="friend-av">SC</div><div><div class="friend-name">Sofia Chen</div><div class="friend-handle">@sofiastyles</div></div><button class="follow-btn">Following</button></div>
-      <div class="friend-row"><div class="friend-av">JL</div><div><div class="friend-name">Jess Looks</div><div class="friend-handle">@jess.looks</div></div><button class="follow-btn">Following</button></div>
-      <div class="friend-row"><div class="friend-av">AM</div><div><div class="friend-name">Amy M</div><div class="friend-handle">@amyy.m</div></div><button class="follow-btn" onclick="this.textContent='Following'">Follow</button></div>
-      <div class="friend-row"><div class="friend-av">RK</div><div><div class="friend-name">Rachel K</div><div class="friend-handle">@rach</div></div><button class="follow-btn" onclick="this.textContent='Following'">Follow</button></div>
+  <!-- Immersive one-post-per-screen feed (rendered dynamically) -->
+  <div class="reels" id="reelsFeed"></div>
 
-      <div style="margin-top:24px;padding-top:20px;border-top:0.5px solid var(--gold-border);">
-        <h3 style="margin-bottom:12px;">Style tours</h3>
-        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Quiet Luxury</span>
-        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Coastal Chic</span>
-        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Y2K Revival</span>
-        <span class="dna-tag" style="display:inline-block;margin:0 4px 6px 0;cursor:pointer;">Office Siren</span>
-        <span style="display:inline-block;padding:5px 12px;font-size:12px;color:var(--gold);cursor:pointer;border:0.5px dashed var(--gold-border);border-radius:20px;margin:0 4px 6px 0;">+ Follow more</span>
+  <!-- Prev / next jump chevrons (desktop) -->
+  <div class="reels-chevrons">
+    <button class="chev-btn" aria-label="Previous post" onclick="reelsScroll(-1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+    <button class="chev-btn" aria-label="Next post" onclick="reelsScroll(1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </div>
+
+  <!-- Comments panel: side drawer on desktop, bottom sheet on mobile -->
+  <div class="comments-overlay" id="commentsOverlay" onclick="closeComments()">
+    <div class="comments-panel" onclick="event.stopPropagation()">
+      <div class="comments-head">
+        <h3>Comments</h3>
+        <button class="comments-close" aria-label="Close comments" onclick="closeComments()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-    </div>
-
-    <!-- Post feed -->
-    <div class="post-feed">
-
-      <!-- Post 1 -->
-      <div class="post-card fade-up">
-        <div class="post-card-header">
-          <div class="post-user-info">
-            <div class="post-av">SC</div>
-            <div>
-              <div class="post-username">Sofia Chen</div>
-              <div class="post-time">@sofiastyles · 2h ago</div>
-            </div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C8860" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-        </div>
-        <div class="post-img-area">
-          <div class="post-figure-placeholder"></div>
-          <div class="item-tags">
-            <div class="item-tag">Zara linen blouse · £35</div>
-            <div class="item-tag">Mango wide-leg trousers · £49</div>
-            <div class="item-tag">COS mule · £89</div>
-          </div>
-          <div class="match-ribbon">
-            <div class="match-pill">87% match for you</div>
-            <div class="match-sub">Based on your style profile</div>
-          </div>
-        </div>
-        <div class="post-actions">
-          <button class="action-btn liked" onclick="toggleLike(this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#C0392B" stroke="#C0392B" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            142
-          </button>
-          <button class="action-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            18
-          </button>
-          <button class="action-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            Share
-          </button>
-          <button class="add-cart-btn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            Add to cart
-          </button>
-        </div>
-        <div class="post-caption"><strong>sofiastyles</strong> dinner fit sorted ✨ obsessed with this combo — the linen shirt is everything rn</div>
-        <div class="hashtags">
-          <span class="hashtag">#Zara</span>
-          <span class="hashtag">#Mango</span>
-          <span class="hashtag">#DinnerOutfit</span>
-          <span class="hashtag">#OOTD</span>
-          <span class="hashtag">#QuietLuxury</span>
-        </div>
-        <div class="comments-section">
-          <div class="comment-row"><div class="comment-av">JL</div><div class="comment-text"><strong>jess.looks</strong> omg where's the shirt from exactly?? 😍</div></div>
-          <div class="comment-row"><div class="comment-av">AM</div><div class="comment-text"><strong>amyy.m</strong> this is so your vibe, adding to my wishlist right now</div></div>
-          <div class="comment-row"><div class="comment-av">R</div><div class="comment-text"><strong>rach</strong> wore something similar last week, it's SO good in person</div></div>
-        </div>
-        <div class="comment-input-row">
-          <div class="post-av" style="width:28px;height:28px;font-size:12px;flex-shrink:0;">AB</div>
-          <input class="comment-input" type="text" placeholder="Add a comment…">
-          <button class="comment-send">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Post 2 -->
-      <div class="post-card fade-up delay-2">
-        <div class="post-card-header">
-          <div class="post-user-info">
-            <div class="post-av">JL</div>
-            <div>
-              <div class="post-username">Jess Looks</div>
-              <div class="post-time">@jess.looks · 5h ago</div>
-            </div>
-          </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9C8860" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-        </div>
-        <div class="post-img-area" style="height:280px;background:var(--gold-faint);">
-          <div class="post-figure-placeholder" style="height:200px;"></div>
-          <div class="item-tags">
-            <div class="item-tag">ARKET relaxed shirt · £65</div>
-            <div class="item-tag">& Other Stories bag · £79</div>
-          </div>
-          <div class="match-ribbon">
-            <div class="match-pill">94% match for you</div>
-            <div class="match-sub">Based on your style profile</div>
-          </div>
-        </div>
-        <div class="post-actions">
-          <button class="action-btn" onclick="toggleLike(this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            89
-          </button>
-          <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> 7</button>
-          <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share</button>
-          <button class="add-cart-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Add to cart</button>
-        </div>
-        <div class="post-caption"><strong>jess.looks</strong> finally found a work-to-dinner look that doesn't require a full change 🙌</div>
-        <div class="hashtags">
-          <span class="hashtag">#ARKET</span><span class="hashtag">#OfficeFit</span><span class="hashtag">#WorkwearInspo</span>
-        </div>
-        <div class="comment-input-row">
-          <div class="post-av" style="width:28px;height:28px;font-size:12px;flex-shrink:0;">AB</div>
-          <input class="comment-input" type="text" placeholder="Add a comment…">
-          <button class="comment-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Right sidebar -->
-    <div class="social-right">
-      <h3>Trending now</h3>
-      <div style="margin-bottom:20px;">
-        <span class="trending-tag">#QuietLuxury</span>
-        <span class="trending-tag">#DinnerOutfit</span>
-        <span class="trending-tag">#OOTD</span>
-        <span class="trending-tag">#Y2K</span>
-        <span class="trending-tag">#OfficeSiren</span>
-        <span class="trending-tag">#CoastalGrandma</span>
-        <span class="trending-tag">#Minimalist</span>
-        <span class="trending-tag">#ArkettCore</span>
-      </div>
-      <div style="padding-top:20px;border-top:0.5px solid var(--gold-border);">
-        <h3 style="margin-bottom:12px;">Share your outfit</h3>
-        <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;">Post a look, tag the items, and let your friends shop directly from your post.</p>
-        <button class="btn-primary" style="font-size:13px;padding:10px 20px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          New post
+      <div class="comments-list" id="commentsList"></div>
+      <div class="comments-input-row">
+        <div class="comment-av">AB</div>
+        <input class="comment-input" id="commentInput" type="text" placeholder="Add a comment…">
+        <button class="comment-send" aria-label="Send comment">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
     </div>
-
   </div>
+
 </section>
 
 <!-- ══════════════════════════════════════
@@ -403,6 +285,17 @@
 </section>
 
 <!-- ══════════════════════════════════════
+     SECTION 6: CART + UNIFIED CHECKOUT
+══════════════════════════════════════ -->
+<section id="cart">
+  <div id="cartRoot"></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 7: PRODUCT DETAIL PAGE (PDP)
+══════════════════════════════════════ -->
+<section id="product">
+  <div id="productRoot"></div>
      SECTION 5: RETAILER CATALOG
 ══════════════════════════════════════ -->
 <section id="retailer" style="padding-top:64px;padding-bottom:72px;">
@@ -698,6 +591,13 @@
     <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Profile
   </button>
+  <button class="bnav-item" id="bnav-cart" onclick="showSection('cart')">
+    <span class="bnav-icon-wrap">
+      <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="bnav-badge" id="bnavCartCount" style="display:none;">0</span>
+    </span>
+    Cart
+  </button>
 </nav>
 
 <!-- Compose FAB (social only) -->
@@ -706,7 +606,7 @@
 </button>
 
 <script>
-  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer'];
+  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product'];
 
   function showSection(id) {
     sections.forEach(s => {
@@ -722,7 +622,12 @@
       const bEl = document.getElementById('bnav-' + s);
       if (bEl) bEl.classList.toggle('active', s === id);
     });
-    document.getElementById('composeFab').style.display = id === 'social' ? 'flex' : 'none';
+    document.getElementById('composeFab').style.display = 'none';
+    if (id === 'social') {
+      const rf = document.getElementById('reelsFeed');
+      if (rf) rf.scrollTop = 0;
+    }
+    if (id === 'cart') { cartView = 'cart'; renderCartPage(); }
     window.scrollTo(0, 0);
     return false;
   }
@@ -1065,7 +970,8 @@
     shirt:    _svg('<path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/><path d="M46 22 L60 34 L74 22" fill="none"/><path d="M60 34 V124" fill="none"/>'),
     hoodie:   _svg('<path d="M40 34 Q60 18 80 34 L98 46 L88 70 L80 60 V126 H40 V60 L32 70 L22 46 Z"/><path d="M48 34 Q60 48 72 34" fill="none"/><path d="M48 98 H72" fill="none"/>'),
     jacket:   _svg('<path d="M44 22 L30 32 L36 58 V128 H54 L57 64 H63 L66 128 H84 V58 L90 32 L76 22 L60 36 Z"/><path d="M60 36 L54 64 M60 36 L66 64" fill="none"/>'),
-    bag:      _svg('<path d="M32 58 H88 L82 128 H38 Z"/><path d="M48 58 V46 A12 12 0 0 1 72 46 V58" fill="none"/><path d="M56 58 H64" fill="none"/>')
+    bag:      _svg('<path d="M32 58 H88 L82 128 H38 Z"/><path d="M48 58 V46 A12 12 0 0 1 72 46 V58" fill="none"/><path d="M56 58 H64" fill="none"/>'),
+    shoe:     _svg('<path d="M14 92 Q14 74 34 72 L66 70 Q80 70 92 78 L106 88 Q112 92 112 96 Q112 102 104 102 L22 102 Q14 102 14 96 Z"/><path d="M30 76 Q48 88 70 80" fill="none"/>')
   };
   // Map every catalogue keyword to one of the drawn icons
   const GARMENT_MAP = {
@@ -1074,29 +980,31 @@
     knit: 'sweater', sweater: 'sweater', cardigan: 'sweater',
     shirt: 'shirt', blouse: 'shirt', hoodie: 'hoodie',
     jacket: 'jacket', blazer: 'jacket', coat: 'jacket', suit: 'jacket',
-    handbag: 'bag'
+    handbag: 'bag', bag: 'bag', tote: 'bag', clutch: 'bag',
+    shoe: 'shoe', mule: 'shoe', heel: 'shoe', heels: 'shoe', sandal: 'shoe',
+    sneaker: 'shoe', sneakers: 'shoe', trainers: 'shoe', boot: 'shoe', loafer: 'shoe'
   };
   const garmentIcon = cat => GARMENT[GARMENT_MAP[cat] || 'tee'];
 
-  function renderCard(it, brand) {
+  function renderCard(it, brand, key, idx) {
     const high = it.m >= 75;
     const badgeClass = it.m >= 75 ? 'rc-badge-high' : (it.m >= 50 ? 'rc-badge-mid' : 'rc-badge-low');
     const save = it.m < 50;
     const price = it.w ? `${it.p} <s>${it.w}</s>` : it.p;
     const tags = it.t.map(t => `<span class="rc-tag">${t}</span>`).join('');
     const btn = save
-      ? `<button class="rc-btn rc-btn-save"
+      ? `<button class="rc-btn rc-btn-save" onclick="event.stopPropagation(); saveRetailerItem('${key}', ${idx}, this)"
             onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
             onmouseleave="this.style.background='';this.style.color='';">Save for later</button>`
-      : `<button class="rc-btn rc-btn-add"
+      : `<button class="rc-btn rc-btn-add" onclick="event.stopPropagation(); addRetailerItem('${key}', ${idx}, this)"
             onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
             onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">Add to cart</button>`;
     return `
-      <div class="rc-card${high ? ' rc-high' : ''}">
+      <div class="rc-card${high ? ' rc-high' : ''}" onclick="openProductFromRetailer('${key}', ${idx})">
         <div class="rc-img">
           <div class="rc-illustration">${garmentIcon(it.k)}</div>
           <div class="rc-badge ${badgeClass}">${it.m}% match</div>
-          <button class="rc-wishlist" aria-label="Save to wishlist">${HEART_SVG}</button>
+          <button class="rc-wishlist" aria-label="Save to wishlist" onclick="event.stopPropagation(); saveRetailerItem('${key}', ${idx}); this.classList.toggle('saved')">${HEART_SVG}</button>
         </div>
         <div class="rc-info">
           <div class="rc-brand-label">${brand}</div>
@@ -1124,7 +1032,7 @@
     document.getElementById('rc-match-num').textContent = r.match + '%';
     document.getElementById('rc-search-text').textContent = 'Search ' + r.name + '…';
     document.getElementById('rc-results-count').textContent = r.count + ' items · showing best matches for you first';
-    document.getElementById('rcGrid').innerHTML = r.items.map(it => renderCard(it, r.name)).join('');
+    document.getElementById('rcGrid').innerHTML = r.items.map((it, idx) => renderCard(it, r.name, key, idx)).join('');
     // reset filter pills to "All"
     document.querySelectorAll('#retailer .rc-filter').forEach((f, i) => f.classList.toggle('on', i === 0));
   }
@@ -1136,6 +1044,809 @@
 
   // Pre-render Zara so the catalog isn't empty on first open
   renderRetailer('zara');
+
+  /* ─── SOCIAL FEED ─────────────────────────────────────
+     Instagram-style scrollable feed. Each post is an outfit;
+     its image is built from the same garment illustrations
+     used in the retailer catalogs (garmentIcon). */
+  const railHeart = on => `<svg width="23" height="23" viewBox="0 0 24 24" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  const RAIL_COMMENT = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
+  const RAIL_SHARE   = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+  const railSave = on => `<svg width="21" height="21" viewBox="0 0 24 24" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
+  const RAIL_CART    = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+
+  /* item: n=name, p=price, k=garment keyword (drives the illustration) */
+  const POSTS = [
+    {
+      user: 'Sofia Chen', handle: '@sofiastyles', av: 'SC', time: '2h ago',
+      match: 87, likes: 142, comments: 18, liked: true,
+      items: [
+        { n: 'Zara linen blouse', p: '£35', k: 'blouse' },
+        { n: 'Mango wide-leg trousers', p: '£49', k: 'trousers' },
+        { n: 'COS mule', p: '£89', k: 'mule' }
+      ],
+      caption: 'dinner fit sorted ✨ obsessed with this combo — the linen shirt is everything rn',
+      hashtags: ['#Zara', '#Mango', '#DinnerOutfit', '#OOTD', '#QuietLuxury'],
+      thread: [
+        { av: 'JL', name: 'jess.looks', text: "omg where's the shirt from exactly?? 😍" },
+        { av: 'AM', name: 'amyy.m', text: 'this is so your vibe, adding to my wishlist right now' },
+        { av: 'R',  name: 'rach', text: "wore something similar last week, it's SO good in person" }
+      ]
+    },
+    {
+      user: 'Jess Looks', handle: '@jess.looks', av: 'JL', time: '5h ago',
+      match: 94, likes: 89, comments: 7, liked: false,
+      items: [
+        { n: 'ARKET relaxed shirt', p: '£65', k: 'shirt' },
+        { n: 'Uniqlo smart trousers', p: '£30', k: 'trousers' },
+        { n: '& Other Stories bag', p: '£79', k: 'bag' }
+      ],
+      caption: "finally found a work-to-dinner look that doesn't require a full change 🙌",
+      hashtags: ['#ARKET', '#OfficeFit', '#WorkwearInspo'],
+      thread: []
+    },
+    {
+      user: 'Amy M', handle: '@amyy.m', av: 'AM', time: '8h ago',
+      match: 91, likes: 203, comments: 24, liked: false,
+      items: [
+        { n: 'COS draped midi dress', p: '£115', k: 'dress' },
+        { n: 'COS structured leather tote', p: '£150', k: 'tote' }
+      ],
+      caption: 'one piece and out the door 🤍 the drape on this dress does all the work',
+      hashtags: ['#COS', '#Minimalist', '#QuietLuxury', '#OOTD'],
+      thread: [
+        { av: 'SC', name: 'sofiastyles', text: 'the silhouette on this is unreal 😮‍💨' },
+        { av: 'RK', name: 'rach', text: 'need this for the wedding next month!!' }
+      ]
+    },
+    {
+      user: 'Rachel K', handle: '@rach', av: 'RK', time: '12h ago',
+      match: 78, likes: 67, comments: 5, liked: false,
+      items: [
+        { n: 'Uniqlo merino jumper', p: '£35', k: 'sweater' },
+        { n: 'ARKET wool trousers', p: '£89', k: 'trousers' },
+        { n: 'New Balance trainers', p: '£95', k: 'sneaker' }
+      ],
+      caption: 'cosy season starter 🤎 neutral knit + a comfy trouser = my whole personality rn',
+      hashtags: ['#Uniqlo', '#ARKET', '#CoastalGrandma', '#Neutrals'],
+      thread: []
+    },
+    {
+      user: 'Sofia Chen', handle: '@sofiastyles', av: 'SC', time: '1d ago',
+      match: 85, likes: 154, comments: 11, liked: false,
+      items: [
+        { n: 'Zara ribbed knit top', p: '£26', k: 'knit' },
+        { n: 'Mango satin slip skirt', p: '£40', k: 'skirt' },
+        { n: 'COS mule', p: '£89', k: 'mule' }
+      ],
+      caption: 'soft girl autumn, reporting for duty 🍂 the satin skirt catches the light so nicely',
+      hashtags: ['#Mango', '#Zara', '#SoftGirl', '#OOTD'],
+      thread: [
+        { av: 'JL', name: 'jess.looks', text: 'the colour palette here 👌' }
+      ]
+    },
+    {
+      user: 'Amy M', handle: '@amyy.m', av: 'AM', time: '1d ago',
+      match: 82, likes: 98, comments: 9, liked: false,
+      items: [
+        { n: 'ARKET linen A-line dress', p: '£79', k: 'dress' },
+        { n: '& Other Stories clutch', p: '£55', k: 'clutch' }
+      ],
+      caption: 'linen szn forever ☀️ throw it on and instantly look put together',
+      hashtags: ['#ARKET', '#Minimalist', '#Linen', '#OOTD'],
+      thread: []
+    }
+  ];
+
+  function renderReel(post, i) {
+    const garments = post.items.map(it => `<div class="post-garment">${garmentIcon(it.k)}</div>`).join('');
+    const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
+    const hashtags = post.hashtags.map(h => `<span class="hashtag">${h}</span>`).join('');
+    const capName  = post.handle.replace('@', '');
+    return `
+      <div class="reel" data-idx="${i}">
+        <div class="reel-frame">
+          <div class="reel-card">
+            <div class="reel-media">
+              <div class="post-illustration-row">${garments}</div>
+              <div class="reel-tags">
+                <div class="reel-match">${post.match}% match for you</div>
+                ${chips}
+              </div>
+              <div class="reel-info">
+                <div class="reel-poster">
+                  <div class="post-av">${post.av}</div>
+                  <div>
+                    <div class="reel-poster-name">${post.user}</div>
+                    <div class="reel-poster-handle">${post.handle} · ${post.time}</div>
+                  </div>
+                </div>
+                <div class="reel-caption"><strong>${capName}</strong> ${post.caption}</div>
+                <div class="reel-hashtags">${hashtags}</div>
+              </div>
+            </div>
+          </div>
+          <div class="reel-rail">
+            <div class="rail-avatar">${post.av}</div>
+            <button class="rail-btn rail-like${post.liked ? ' on' : ''}" onclick="toggleReelLike(this, ${i})" aria-label="Like">
+              <span class="rail-icon">${railHeart(post.liked)}</span>
+              <span class="rail-count" data-likes>${post.likes}</span>
+            </button>
+            <button class="rail-btn" onclick="openComments(${i})" aria-label="Comments">
+              <span class="rail-icon">${RAIL_COMMENT}</span>
+              <span class="rail-count">${post.comments}</span>
+            </button>
+            <button class="rail-btn" onclick="bumpRail(this)" aria-label="Share">
+              <span class="rail-icon">${RAIL_SHARE}</span>
+              <span class="rail-count">Share</span>
+            </button>
+            <button class="rail-btn rail-save" onclick="toggleSave(this)" aria-label="Save">
+              <span class="rail-icon">${railSave(false)}</span>
+              <span class="rail-count">Save</span>
+            </button>
+            <button class="rail-btn rail-cart" onclick="addLookToCart(${i}, this)" aria-label="Add to cart">
+              <span class="rail-icon">${RAIL_CART}</span>
+              <span class="rail-count">Add</span>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  /* ─── Rail actions ─── */
+  function bumpRail(btn) {
+    btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
+  }
+  function toggleReelLike(btn, i) {
+    const post = POSTS[i];
+    post.liked = !post.liked;
+    post.likes += post.liked ? 1 : -1;
+    btn.classList.toggle('on', post.liked);
+    btn.querySelector('.rail-icon').innerHTML = railHeart(post.liked);
+    btn.querySelector('[data-likes]').textContent = post.likes;
+    bumpRail(btn);
+  }
+  function toggleSave(btn) {
+    const on = btn.classList.toggle('on');
+    btn.querySelector('.rail-icon').innerHTML = railSave(on);
+    btn.querySelector('.rail-count').textContent = on ? 'Saved' : 'Save';
+    bumpRail(btn);
+  }
+  /* Adds the whole look (every tagged item) to the unified cart — see addLookToCart below */
+
+  /* ─── Comments panel (drawer / bottom sheet) ─── */
+  function openComments(i) {
+    const post = POSTS[i];
+    const list = document.getElementById('commentsList');
+    list.innerHTML = (post.thread && post.thread.length)
+      ? post.thread.map(c => `<div class="comment-row"><div class="comment-av">${c.av}</div><div class="comment-text"><strong>${c.name}</strong> ${c.text}</div></div>`).join('')
+      : '<div class="comments-empty">No comments yet — be the first to say something.</div>';
+    document.getElementById('commentsOverlay').classList.add('open');
+  }
+  function closeComments() {
+    document.getElementById('commentsOverlay').classList.remove('open');
+  }
+
+  /* Pad each post's thread so the comments shown match the count on the post */
+  const COMMENT_POOL = [
+    { av: 'EM', name: 'ella.m',  text: 'obsessed with this 😍' },
+    { av: 'NK', name: 'nadia.k', text: 'where are the trousers from??' },
+    { av: 'TC', name: 'tara.c',  text: 'this is such a vibe' },
+    { av: 'LP', name: 'lola.p',  text: 'need the whole fit immediately' },
+    { av: 'MD', name: 'mara.d',  text: 'the colours though 🤎' },
+    { av: 'SR', name: 'sana.r',  text: 'saving this for inspo' },
+    { av: 'JW', name: 'jo.w',    text: 'okay this is gorgeous' },
+    { av: 'BK', name: 'bea.k',   text: 'adding it all to cart rn' },
+    { av: 'FN', name: 'fern.n',  text: 'how is the sizing on the top?' },
+    { av: 'IV', name: 'iris.v',  text: 'so good 👏' },
+    { av: 'CH', name: 'cleo.h',  text: 'this matched me 90% too!!' },
+    { av: 'DP', name: 'dani.p',  text: 'wore mine yesterday, love it' },
+    { av: 'RG', name: 'romy.g',  text: 'the styling here is unreal' },
+    { av: 'AO', name: 'ava.o',   text: 'need this for the weekend' },
+    { av: 'TN', name: 'tess.n',  text: 'bookmarking instantly' },
+    { av: 'YL', name: 'yara.l',  text: 'literally perfect 🙌' }
+  ];
+  POSTS.forEach(p => {
+    const full = (p.thread || []).slice();
+    for (let i = 0; full.length < p.comments; i++) full.push(COMMENT_POOL[i % COMMENT_POOL.length]);
+    p.thread = full;            // thread length now equals the comment count shown
+  });
+
+  /* ─── Snap navigation: wheel, arrow keys and chevrons all move one post ─── */
+  let reelSnapBusy = false;
+  function reelsScroll(dir) {
+    const c = document.getElementById('reelsFeed');
+    if (!c || reelSnapBusy) return;
+    const h = c.clientHeight;
+    const cur = Math.round(c.scrollTop / h);
+    const next = Math.max(0, Math.min(POSTS.length - 1, cur + dir));
+    if (next === cur) return;
+    reelSnapBusy = true;
+    c.scrollTo({ top: next * h, behavior: 'smooth' });
+    setTimeout(() => { reelSnapBusy = false; }, 700);
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('social').classList.contains('active')) return;
+    if (e.key === 'Escape') { closeComments(); return; }
+    if (document.getElementById('commentsOverlay').classList.contains('open')) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); reelsScroll(1); }
+    else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); reelsScroll(-1); }
+  });
+
+  const reelsEl = document.getElementById('reelsFeed');
+  reelsEl.innerHTML = POSTS.map(renderReel).join('');
+  // One wheel gesture = one post (momentum events are ignored while a snap is in flight)
+  reelsEl.addEventListener('wheel', e => {
+    if (document.getElementById('commentsOverlay').classList.contains('open')) return;
+    if (Math.abs(e.deltaY) < 6) return;
+    e.preventDefault();
+    reelsScroll(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false });
+
+  /* ══════════════════════════════════════════════════════
+     UNIFIED CART — one app-wide store, persisted to
+     localStorage, with a single checkout across retailers.
+     ══════════════════════════════════════════════════════ */
+  const Cart = (function () {
+    const KEY = 'drape_cart_v1';
+    let state = { items: [], saved: [] };
+    const listeners = [];
+    try {
+      const raw = JSON.parse(localStorage.getItem(KEY));
+      if (raw && Array.isArray(raw.items)) state = { items: raw.items, saved: raw.saved || [] };
+    } catch (e) { /* ignore corrupt storage */ }
+    function persist() {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      listeners.forEach(fn => fn(state));
+    }
+    return {
+      get: () => state,
+      subscribe(fn) { listeners.push(fn); fn(state); },
+      count: () => state.items.reduce((n, i) => n + i.qty, 0),
+      add(item) {
+        const ex = state.items.find(i => i.id === item.id);
+        if (ex) ex.qty += (item.qty || 1);
+        else state.items.push(Object.assign({ qty: 1 }, item));
+        persist();
+      },
+      remove(id) { state.items = state.items.filter(i => i.id !== id); persist(); },
+      setQty(id, q) { const it = state.items.find(i => i.id === id); if (it) { it.qty = Math.max(1, q); persist(); } },
+      saveForLater(item) {
+        if (!state.saved.find(i => i.id === item.id)) state.saved.push(Object.assign({ qty: 1 }, item));
+        persist();
+      },
+      moveToCart(id) {
+        const idx = state.saved.findIndex(i => i.id === id);
+        if (idx < 0) return;
+        const it = state.saved.splice(idx, 1)[0];
+        const ex = state.items.find(i => i.id === it.id);
+        if (ex) ex.qty += it.qty || 1; else state.items.push(it);
+        persist();
+      },
+      removeSaved(id) { state.saved = state.saved.filter(i => i.id !== id); persist(); },
+      clear() { state.items = []; persist(); }
+    };
+  })();
+
+  const parsePrice = s => { const v = parseFloat(String(s).replace(/[^0-9.]/g, '')); return isNaN(v) ? 0 : v; };
+  const money = n => '£' + n.toFixed(2);
+
+  /* Social item names embed the retailer (e.g. "Zara linen blouse") — split it out */
+  const KNOWN_BRANDS = ['& Other Stories', 'Pretty Little Thing', 'River Island', 'New Balance', 'Pull&Bear', 'Bershka', 'Uniqlo', 'ARKET', 'Mango', 'Monki', 'ASOS', 'Zara', 'H&M', 'COS'];
+  function splitBrand(full) {
+    for (const b of KNOWN_BRANDS) {
+      if (full.toLowerCase().startsWith(b.toLowerCase() + ' ')) return { retailer: b, name: full.slice(b.length).trim() };
+    }
+    const sp = full.indexOf(' ');
+    return sp > 0 ? { retailer: full.slice(0, sp), name: full.slice(sp + 1) } : { retailer: 'Drape', name: full };
+  }
+  function lineFromRetailerItem(it, brand) {
+    const sizeTag = (it.t || []).find(t => /size/i.test(t)) || '';
+    return { id: 'i:' + brand + ':' + it.n, retailer: brand, name: it.n, priceLabel: it.p, price: parsePrice(it.p), size: sizeTag, match: it.m, k: it.k };
+  }
+
+  /* ─── Add-to-cart / save entry points wired to every button ─── */
+  function addRetailerItem(key, idx, btn) {
+    const r = RETAILERS[key]; if (!r || !r.items[idx]) return;
+    Cart.add(lineFromRetailerItem(r.items[idx], r.name));
+    flashBtn(btn, 'Added ✓');
+    toast(r.items[idx].n + ' added to cart');
+  }
+  function saveRetailerItem(key, idx, btn) {
+    const r = RETAILERS[key]; if (!r || !r.items[idx]) return;
+    Cart.saveForLater(lineFromRetailerItem(r.items[idx], r.name));
+    flashBtn(btn, 'Saved ✓');
+    toast(r.items[idx].n + ' saved for later');
+  }
+  function addLookToCart(i, btn) {
+    const post = POSTS[i]; if (!post) return;
+    post.items.forEach(it => {
+      const b = splitBrand(it.n);
+      Cart.add({ id: 'i:' + b.retailer + ':' + b.name, retailer: b.retailer, name: b.name, priceLabel: it.p, price: parsePrice(it.p), size: '', match: post.match, k: it.k });
+    });
+    if (btn) {
+      btn.classList.add('on');
+      const c = btn.querySelector('.rail-count'); if (c) c.textContent = 'Added';
+      bumpRail(btn);
+      setTimeout(() => { btn.classList.remove('on'); if (c) c.textContent = 'Add'; }, 1500);
+    }
+    toast(post.items.length + ' items added to cart');
+  }
+
+  function flashBtn(btn, label) {
+    if (!btn || btn._flashing) return;
+    const orig = btn.textContent;
+    btn._flashing = true;
+    btn.textContent = label;
+    btn.classList.add('rc-btn-added');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('rc-btn-added'); btn._flashing = false; }, 1400);
+  }
+
+  let _toastTimer = null;
+  function toast(msg) {
+    let t = document.getElementById('drapeToast');
+    if (!t) { t = document.createElement('div'); t.id = 'drapeToast'; t.className = 'drape-toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  function renderCartBadges(state) {
+    const n = state.items.reduce((a, i) => a + i.qty, 0);
+    ['navCartCount', 'bnavCartCount'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = n;
+      el.style.display = n > 0 ? 'inline-flex' : 'none';
+    });
+  }
+
+  /* ─── Cart page + unified checkout ─── */
+  let cartView = 'cart';     // 'cart' | 'delivery' | 'payment' | 'confirmation'
+  let lastOrder = null;
+
+  function groupByRetailer(items) {
+    const map = new Map();
+    items.forEach(it => { if (!map.has(it.retailer)) map.set(it.retailer, []); map.get(it.retailer).push(it); });
+    return map;
+  }
+  const esc = id => String(id).replace(/'/g, "\\'");
+  const cartThumb = k => `<div class="cart-thumb"><div class="cart-thumb-ill">${garmentIcon(k)}</div></div>`;
+
+  function renderCartPage() {
+    const root = document.getElementById('cartRoot');
+    if (!root) return;
+    if (cartView === 'delivery' || cartView === 'payment') root.innerHTML = renderCheckoutStep(cartView);
+    else if (cartView === 'confirmation') root.innerHTML = renderConfirmation();
+    else root.innerHTML = renderBasket();
+  }
+
+  function renderBasket() {
+    const st = Cart.get();
+    if (!st.items.length) {
+      return `
+        <div class="cart-empty">
+          <div class="cart-empty-icon"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+          <h2>Your cart is empty</h2>
+          <p>One cart, every retailer. Add looks from the feed and check out just once.</p>
+          <button class="btn-primary" onclick="showSection('feed')">Browse the feed</button>
+        </div>
+        ${renderSavedBlock()}`;
+    }
+    const groups = groupByRetailer(st.items);
+    let itemsHtml = '', subtotal = 0, count = 0;
+    groups.forEach((items, retailer) => {
+      let rSub = 0, rCount = 0;
+      const lines = items.map(it => { rSub += it.price * it.qty; rCount += it.qty; return cartLine(it); }).join('');
+      subtotal += rSub; count += rCount;
+      itemsHtml += `
+        <div class="cart-group">
+          <div class="cart-group-head">
+            <span class="cart-group-name">${retailer}</span>
+            <span class="cart-group-meta">${rCount} item${rCount > 1 ? 's' : ''} · ${money(rSub)}</span>
+          </div>
+          ${lines}
+        </div>`;
+    });
+    const total = subtotal; // unified free delivery
+    return `
+      <div class="cart-page">
+        <div class="cart-main">
+          <h1 class="cart-title">Your cart</h1>
+          <p class="cart-sub">${count} item${count > 1 ? 's' : ''} from ${groups.size} retailer${groups.size > 1 ? 's' : ''} — one checkout.</p>
+          ${itemsHtml}
+          ${renderSavedBlock()}
+        </div>
+        <aside class="cart-summary">
+          <h3>Order summary</h3>
+          <div class="summary-row"><span>Subtotal (${count})</span><span>${money(subtotal)}</span></div>
+          <div class="summary-row"><span>Delivery</span><span class="summary-free">Free</span></div>
+          <div class="summary-row summary-total"><span>Total</span><span>${money(total)}</span></div>
+          <button class="btn-primary cart-checkout" onclick="goCheckout()">Checkout · ${money(total)}</button>
+          <div class="summary-note">One payment — we split the order across ${groups.size} retailer${groups.size > 1 ? 's' : ''} for you.</div>
+        </aside>
+      </div>`;
+  }
+
+  function cartLine(it) {
+    const meta = [it.size, (it.match ? it.match + '% match' : '')].filter(Boolean).join(' · ');
+    return `
+      <div class="cart-line">
+        ${cartThumb(it.k)}
+        <div class="cart-line-info">
+          <div class="cart-line-top">
+            <div>
+              <div class="cart-line-name">${it.name}</div>
+              <div class="cart-line-meta">${it.retailer}${meta ? ' · ' + meta : ''}</div>
+            </div>
+            <button class="cart-remove" title="Remove" onclick="cartRemove('${esc(it.id)}')">✕</button>
+          </div>
+          <div class="cart-line-bottom">
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="cartQty('${esc(it.id)}', -1)">−</button>
+              <span class="qty-val">${it.qty}</span>
+              <button class="qty-btn" onclick="cartQty('${esc(it.id)}', 1)">+</button>
+            </div>
+            <div class="cart-line-price">${money(it.price * it.qty)}</div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderSavedBlock() {
+    const st = Cart.get();
+    if (!st.saved.length) return '';
+    const lines = st.saved.map(it => `
+      <div class="cart-line">
+        ${cartThumb(it.k)}
+        <div class="cart-line-info">
+          <div class="cart-line-top">
+            <div>
+              <div class="cart-line-name">${it.name}</div>
+              <div class="cart-line-meta">${it.retailer}${it.size ? ' · ' + it.size : ''} · ${it.priceLabel}</div>
+            </div>
+            <button class="cart-remove" title="Remove" onclick="savedRemove('${esc(it.id)}')">✕</button>
+          </div>
+          <div class="cart-line-bottom">
+            <button class="link-btn" onclick="savedMove('${esc(it.id)}')">Move to cart</button>
+          </div>
+        </div>
+      </div>`).join('');
+    return `<div class="cart-page"><div class="cart-main"><div class="cart-group saved-group"><div class="cart-group-head"><span class="cart-group-name">Saved for later</span><span class="cart-group-meta">${st.saved.length}</span></div>${lines}</div></div></div>`;
+  }
+
+  function cartRemove(id) { Cart.remove(id); toast('Removed from cart'); }
+  function cartQty(id, d) { const it = Cart.get().items.find(i => i.id === id); if (!it) return; if (it.qty + d < 1) Cart.remove(id); else Cart.setQty(id, it.qty + d); }
+  function savedRemove(id) { Cart.removeSaved(id); }
+  function savedMove(id) { Cart.moveToCart(id); toast('Moved to cart'); }
+
+  function goCheckout() { if (!Cart.count()) return; cartView = 'delivery'; renderCartPage(); window.scrollTo(0, 0); }
+  function backToCart() { cartView = 'cart'; renderCartPage(); window.scrollTo(0, 0); }
+  function goPayment() { cartView = 'payment'; renderCartPage(); window.scrollTo(0, 0); }
+  function checkoutBack() { cartView = 'delivery'; renderCartPage(); window.scrollTo(0, 0); }
+
+  function renderCheckoutStep(step) {
+    const st = Cart.get();
+    const total = st.items.reduce((a, i) => a + i.price * i.qty, 0);
+    const count = st.items.reduce((a, i) => a + i.qty, 0);
+    const retailers = groupByRetailer(st.items).size;
+    const stepNum = step === 'delivery' ? 1 : 2;
+    const head = `
+      <div class="checkout-head">
+        <button class="link-btn" onclick="${step === 'delivery' ? 'backToCart()' : 'checkoutBack()'}">← Back</button>
+        <div class="checkout-steps">
+          <span class="cstep ${stepNum >= 1 ? 'on' : ''}">1 · Delivery</span>
+          <span class="cstep ${stepNum >= 2 ? 'on' : ''}">2 · Payment</span>
+          <span class="cstep">3 · Done</span>
+        </div>
+      </div>`;
+    const body = step === 'delivery' ? `
+        <h1 class="cart-title">Delivery details</h1>
+        <p class="cart-sub">One delivery step for your whole basket — ${count} item${count > 1 ? 's' : ''} across ${retailers} retailer${retailers > 1 ? 's' : ''}.</p>
+        <div class="checkout-form">
+          <label class="field"><span>Full name</span><input type="text" value="Alicia Baquero"></label>
+          <label class="field"><span>Email</span><input type="email" value="alicia@example.com"></label>
+          <label class="field field-wide"><span>Address</span><input type="text" placeholder="123 Example Street"></label>
+          <label class="field"><span>City</span><input type="text" placeholder="London"></label>
+          <label class="field"><span>Postcode</span><input type="text" placeholder="E1 6AN"></label>
+        </div>
+        <button class="btn-primary" onclick="goPayment()">Continue to payment</button>
+      ` : `
+        <h1 class="cart-title">Payment</h1>
+        <p class="cart-sub">One payment of <strong>${money(total)}</strong> — we settle with each retailer behind the scenes.</p>
+        <div class="checkout-form">
+          <label class="field field-wide"><span>Card number</span><input type="text" placeholder="4242 4242 4242 4242"></label>
+          <label class="field"><span>Expiry</span><input type="text" placeholder="12/28"></label>
+          <label class="field"><span>CVC</span><input type="text" placeholder="123"></label>
+          <label class="field field-wide"><span>Name on card</span><input type="text" value="Alicia Baquero"></label>
+        </div>
+        <button class="btn-primary" onclick="placeOrder()">Pay ${money(total)} · Place order</button>
+        <div class="summary-note">Mock payment — no card is charged.</div>
+      `;
+    return `<div class="checkout-wrap">${head}<div class="checkout-body">${body}</div></div>`;
+  }
+
+  function placeOrder() {
+    const st = Cart.get();
+    if (!st.items.length) return;
+    const groups = groupByRetailer(st.items);
+    const parts = [];
+    groups.forEach((items, retailer) => {
+      const q = items.reduce((a, i) => a + i.qty, 0);
+      parts.push(q + ' item' + (q > 1 ? 's' : '') + ' from ' + retailer);
+    });
+    lastOrder = {
+      parts,
+      retailers: groups.size,
+      total: st.items.reduce((a, i) => a + i.price * i.qty, 0),
+      ref: 'DRP-' + Date.now().toString().slice(-6)
+    };
+    cartView = 'confirmation';
+    Cart.clear();        // emits → badges update; basket re-render is skipped because view !== 'cart'
+    renderCartPage();    // explicitly render the confirmation
+    window.scrollTo(0, 0);
+  }
+
+  function renderConfirmation() {
+    const o = lastOrder || { parts: [], retailers: 0, total: 0, ref: '' };
+    const list = o.parts.map(p => `<li>${p}</li>`).join('');
+    return `
+      <div class="checkout-wrap confirm-wrap">
+        <div class="confirm-card">
+          <div class="confirm-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h1 class="cart-title">Order placed</h1>
+          <p class="cart-sub">One order, ${o.retailers} retailer${o.retailers > 1 ? 's' : ''} — we'll handle the rest.</p>
+          <ul class="confirm-list">${list}</ul>
+          <div class="summary-row summary-total"><span>Paid</span><span>${money(o.total)}</span></div>
+          <div class="confirm-ref">Order ref ${o.ref}</div>
+          <button class="btn-primary" onclick="showSection('feed')">Continue shopping</button>
+        </div>
+      </div>`;
+  }
+
+  /* Live badges + keep the basket view in sync with the store */
+  Cart.subscribe(state => {
+    renderCartBadges(state);
+    if (document.getElementById('cart').classList.contains('active') && cartView === 'cart') renderCartPage();
+  });
+
+  /* ══════════════════════════════════════════════════════
+     PRODUCT DETAIL PAGE — store cards AND social chips both
+     route here; the PDP feeds the same unified Cart.
+     ══════════════════════════════════════════════════════ */
+  const BRAND_KEY = {};
+  Object.keys(RETAILERS).forEach(k => { BRAND_KEY[RETAILERS[k].name.toLowerCase()] = k; });
+  const brandKey = name => BRAND_KEY[String(name).toLowerCase()] || null;
+
+  /* style tags inferred from garment type (social chips carry no tag data) */
+  const STYLE_TAGS = {
+    sweater: ['Cosy knit', 'Relaxed fit'], trousers: ['Loose tailoring', 'Neutral tone'],
+    dress: ['Soft feminine', 'Easy drape'], shirt: ['Relaxed fit', 'Breathable'],
+    tee: ['Everyday staple', 'Soft cotton'], skirt: ['Midi length', 'Soft feminine'],
+    jacket: ['Structured', 'Layering'], hoodie: ['Casual', 'Brushed-back'],
+    bag: ['Accessory', 'Neutral tone'], shoe: ['Comfortable sole', 'Versatile']
+  };
+  const styleTagsFor = k => STYLE_TAGS[GARMENT_MAP[k] || 'tee'] || ['Everyday', 'Versatile'];
+
+  function productFromRetailer(key, idx) {
+    const r = RETAILERS[key]; if (!r || !r.items[idx]) return null;
+    const it = r.items[idx];
+    const size = (it.t || []).find(t => /size/i.test(t)) || 'Your size M';
+    const tags = (it.t || []).filter(t => !/size/i.test(t));
+    return { id: 'i:' + r.name + ':' + it.n, retailer: r.name, retailerKey: key, name: it.n,
+             priceLabel: it.p, price: parsePrice(it.p), was: it.w, match: it.m, size, tags, k: it.k };
+  }
+  function productFromChip(i, j) {
+    const post = POSTS[i]; if (!post || !post.items[j]) return null;
+    const it = post.items[j]; const b = splitBrand(it.n);
+    return { id: 'i:' + b.retailer + ':' + b.name, retailer: b.retailer, retailerKey: brandKey(b.retailer),
+             name: b.name, priceLabel: it.p, price: parsePrice(it.p), match: post.match,
+             size: 'Your size M', tags: styleTagsFor(it.k), k: it.k };
+  }
+  function openProductFromRetailer(key, idx) { const p = productFromRetailer(key, idx); if (p) openProduct(p); }
+  function openProductFromChip(i, j) { const p = productFromChip(i, j); if (p) openProduct(p); }
+
+  let currentProduct = null, productBackTo = 'feed', pdpSize = 'M', pdpQty = 1;
+  function openProduct(p) {
+    const cur = sections.find(s => document.getElementById(s).classList.contains('active'));
+    if (cur && cur !== 'product') productBackTo = cur;
+    currentProduct = p; pdpSize = 'M'; pdpQty = 1;
+    renderProductPage();
+    showSection('product');
+    window.scrollTo(0, 0);
+  }
+  function goBackFromProduct() { showSection(productBackTo || 'feed'); }
+
+  /* deterministic per-product mock copy + reviews (stable, but varies by product) */
+  function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
+  const DESC_BY_TYPE = {
+    sweater: 'Knitted from a soft, mid-weight yarn that keeps its shape wash after wash.',
+    trousers: 'Cut with a fluid, relaxed leg that drapes cleanly from the hip.',
+    dress: 'A fluid silhouette that skims the body and moves beautifully as you walk.',
+    shirt: 'Crisp yet breathable, with a relaxed collar and an easy, untucked drape.',
+    tee: 'A wardrobe staple in a substantial, structured cotton that wears in nicely.',
+    skirt: 'A versatile midi cut that takes you from desk to dinner without a thought.',
+    jacket: 'Lightly structured shoulders with a soft, unlined finish for everyday layering.',
+    hoodie: 'Brushed-back fleece with a roomy, lived-in fit and a heavyweight feel.',
+    bag: 'Crafted in a wipe-clean finish with a structured, stand-up shape.',
+    shoe: 'A clean, contemporary shape set on a comfortable everyday sole.'
+  };
+  const STYLE_NOTES = [
+    'Style it back with relaxed tailoring and a flat mule for an easy day-to-night look.',
+    'Layer under a longline coat now, then wear it solo as the weather turns.',
+    'Pairs effortlessly with denim or wide-leg trousers for a put-together finish.',
+    'Tuck it in for a sharper line, or leave it loose for something more off-duty.'
+  ];
+  function renderDescription(p) {
+    const base = DESC_BY_TYPE[GARMENT_MAP[p.k] || 'tee'] || 'A considered everyday piece designed to layer into your existing wardrobe.';
+    const note = STYLE_NOTES[hashStr(p.id) % STYLE_NOTES.length];
+    return `
+      <div class="pdp-section">
+        <h3 class="pdp-h3">Description</h3>
+        <p class="pdp-desc">${base} ${note} Matched to your profile at <strong>${p.match || 80}%</strong> — we think the fit and tone are right for you.</p>
+        <div class="pdp-meta-row">
+          <span>Material · responsibly sourced blend</span><span class="pdp-dot">·</span>
+          <span>Model wears size M</span><span class="pdp-dot">·</span>
+          <a class="link-btn" onclick="toast('Size guide: runs true to size — take your usual fit.')">Size guide</a>
+        </div>
+      </div>`;
+  }
+
+  const REVIEW_NAMES = ['Sophie T.', 'Maya R.', 'Imani K.', 'Chloe B.', 'Hannah L.', 'Priya S.', 'Elena G.', 'Ruby M.', 'Noor A.', 'Daria V.', 'Freya W.', 'Aisha M.'];
+  const REVIEW_TEXTS = [
+    'Exactly as pictured — the fit is spot on and the quality feels premium.',
+    'Obsessed. Wore it twice already this week. True to size.',
+    'Lovely material and it drapes really nicely. Sizing runs slightly large.',
+    'Great everyday piece, and the colour is even better in person.',
+    'Comfortable and versatile — dressed it up and down with no effort.',
+    'Good value. Already thinking about buying it in another colour.',
+    'Soft and well made. Took off a star only because delivery was slow.',
+    'Perfect for the season. It matches half my wardrobe already.',
+    'Flattering cut and not see-through at all. Would recommend.',
+    'Nice weight to the fabric — feels like it will last.'
+  ];
+  const REVIEW_AGES = ['3 days ago', '1 week ago', '2 weeks ago', '3 weeks ago', '1 month ago', '2 months ago'];
+  function starRow(n, cls) { return `<span class="pdp-stars ${cls || ''}">${'★'.repeat(n)}<span class="pdp-stars-empty">${'★'.repeat(5 - n)}</span></span>`; }
+  function renderReviews(p) {
+    const h = hashStr(p.id);
+    const avg = (4.1 + (h % 8) / 10).toFixed(1);   // 4.1–4.8
+    const count = 23 + (h % 280);
+    const r5 = 56 + (h % 18), r4 = 16 + ((h >> 3) % 12), r3 = 6 + ((h >> 6) % 6), r2 = 3 + ((h >> 9) % 4);
+    const r1 = Math.max(1, 100 - r5 - r4 - r3 - r2);
+    const bars = [['5', r5], ['4', r4], ['3', r3], ['2', r2], ['1', r1]]
+      .map(([s, w]) => `<div class="pdp-bar-row"><span class="pdp-bar-lbl">${s}★</span><div class="pdp-bar"><div class="pdp-bar-fill" style="width:${w}%"></div></div></div>`).join('');
+    const n = 3 + (h % 2);
+    let list = '';
+    for (let i = 0; i < n; i++) {
+      const nm = REVIEW_NAMES[(h + i * 5) % REVIEW_NAMES.length];
+      const tx = REVIEW_TEXTS[(h + i * 7) % REVIEW_TEXTS.length];
+      const ag = REVIEW_AGES[(h + i * 3) % REVIEW_AGES.length];
+      const st = Math.max(3, i === 0 ? 5 : 5 - ((h >> (i * 2)) % 2) - (((h >> (i + 4)) % 5 === 0) ? 1 : 0));
+      list += `
+        <div class="pdp-review">
+          <div class="pdp-review-head">
+            <span class="pdp-review-name">${nm}</span>
+            ${starRow(st)}
+          </div>
+          <div class="pdp-review-date">${ag} · Verified purchase</div>
+          <div class="pdp-review-text">${tx}</div>
+        </div>`;
+    }
+    return `
+      <div class="pdp-section">
+        <h3 class="pdp-h3">Reviews</h3>
+        <div class="pdp-reviews-top">
+          <div class="pdp-rating-big">
+            <div class="pdp-rating-num">${avg}</div>
+            ${starRow(Math.round(avg), 'pdp-stars-lg')}
+            <div class="pdp-rating-count">${count} reviews</div>
+          </div>
+          <div class="pdp-bars">${bars}</div>
+        </div>
+        <div class="pdp-review-list">${list}</div>
+      </div>`;
+  }
+
+  function renderRecs(p) {
+    const pool = [];
+    if (p.retailerKey && RETAILERS[p.retailerKey]) {
+      RETAILERS[p.retailerKey].items.forEach((it, idx) => { if (it.n !== p.name) pool.push([p.retailerKey, idx]); });
+    }
+    if (pool.length < 4) {
+      [['arket', 0], ['cos', 0], ['uniqlo', 1], ['mango', 1], ['zara', 2], ['hm', 1]].forEach(pr => {
+        const r = RETAILERS[pr[0]];
+        if (r && r.items[pr[1]] && r.items[pr[1]].n !== p.name && !pool.some(x => x[0] === pr[0] && x[1] === pr[1])) pool.push(pr);
+      });
+    }
+    const picks = pool.slice(0, 4);
+    if (!picks.length) return '';
+    const cards = picks.map(([key, idx]) => {
+      const r = RETAILERS[key], it = r.items[idx];
+      return `
+        <div class="pdp-rec" onclick="openProductFromRetailer('${key}', ${idx})">
+          <div class="pdp-rec-img"><div class="pdp-rec-ill">${garmentIcon(it.k)}</div></div>
+          <div class="pdp-rec-brand">${r.name}</div>
+          <div class="pdp-rec-name">${it.n}</div>
+          <div class="pdp-rec-price">${it.p}</div>
+        </div>`;
+    }).join('');
+    return `<div class="pdp-section"><h3 class="pdp-h3">You might also like</h3><div class="pdp-recs">${cards}</div></div>`;
+  }
+
+  function renderProductPage() {
+    const p = currentProduct;
+    const root = document.getElementById('productRoot');
+    if (!root) return;
+    if (!p) { root.innerHTML = ''; return; }
+    const priceHtml = p.was ? `${p.priceLabel} <s>${p.was}</s>` : p.priceLabel;
+    const matchBadge = p.match ? `<span class="pdp-match">${p.match}% match for you</span>` : '';
+    const tagChips = [p.size].concat(p.tags || []).filter(Boolean).map(t => `<span class="pdp-tag">${t}</span>`).join('');
+    const sizeBtns = ['S', 'M', 'L'].map(s => `<button class="pdp-size-btn${s === 'M' ? ' on' : ''}" onclick="setPdpSize('${s}', this)">${s}</button>`).join('');
+    root.innerHTML = `
+      <div class="pdp-bar">
+        <button class="rc-back" onclick="goBackFromProduct()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back
+        </button>
+        <span class="rc-nav-divider"></span>
+        <span class="pdp-bar-crumb">${p.retailer} · ${p.name}</span>
+      </div>
+      <div class="pdp-main">
+        <div class="pdp-media">
+          <div class="pdp-illustration">${garmentIcon(p.k)}</div>
+          ${p.match ? `<div class="pdp-media-badge">${p.match}% match</div>` : ''}
+        </div>
+        <div class="pdp-info">
+          <div class="pdp-retailer">${p.retailer}</div>
+          <h1 class="pdp-name">${p.name}</h1>
+          <div class="pdp-price">${priceHtml}</div>
+          ${matchBadge}
+          <div class="pdp-tags">${tagChips}</div>
+          <div class="pdp-field">
+            <div class="pdp-field-label">Size <span class="pdp-size-note">${p.size || 'Your size M'}</span></div>
+            <div class="pdp-sizes">${sizeBtns}</div>
+          </div>
+          <div class="pdp-field">
+            <div class="pdp-field-label">Quantity</div>
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="pdpQtyChange(-1)">−</button>
+              <span class="qty-val" id="pdpQtyVal">1</span>
+              <button class="qty-btn" onclick="pdpQtyChange(1)">+</button>
+            </div>
+          </div>
+          <div class="pdp-actions">
+            <button class="btn-primary pdp-add" onclick="pdpAddToCart(this)">Add to cart</button>
+            <button class="btn-outline pdp-buy" onclick="pdpBuyNow()">Buy now</button>
+          </div>
+          <div class="pdp-reassure">Free returns · Ships with your other Drape items · One checkout</div>
+        </div>
+      </div>
+      ${renderDescription(p)}
+      ${renderReviews(p)}
+      ${renderRecs(p)}
+    `;
+  }
+
+  function setPdpSize(s, btn) { pdpSize = s; document.querySelectorAll('.pdp-size-btn').forEach(b => b.classList.remove('on')); if (btn) btn.classList.add('on'); }
+  function pdpQtyChange(d) { pdpQty = Math.max(1, pdpQty + d); const el = document.getElementById('pdpQtyVal'); if (el) el.textContent = pdpQty; }
+  function pdpCartLine() {
+    const p = currentProduct;
+    return { id: p.id, retailer: p.retailer, name: p.name, priceLabel: p.priceLabel, price: p.price, size: 'Size ' + pdpSize, match: p.match, k: p.k, qty: pdpQty };
+  }
+  function pdpAddToCart(btn) {
+    if (!currentProduct) return;
+    Cart.add(pdpCartLine());
+    if (btn) flashBtn(btn, 'Added ✓');
+    toast(currentProduct.name + ' added to cart');
+  }
+  function pdpBuyNow() {
+    if (!currentProduct) return;
+    Cart.add(pdpCartLine());
+    toast('Added — taking you to checkout');
+    showSection('cart');
+    goCheckout();
+  }
 </script>
 
 </body>
