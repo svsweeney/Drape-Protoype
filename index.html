@@ -1082,6 +1082,15 @@ async function sendMessage() {
   const RAIL_SHARE   = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
   const railSave = on => `<svg width="21" height="21" viewBox="0 0 24 24" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
   const RAIL_CART    = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+  const OUTFIT_IMGS = [
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=420&q=80',
+  'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=420&q=80',
+  'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=420&q=80',
+  'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=420&q=80',
+  'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=420&q=80',
+  'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=420&q=80',
+  'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=420&q=80',
+  'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=420&q=80',];
 
   /* item: n=name, p=price, k=garment keyword (drives the illustration) */
   const POSTS = [
@@ -1163,11 +1172,43 @@ async function sendMessage() {
       caption: 'linen szn forever ☀️ throw it on and instantly look put together',
       hashtags: ['#ARKET', '#Minimalist', '#Linen', '#OOTD'],
       thread: []
+    },
+    {
+      user: 'Priya S', handle: '@priya.styles', av: 'PS', time: '2d ago',
+      match: 89, likes: 176, comments: 14, liked: false,
+      items: [
+        { n: 'COS cashmere roll-neck', p: '£125', k: 'sweater' },
+        { n: 'ARKET pleated midi skirt', p: '£69', k: 'skirt' },
+        { n: 'Mango belted trench coat', p: '£79', k: 'coat' }
+      ],
+      caption: 'autumn layering unlocked 🤎 this trench over the knit combo is doing everything',
+      hashtags: ['#COS', '#ARKET', '#Mango', '#LayeredLooks', '#QuietLuxury'],
+      thread: [
+        { av: 'SC', name: 'sofiastyles', text: 'the trench is so good, been eyeing it for weeks' },
+        { av: 'AM', name: 'amyy.m', text: 'this whole look is so you 🙌' },
+        { av: 'JL', name: 'jess.looks', text: 'okay the colour palette here is immaculate' }
+      ]
+    },
+    {
+      user: 'Nadia K', handle: '@nadia.k', av: 'NK', time: '3d ago',
+      match: 83, likes: 211, comments: 19, liked: false,
+      items: [
+        { n: 'Uniqlo smart ankle trousers', p: '£30', k: 'trousers' },
+        { n: 'Zara draped shoulder blouse', p: '£36', k: 'shirt' },
+        { n: 'ARKET organic poplin shirt', p: '£55', k: 'bag' }
+      ],
+      caption: 'work fit that actually passes the "could wear this to dinner" test ✨ obsessed with this trouser',
+      hashtags: ['#Uniqlo', '#Zara', '#WorkwearInspo', '#OOTD', '#OfficeStyle'],
+      thread: [
+        { av: 'RK', name: 'rach', text: 'need those trousers immediately, are they true to size?' },
+        { av: 'PS', name: 'priya.styles', text: 'this is exactly what I needed for my new job 😍' },
+        { av: 'SC', name: 'sofiastyles', text: 'the blouse drape is everything' }
+      ]
     }
   ];
 
   function renderReel(post, i) {
-    const garments = post.items.map(it => `<div class="post-garment">${garmentIcon(it.k)}</div>`).join('');
+    const garments = `<img src="${OUTFIT_IMGS[i % OUTFIT_IMGS.length]}" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;border-radius:inherit;" alt="outfit">`;
     const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
     const hashtags = post.hashtags.map(h => `<span class="hashtag">${h}</span>`).join('');
     const capName  = post.handle.replace('@', '');
