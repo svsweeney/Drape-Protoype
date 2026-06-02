@@ -1089,13 +1089,16 @@
   const reelsEl = document.getElementById('reelsFeed');
   reelsEl.innerHTML = POSTS.map(renderReel).join('');
 
-  /* One gesture = exactly one post. Native CSS snap (scroll-snap-stop:always) handles
-     touch; on trackpads, momentum can fly past a post, so we own the wheel: a flick
-     advances once, then every further wheel tick is swallowed until the stream goes
-     quiet AND the smooth-scroll has settled - so a single gesture never double-fires. */
+  /* One gesture = exactly one post — handled by native CSS scroll-snap:
+     the container is `scroll-snap-type: y mandatory` and every .reel is
+     `scroll-snap-align: start; scroll-snap-stop: always`, so the browser owns
+     trackpad / wheel / touch momentum and can never fly past a post. We do NOT
+     preventDefault the wheel — doing so froze trackpad scrolling so only the
+     arrows worked. The chevron buttons and ↑/↓ keys nudge by exactly one post
+     via goToReel(); a scroll / scrollend listener keeps reelIndex in sync with
+     wherever the user lands. */
   let reelIndex = 0;          // post we're parked on / animating toward
-  let reelAnimating = false;  // a programmatic smooth-scroll is in flight
-  let wheelQuietAt = 0;       // until this ts, an incoming wheel = same momentum train
+  let reelAnimating = false;  // a programmatic smooth-scroll (arrows / keys) is in flight
   let reelSettleTimer = null;
 
   const clampReel = i => Math.max(0, Math.min(POSTS.length - 1, i));
@@ -1121,16 +1124,8 @@
   let reelScrollIdle = null;
   reelsEl.addEventListener('scroll', () => { clearTimeout(reelScrollIdle); reelScrollIdle = setTimeout(onReelSettle, 120); });
 
-  reelsEl.addEventListener('wheel', e => {
-    if (document.getElementById('commentsOverlay').classList.contains('open')) return;
-    e.preventDefault();                          // we fully own vertical paging on the feed
-    const now = (window.performance && performance.now) ? performance.now() : Date.now();
-    const inMomentum = now < wheelQuietAt;
-    wheelQuietAt = now + 150;                     // any tick (even ignored) extends the quiet window
-    if (reelAnimating || inMomentum) return;      // swallow the whole momentum tail -> no skip
-    if (Math.abs(e.deltaY) < 4) return;           // ignore micro / mostly-horizontal noise
-    reelsScroll(e.deltaY > 0 ? 1 : -1);
-  }, { passive: false });
+  /* No wheel handler: native scroll-snap (mandatory + snap-stop:always) gives a
+     smooth Reels/TikTok trackpad feel and still lands one post per gesture. */
 
   document.addEventListener('keydown', e => {
     if (!document.getElementById('social').classList.contains('active')) return;

@@ -719,7 +719,9 @@ section.active { display: block; }
   position: absolute; top: 16px; left: 16px; right: 16px;
   display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
   z-index: 3;
+  pointer-events: none;          /* empty container area never eats clicks/scroll … */
 }
+.reel-tags > * { pointer-events: auto; }   /* … only the chips/badge are interactive */
 .reel-match {
   background: var(--gold); color: var(--cream);
   font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px;
@@ -992,7 +994,7 @@ section.active { display: block; }
 }
 .rc-wishlist:hover { color: #C0392B; }
 .rc-wishlist.saved { color: #C0392B; }
-.reel-chip { cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s, border-color 0.15s; }
+.reel-chip { cursor: pointer; position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s, border-color 0.15s; }
 .reel-chip:hover { background: var(--cream); border-color: var(--gold-light); }
 .reel-chip-go { color: var(--gold); font-weight: 700; }
 
