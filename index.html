@@ -12,17 +12,17 @@
 
 <!-- ─── TOP NAV ─── -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showSection('feed')">DRAPE</a>
+  <a class="nav-logo" href="#" onclick="return showSection('feed')">DRAPE</a>
   <div class="nav-links">
-    <a href="#" onclick="showSection('feed')" id="nav-feed" class="active">Discover</a>
-    <a href="#" onclick="showSection('stylist')" id="nav-stylist">AI Stylist</a>
-    <a href="#" onclick="showSection('social')" id="nav-social">Social</a>
-    <a href="#" onclick="showSection('profile')" id="nav-profile">Profile</a>
-    <a href="#" onclick="showSection('cart')" id="nav-cart" class="nav-cart-link">
+    <a href="#" onclick="return showSection('feed')" id="nav-feed" class="active">Discover</a>
+    <a href="#" onclick="return showSection('stylist')" id="nav-stylist">AI Stylist</a>
+    <a href="#" onclick="return showSection('social')" id="nav-social">Social</a>
+    <a href="#" onclick="return showSection('profile')" id="nav-profile">Profile</a>
+    <a href="#" onclick="return showSection('cart')" id="nav-cart" class="nav-cart-link">
       <svg class="nav-cart-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       Cart<span class="nav-cart-count" id="navCartCount" style="display:none;">0</span>
     </a>
-    <a href="#" class="nav-cta" onclick="showSection('stylist')">Get Started</a>
+    <a href="#" class="nav-cta" onclick="return showSection('stylist')">Get Started</a>
   </div>
 </nav>
 
@@ -35,11 +35,11 @@
     <h1>One app.<br><em>Every retailer.</em><br>One AI that knows you.</h1>
     <p>Discover fashion multiple retailers, filtered to your size, style, and taste. No more switching tabs.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="showSection('stylist')">
+      <button class="btn-primary" onclick="return showSection('stylist')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         Talk to my stylist
       </button>
-      <button class="btn-outline" onclick="showSection('social')">See what's trending</button>
+      <button class="btn-outline" onclick="return showSection('social')">See what's trending</button>
     </div>
   </div>
 
@@ -59,7 +59,7 @@
     <span class="pill" onclick="togglePill(this)">Shoes</span>
   </div>
 
-  <div class="stylist-bar fade-up delay-2" onclick="showSection('stylist')">
+  <div class="stylist-bar fade-up delay-2" onclick="return showSection('stylist')">
     <div class="stylist-bar-left">
       <div class="stylist-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -73,11 +73,11 @@
   </div>
 
   <div class="section-label fade-up delay-2">Followed Retailers</div>
-  <div class="featured-card fade-up delay-2">
+  <div class="featured-card fade-up delay-2" onclick="openRetailer('zara')" style="cursor:pointer;">
     <div>
       <div class="brand">Zara</div>
       <div class="sub">Summer sale — up to 30% off · 847 items match your profile</div>
-      <div class="cta" onclick="showSection('retailer')">Shop now →</div>
+      <div class="cta">Shop now →</div>
     </div>
     <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
   </div>
@@ -304,18 +304,18 @@
 
   <!-- Sub-nav -->
   <div class="rc-nav">
-    <button class="rc-back" onclick="showSection('feed')">
+    <button class="rc-back" onclick="return showSection('feed')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Back
     </button>
     <div class="rc-divider"></div>
     <span class="rc-nav-logo">DRAPE</span>
     <div class="rc-divider"></div>
-    <span class="rc-nav-brand">Zara</span>
+    <span class="rc-nav-brand" id="rc-brand-name">Zara</span>
     <div class="rc-nav-right">
       <div class="rc-matched-pill">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        847 items matched to you
+        <span id="rc-matched-text">847 items matched to you</span>
       </div>
       <svg class="rc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       <svg class="rc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -324,44 +324,38 @@
 
   <!-- Brand hero -->
   <div class="rc-hero">
-    <div class="rc-logo-box"><span class="rc-logo-text">ZARA</span></div>
+    <div class="rc-logo-box"><span class="rc-logo-text" id="rc-logo-text">ZARA</span></div>
     <div class="rc-brand-info">
       <div class="rc-title-row">
-        <h2 class="rc-brand-h2">Zara</h2>
+        <h2 class="rc-brand-h2" id="rc-hero-name">Zara</h2>
         <button class="rc-follow-btn"
           onmouseenter="this.style.background='var(--gold)';this.style.color='var(--cream)';"
           onmouseleave="this.style.background='transparent';this.style.color='var(--gold)';">
           + Follow
         </button>
-        <a class="rc-visit-btn" href="https://zara.com" target="_blank">
+        <a class="rc-visit-btn" id="rc-visit-link" href="#" onclick="return false">
           Visit site
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
       <!-- AI Stylist button -->
-      <div class="rc-stylist-bar" onclick="showSection('stylist')">
+      <div class="rc-stylist-bar" onclick="return showSection('stylist')">
         <div class="rc-stylist-bar-left">
           <div class="rc-stylist-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <div>
             <div class="rc-stylist-title">Ask your AI Stylist</div>
-            <div class="rc-stylist-sub">Get help finding the right look from Zara</div>
+            <div class="rc-stylist-sub" id="rc-stylist-sub">Get help finding the right look from this retailer</div>
           </div>
         </div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,245,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
-      <p class="rc-brand-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
-      <div class="rc-tags">
-        <span class="rc-tag-pill">Womenswear</span>
-        <span class="rc-tag-pill">Menswear</span>
-        <span class="rc-tag-pill">New in</span>
-        <span class="rc-tag-pill">Sale</span>
-        <span class="rc-tag-pill">Studio</span>
-      </div>
+      <p class="rc-brand-sub" id="rc-hero-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
+      <div class="rc-brand-tags" id="rc-hero-tags"></div>
     </div>
     <div class="rc-overall">
-      <div class="rc-overall-num">73%</div>
+      <div class="rc-overall-num" id="rc-match-num">73%</div>
       <div class="rc-overall-lbl">overall match<br>to your profile</div>
     </div>
   </div>
@@ -370,7 +364,7 @@
   <div class="rc-toolbar">
     <div class="rc-search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      Search Zara…
+      <span id="rc-search-text">Search</span>
     </div>
     <div class="rc-filters">
       <span class="rc-filter on">All</span>
@@ -391,7 +385,7 @@
 
   <!-- Results bar -->
   <div class="rc-results-bar">
-    <span class="rc-results-count">1,247 items · showing best matches for you first</span>
+    <span class="rc-results-count" id="rc-results-count">1,247 items · showing best matches for you first</span>
     <button class="rc-size-btn" onclick="this.classList.toggle('on')">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
       Show my size only
@@ -406,194 +400,30 @@
     </div>
   </div>
 
-  <!-- Product grid -->
-  <div class="rc-grid">
-
-    <div class="rc-card rc-high">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:52px;height:150px;"></div>
-        <div class="rc-badge rc-badge-high">94% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Linen wide-leg trousers</div>
-        <div class="rc-price">£39.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Loose tailoring</span><span class="rc-item-tag">Neutral tone</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£39.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card rc-high">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:46px;height:140px;"></div>
-        <div class="rc-badge rc-badge-high">88% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Satin slip midi dress</div>
-        <div class="rc-price">£49.99 <s>£69.99</s></div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Soft feminine</span><span class="rc-item-tag">Sale</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£49.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card rc-high">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:58px;height:130px;"></div>
-        <div class="rc-badge rc-badge-high">82% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Oversized linen blazer</div>
-        <div class="rc-price">£69.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Oversized fit</span><span class="rc-item-tag">Neutral tone</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£69.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:44px;height:118px;"></div>
-        <div class="rc-badge rc-badge-mid">67% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Ribbed knit top</div>
-        <div class="rc-price">£25.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Fitted cut</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£25.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:54px;height:145px;"></div>
-        <div class="rc-badge rc-badge-mid">61% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Floral print maxi dress</div>
-        <div class="rc-price">£59.99 <s>£79.99</s></div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Bold print</span><span class="rc-item-tag">Sale</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£59.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:50px;height:110px;"></div>
-        <div class="rc-badge rc-badge-low">38% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Neon orange crop jacket</div>
-        <div class="rc-price">£55.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Avoids: orange</span><span class="rc-item-tag">Bright colour</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£59.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card rc-high">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:48px;height:138px;"></div>
-        <div class="rc-badge rc-badge-high">85% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Draped shoulder blouse</div>
-        <div class="rc-price">£35.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Soft feminine</span><span class="rc-item-tag">Earthy pink</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£35.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="rc-card">
-      <div class="rc-img">
-        <div class="rc-figure" style="width:52px;height:124px;"></div>
-        <div class="rc-badge rc-badge-mid">58% match</div>
-        <button class="rc-heart" onclick="toggleHeart(this)" aria-label="Save to wishlist">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="rc-info">
-        <div class="rc-retailer-lbl">Zara</div>
-        <div class="rc-item-name">Structured midi skirt</div>
-        <div class="rc-price">£45.99</div>
-        <div class="rc-item-tags"><span class="rc-item-tag">Your size M</span><span class="rc-item-tag">Tailored</span></div>
-        <button class="rc-btn rc-btn-add" onclick="addToCart(this,'£45.99')"
-          onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-          onmouseleave="if(!this.dataset.added){this.style.background='';this.style.color='';this.style.borderColor='';}">Add to cart</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Sticky cart bar -->
-  <div class="rc-cart-bar">
-    <div class="rc-cart-info"><strong id="cart-count">0 items</strong> added from Zara</div>
-    <button class="rc-cart-cta" id="cart-cta"
-      onmouseenter="this.style.background='#8C6E2A';"
-      onmouseleave="this.style.background='var(--gold)';">
-      View cart — £0.00
-    </button>
-  </div>
+  <!-- Product grid (populated by renderRetailer -> renderCard) -->
+  <div class="rc-grid" id="rcGrid"></div>
 
 </section>
 
 <!-- ─── BOTTOM NAV ─── -->
 <nav class="bottom-nav">
-  <button class="bnav-item active" id="bnav-feed" onclick="showSection('feed')">
+  <button class="bnav-item active" id="bnav-feed" onclick="return showSection('feed')">
     <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
     Feed
   </button>
-  <button class="bnav-item" id="bnav-stylist" onclick="showSection('stylist')">
+  <button class="bnav-item" id="bnav-stylist" onclick="return showSection('stylist')">
     <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     Stylist
   </button>
-  <button class="bnav-item" id="bnav-social" onclick="showSection('social')">
+  <button class="bnav-item" id="bnav-social" onclick="return showSection('social')">
     <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     Social
   </button>
-  <button class="bnav-item" id="bnav-profile" onclick="showSection('profile')">
+  <button class="bnav-item" id="bnav-profile" onclick="return showSection('profile')">
     <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Profile
   </button>
-  <button class="bnav-item" id="bnav-cart" onclick="showSection('cart')">
+  <button class="bnav-item" id="bnav-cart" onclick="return showSection('cart')">
     <span class="bnav-icon-wrap">
       <svg class="bnav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="bnav-badge" id="bnavCartCount" style="display:none;">0</span>
@@ -609,16 +439,16 @@
 
 <script>
   const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product'];
+  const BASE_SECTIONS = ['feed', 'stylist', 'social', 'profile', 'cart'];
 
-  function showSection(id) {
+  /* Low-level: show one section + sync the nav highlight. No URL side-effects. */
+  function _renderSection(id) {
     sections.forEach(s => {
       const el = document.getElementById(s);
       el.classList.toggle('active', s === id);
       if (['stylist', 'social', 'retailer', 'cart', 'product'].includes(s)) {
-      el.style.display = s === id
-        ? (s === 'stylist' ? 'flex' : 'block')
-        : 'none';
-    }
+        el.style.display = s === id ? (s === 'stylist' ? 'flex' : 'block') : 'none';
+      }
     });
     sections.forEach(s => {
       const navEl = document.getElementById('nav-' + s);
@@ -631,12 +461,43 @@
       const rf = document.getElementById('reelsFeed');
       if (rf) rf.scrollTop = 0;
     }
-    if (id === 'cart') { cartView = 'cart'; renderCartPage(); }
     window.scrollTo(0, 0);
-    return false;
   }
 
-  // Initial display state
+  /* -- Hash router ----------------------------------------------
+     Real URLs: #/feed ... #/cart for tabs, #/store/:id for a store,
+     #/product/:token for a PDP. openRetailer / openProduct push their
+     own hashes so the browser Back button walks product -> store -> home,
+     and a store/product URL survives a refresh. */
+  function navHash(t) { if (location.hash === t) applyRoute(); else location.hash = t; }
+
+  function showSection(id) {
+    if (id === 'cart') cartView = 'cart';   // a fresh Cart click always opens the basket
+    navHash('#/' + id);
+    return false;                           // cancels the host <a href="#"> default
+  }
+
+  function applyRoute() {
+    const h = location.hash || '';
+    let m;
+    if ((m = h.match(/^#\/store\/([\w-]+)$/)) && RETAILERS[m[1]]) {
+      renderRetailer(m[1]);
+      _renderSection('retailer');
+    } else if ((m = h.match(/^#\/product\/(.+)$/))) {
+      const p = resolveProductToken(decodeURIComponent(m[1]));
+      if (p) { currentProduct = p; pdpSize = 'M'; pdpQty = 1; renderProductPage(); _renderSection('product'); }
+      else { _renderSection('feed'); }
+    } else {
+      m = h.match(/^#\/([\w-]+)$/);
+      const id = (m && BASE_SECTIONS.includes(m[1])) ? m[1] : 'feed';
+      if (id === 'cart') renderCartPage();
+      _renderSection(id);
+    }
+  }
+
+  window.addEventListener('hashchange', applyRoute);
+
+  // Initial display state (overlayed sections hidden until routed)
   document.getElementById('stylist').style.display = 'none';
   document.getElementById('social').style.display = 'none';
   document.getElementById('retailer').style.display = 'none';
@@ -714,37 +575,6 @@
   function toggleRcFilter(el) {
     document.querySelectorAll('.rc-filter').forEach(f => f.classList.remove('on'));
     el.classList.add('on');
-  }
-
-  function toggleHeart(btn) {
-    const svg = btn.querySelector('path');
-    btn.classList.toggle('liked');
-    if (btn.classList.contains('liked')) {
-      svg.setAttribute('fill', '#C0392B');
-      svg.setAttribute('stroke', '#C0392B');
-      btn.style.color = '#C0392B';
-    } else {
-      svg.setAttribute('fill', 'none');
-      svg.setAttribute('stroke', 'currentColor');
-      btn.style.color = '';
-    }
-  }
-
-  let cartCount = 0;
-  let cartTotal = 0;
-
-  function addToCart(btn, priceStr) {
-    if (btn.dataset.added) return;
-    btn.dataset.added = 'true';
-    btn.textContent = '✓ Added';
-    btn.style.background = '#8C6E2A';
-    btn.style.color = '#FAFAF5';
-    btn.style.borderColor = '#8C6E2A';
-    const price = parseFloat(priceStr.replace('£', ''));
-    cartCount++;
-    cartTotal += price;
-    document.getElementById('cart-count').textContent = cartCount + (cartCount === 1 ? ' item' : ' items');
-    document.getElementById('cart-cta').textContent = 'View cart — £' + cartTotal.toFixed(2);
   }
 
   /* ─── RETAILER CATALOGS ───────────────────────────────
@@ -1044,8 +874,8 @@
   }
 
   function openRetailer(key) {
-    renderRetailer(key);
-    showSection('retailer');
+    if (!RETAILERS[key]) return;
+    navHash('#/store/' + key);   // router -> renderRetailer(key) + show
   }
 
   /* ─── SOCIAL FEED ─────────────────────────────────────
@@ -1256,18 +1086,52 @@
   });
 
   /* ─── Snap navigation: wheel, arrow keys and chevrons all move one post ─── */
-  let reelSnapBusy = false;
-  function reelsScroll(dir) {
-    const c = document.getElementById('reelsFeed');
-    if (!c || reelSnapBusy) return;
-    const h = c.clientHeight;
-    const cur = Math.round(c.scrollTop / h);
-    const next = Math.max(0, Math.min(POSTS.length - 1, cur + dir));
-    if (next === cur) return;
-    reelSnapBusy = true;
-    c.scrollTo({ top: next * h, behavior: 'smooth' });
-    setTimeout(() => { reelSnapBusy = false; }, 700);
+  const reelsEl = document.getElementById('reelsFeed');
+  reelsEl.innerHTML = POSTS.map(renderReel).join('');
+
+  /* One gesture = exactly one post. Native CSS snap (scroll-snap-stop:always) handles
+     touch; on trackpads, momentum can fly past a post, so we own the wheel: a flick
+     advances once, then every further wheel tick is swallowed until the stream goes
+     quiet AND the smooth-scroll has settled - so a single gesture never double-fires. */
+  let reelIndex = 0;          // post we're parked on / animating toward
+  let reelAnimating = false;  // a programmatic smooth-scroll is in flight
+  let wheelQuietAt = 0;       // until this ts, an incoming wheel = same momentum train
+  let reelSettleTimer = null;
+
+  const clampReel = i => Math.max(0, Math.min(POSTS.length - 1, i));
+  const reelIndexFromScroll = () => clampReel(Math.round(reelsEl.scrollTop / reelsEl.clientHeight));
+
+  function onReelSettle() {
+    reelAnimating = false;
+    reelIndex = reelIndexFromScroll();          // re-sync after touch / native snap too
   }
+  function goToReel(i) {
+    i = clampReel(i);
+    reelIndex = i;
+    reelAnimating = true;
+    reelsEl.scrollTo({ top: i * reelsEl.clientHeight, behavior: 'smooth' });
+    clearTimeout(reelSettleTimer);
+    reelSettleTimer = setTimeout(onReelSettle, 600);   // fallback if scrollend never fires
+  }
+  // Chevrons + arrow keys both call this -> always exactly one post.
+  function reelsScroll(dir) { goToReel((reelAnimating ? reelIndex : reelIndexFromScroll()) + dir); }
+
+  // Authoritative settle (modern browsers) + debounced fallback (touch / no scrollend support).
+  reelsEl.addEventListener('scrollend', onReelSettle);
+  let reelScrollIdle = null;
+  reelsEl.addEventListener('scroll', () => { clearTimeout(reelScrollIdle); reelScrollIdle = setTimeout(onReelSettle, 120); });
+
+  reelsEl.addEventListener('wheel', e => {
+    if (document.getElementById('commentsOverlay').classList.contains('open')) return;
+    e.preventDefault();                          // we fully own vertical paging on the feed
+    const now = (window.performance && performance.now) ? performance.now() : Date.now();
+    const inMomentum = now < wheelQuietAt;
+    wheelQuietAt = now + 150;                     // any tick (even ignored) extends the quiet window
+    if (reelAnimating || inMomentum) return;      // swallow the whole momentum tail -> no skip
+    if (Math.abs(e.deltaY) < 4) return;           // ignore micro / mostly-horizontal noise
+    reelsScroll(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false });
+
   document.addEventListener('keydown', e => {
     if (!document.getElementById('social').classList.contains('active')) return;
     if (e.key === 'Escape') { closeComments(); return; }
@@ -1275,16 +1139,6 @@
     if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); reelsScroll(1); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); reelsScroll(-1); }
   });
-
-  const reelsEl = document.getElementById('reelsFeed');
-  reelsEl.innerHTML = POSTS.map(renderReel).join('');
-  // One wheel gesture = one post (momentum events are ignored while a snap is in flight)
-  reelsEl.addEventListener('wheel', e => {
-    if (document.getElementById('commentsOverlay').classList.contains('open')) return;
-    if (Math.abs(e.deltaY) < 6) return;
-    e.preventDefault();
-    reelsScroll(e.deltaY > 0 ? 1 : -1);
-  }, { passive: false });
 
   /* ══════════════════════════════════════════════════════
      UNIFIED CART — one app-wide store, persisted to
@@ -1433,7 +1287,7 @@
           <div class="cart-empty-icon"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
           <h2>Your cart is empty</h2>
           <p>One cart, every retailer. Add looks from the feed and check out just once.</p>
-          <button class="btn-primary" onclick="showSection('feed')">Browse the feed</button>
+          <button class="btn-primary" onclick="return showSection('feed')">Browse the feed</button>
         </div>
         ${renderSavedBlock()}`;
     }
@@ -1603,7 +1457,7 @@
           <ul class="confirm-list">${list}</ul>
           <div class="summary-row summary-total"><span>Paid</span><span>${money(o.total)}</span></div>
           <div class="confirm-ref">Order ref ${o.ref}</div>
-          <button class="btn-primary" onclick="showSection('feed')">Continue shopping</button>
+          <button class="btn-primary" onclick="return showSection('feed')">Continue shopping</button>
         </div>
       </div>`;
   }
@@ -1647,19 +1501,19 @@
              name: b.name, priceLabel: it.p, price: parsePrice(it.p), match: post.match,
              size: 'Your size M', tags: styleTagsFor(it.k), k: it.k };
   }
-  function openProductFromRetailer(key, idx) { const p = productFromRetailer(key, idx); if (p) openProduct(p); }
-  function openProductFromChip(i, j) { const p = productFromChip(i, j); if (p) openProduct(p); }
-
-  let currentProduct = null, productBackTo = 'feed', pdpSize = 'M', pdpQty = 1;
-  function openProduct(p) {
-    const cur = sections.find(s => document.getElementById(s).classList.contains('active'));
-    if (cur && cur !== 'product') productBackTo = cur;
-    currentProduct = p; pdpSize = 'M'; pdpQty = 1;
-    renderProductPage();
-    showSection('product');
-    window.scrollTo(0, 0);
+  /* Store cards & social chips both route to a PDP via a resolvable token in the URL:
+     r.<storeKey>.<index> for catalogue items, c.<postIdx>.<itemIdx> for social chips. */
+  function openProductFromRetailer(key, idx) { if (RETAILERS[key] && RETAILERS[key].items[idx]) navHash('#/product/r.' + key + '.' + idx); }
+  function openProductFromChip(i, j) { const post = POSTS[i]; if (post && post.items[j]) navHash('#/product/c.' + i + '.' + j); }
+  function resolveProductToken(tok) {
+    const parts = String(tok).split('.');
+    if (parts[0] === 'r') return productFromRetailer(parts[1], parseInt(parts[2], 10));
+    if (parts[0] === 'c') return productFromChip(parseInt(parts[1], 10), parseInt(parts[2], 10));
+    return null;
   }
-  function goBackFromProduct() { showSection(productBackTo || 'feed'); }
+
+  let currentProduct = null, pdpSize = 'M', pdpQty = 1;
+  function goBackFromProduct() { if (window.history.length > 1) history.back(); else showSection('feed'); }
 
   /* deterministic per-product mock copy + reviews (stable, but varies by product) */
   function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
@@ -1847,9 +1701,12 @@
     if (!currentProduct) return;
     Cart.add(pdpCartLine());
     toast('Added — taking you to checkout');
-    showSection('cart');
-    goCheckout();
+    cartView = 'delivery';
+    navHash('#/cart');   // router renders the cart in the delivery step + shows it
   }
+
+  /* Resolve the initial URL (supports deep-link / refresh on a store or product). */
+  applyRoute();
 </script>
 
 </body>
