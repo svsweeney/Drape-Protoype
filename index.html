@@ -43,7 +43,7 @@
       <div class="ob-sub">Your personal AI stylist across every retailer. Let's start with your name.</div>
       <input class="ob-input" id="obNameInput" type="text" placeholder="Your first name" autocomplete="off">
       <button class="ob-btn" onclick="obNextFromName()">Continue</button>
-      <div class="ob-link" onclick="obGoTo(7)">Already have an account? Sign in</div>
+      <div class="ob-link" onclick="obGoTo(9)">Already have an account? Sign in</div>
     </div>
   </div>
 
@@ -56,7 +56,25 @@
     </div>
   </div>
 
-  <div class="ob-screen ob-screen-feed" id="ob2">
+  <div class="ob-screen" id="ob2">
+    <div class="ob-body">
+      <div class="ob-heading">Colours you love</div>
+      <div class="ob-sub">Select the colour families that feel like your wardrobe.</div>
+      <div class="ob-colour-grid" id="obLoveGrid"></div>
+      <button class="ob-btn" onclick="obGoTo(3)" style="margin-top:20px;">Next</button>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob3">
+    <div class="ob-body">
+      <div class="ob-heading">Colours you avoid</div>
+      <div class="ob-sub">These get filtered out of your recommendations.</div>
+      <div class="ob-colour-grid" id="obAvoidGrid"></div>
+      <button class="ob-btn" onclick="obGoTo(4)" style="margin-top:20px;">Next</button>
+    </div>
+  </div>
+
+  <div class="ob-screen ob-screen-feed" id="ob4">
     <div class="ob-feed-header">
       <div class="ob-heading" style="font-size:24px;">Like the looks you love</div>
       <div class="ob-sub" style="margin-bottom:0;max-width:100%;text-align:center;">Tap the heart on outfits that feel like you.</div>
@@ -69,7 +87,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob3">
+  <div class="ob-screen" id="ob5">
     <div class="ob-body">
       <div style="text-align:center;max-width:340px;">
         <div class="ob-spinner"></div>
@@ -80,7 +98,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob4">
+  <div class="ob-screen" id="ob6">
     <div class="ob-body">
       <div class="ob-check-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -93,11 +111,11 @@
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
       </ul>
-      <button class="ob-btn" onclick="obGoTo(5)">See my recommendations</button>
+      <button class="ob-btn" onclick="obGoTo(7)">See my recommendations</button>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob5">
+  <div class="ob-screen" id="ob7">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Your recommendations are ready</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign up to unlock your personalised feed, <span id="obNameInSignup" style="color:var(--gold);font-weight:500;"></span>.</div>
@@ -106,14 +124,14 @@
         <div class="ob-field-wrap"><div class="ob-field-label">Password</div><input class="ob-field" type="password" placeholder="Create a password"></div>
         <div class="ob-field-wrap"><div class="ob-field-label">Confirm password</div><input class="ob-field" type="password" placeholder="Repeat your password"></div>
         <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Create account &amp; see my feed</button>
-        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Already have an account? Sign in</div>
+        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Already have an account? Sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob6"></div>
+  <div class="ob-screen" id="ob8"></div>
 
-  <div class="ob-screen" id="ob7">
+  <div class="ob-screen" id="ob9">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Welcome back</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign in to your DRAPE account.</div>
@@ -132,7 +150,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob8">
+  <div class="ob-screen" id="ob10">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Reset your password</div>
       <div class="ob-sub" style="margin-bottom:24px;">Enter the email address on your account and we'll send you a reset link.</div>
@@ -142,20 +160,20 @@
           <input class="ob-field" id="obResetEmail" type="email" placeholder="you@example.com">
         </div>
         <button class="ob-btn" style="max-width:100%;" onclick="obSendReset()">Send reset link</button>
-        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Back to sign in</div>
+        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Back to sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob9">
+  <div class="ob-screen" id="ob11">
     <div class="ob-body">
       <div class="ob-email-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Check your inbox</div>
       <div class="ob-sub" style="margin-bottom:24px;">We've sent a reset link to <span id="obResetEmailDisplay" style="color:var(--gold);font-weight:500;"></span>. It may take a minute to arrive.</div>
-      <button class="ob-btn" onclick="obGoTo(7)">Back to sign in</button>
-      <div class="ob-link" onclick="obGoTo(8)" style="margin-top:10px;">Didn't get it? Resend</div>
+      <button class="ob-btn" onclick="obGoTo(9)">Back to sign in</button>
+      <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Didn't get it? Resend</div>
     </div>
   </div>
 
@@ -275,10 +293,11 @@
         <div class="bubble-tag">DRAPE AI</div>
         Hi! What can I help you with today?
       </div>
+    </div>
 
 
     <div class="chat-input-area">
-      <div class="chat-rating">
+      <div class="chat-rating" id="chat-rating" style = "display:none;">
         <span>Rate this response:</span>
         <div class="stars">
           <span onclick="setRating(1)">★</span>
@@ -695,13 +714,41 @@
   }
 
 
-  const botReplies = [
-    "Got it — earthy pinks and soft blues, no orange. Let me pull some looks together for you ✨",
-    "Perfect. Smart casual with a feminine edge — I'm thinking relaxed tailoring, maybe a linen piece. Give me a sec.",
-    "On it! Filtering now for pieces under £100 across Zara, Mango and ARKET. Back in a moment…",
-  ];
-  let replyIndex = 0;
+  // ─── PASTE THIS IN YOUR index.html SCRIPT BLOCK ───
+  // Replace your existing sendMessage function, botReplies, replyIndex,
+  // setRating, and handleEnter with everything below.
+  // It requires RETAILERS and garmentIcon to already exist in the same script block
+  // (they do in your doc5 file).
 
+  const stylistMessages = [];
+  let hasRecommended = false;
+
+  const STYLIST_SYSTEM = `You are DRAPE's AI Stylist — a warm, witty, and genuinely helpful personal shopper.
+You know this user's style profile: size M, 5'4", loves neutral palettes, loose tailoring, earthy pinks and soft blues. Avoids orange and neons. Budget around £20–80 per item.
+
+Ask the user clarifying questions before giving any recommendations. It's very important to ask questions one at a time.
+
+IMPORTANT: When recommending products, you MUST only recommend items that exist in the DRAPE catalogue below. Always pick 2-4 real items from this list that best match the user's request. Format recommendations by outputting a special JSON block at the end of your message like this:
+
+RECOMMENDATIONS:[{"retailer":"Zara","index":0},{"retailer":"Mango","index":2}]
+
+The retailer must match exactly (case-sensitive). The index is the item's position (0-based) in that retailer's items array.
+
+Available catalogue:
+ZARA (key: zara): 0=Linen wide-leg trousers £39.99, 1=Satin slip midi dress £49.99, 2=Oversized linen blazer £69.99, 3=Ribbed knit top £25.99, 4=Pleated midi skirt £35.99, 5=Cropped wool cardigan £45.99, 6=Poplin shirt dress £39.99, 7=High-waist tailored trousers £39.99, 8=Floral print maxi dress £59.99, 9=Faux-leather biker jacket £69.99, 10=Knitted polo vest £29.99, 11=Neon orange crop jacket £55.99
+H&M (key: hm): 0=Rib-knit jumper £19.99, 1=Wide-leg twill trousers £27.99, 2=Oversized cotton shirt £24.99, 3=Linen-blend midi dress £34.99, 4=Ribbed tank top £9.99, 5=Tailored blazer £44.99, 6=Pleated trousers £29.99, 7=Cropped denim jacket £34.99, 8=Floral wrap dress £29.99, 9=Sequin mini dress £39.99, 10=Neon pink hoodie £24.99
+MANGO (key: mango): 0=Linen-blend blazer £59.99, 1=Wide-leg flowy trousers £35.99, 2=Satin midi slip skirt £39.99, 3=Knitted halter top £25.99, 4=Oversized poplin shirt £29.99, 5=Belted trench coat £79.99, 6=Ribbed knit dress £45.99, 7=Pleated palazzo trousers £39.99, 8=Floral midi dress £49.99, 9=Leather-effect leggings £35.99, 10=Fuchsia tailored suit £99.99
+ASOS (key: asos): 0=ASOS DESIGN slouchy trousers £28, 1=Ribbed midi dress £32, 2=Oversized dad blazer £55, 3=Knitted lounge set £40, 4=Straight-leg jeans £30, 5=Linen shirt £26, 6=Pleated maxi skirt £34, 7=Faux-leather trench £65, 8=Bias-cut slip dress £28, 9=Cargo mini skirt £25, 10=Bright orange co-ord £42
+UNIQLO (key: uniqlo): 0=Smart ankle trousers £29.90, 1=Supima cotton crew tee £14.90, 2=Merino-blend jumper £34.90, 3=Linen-blend shirt £29.90, 4=Pleated wide trousers £39.90, 5=Rayon midi dress £39.90, 6=Ultra Light Down jacket £69.90, 7=Ribbed knit cardigan £34.90, 8=Wide straight jeans £39.90, 9=Fleece half-zip £24.90
+ARKET (key: arket): 0=Heavyweight cotton tee £25, 1=Wool-blend tailored trousers £89, 2=Oversized wool coat £165, 3=Merino crew-neck jumper £69, 4=Linen A-line dress £79, 5=Organic poplin shirt £55, 6=Pleated midi skirt £69, 7=Relaxed tapered jeans £75, 8=Quilted liner jacket £115, 9=Knitted polo shirt £49
+COS (key: cos): 0=Voluminous wide trousers £89, 1=Draped midi dress £115, 2=Oversized wool-blend coat £190, 3=Cashmere roll-neck £125, 4=Organic-cotton poplin shirt £69, 5=Sculpted A-line skirt £79, 6=Tailored straight-leg trousers £89, 7=Knitted column dress £99, 8=Relaxed selvedge jeans £89, 9=Structured leather tote £150
+RIVER ISLAND (key: riverisland): 0=Tailored wide-leg trousers £40, 1=Satin slip midi dress £45, 2=Oversized boyfriend blazer £65, 3=Ribbed knit jumper £32, 4=Pleated midi skirt £38, 5=Oversized poplin shirt £30, 6=Straight-leg jeans £40, 7=Belted trench coat £85, 8=Bias-cut maxi dress £48, 9=Faux-leather mini skirt £35, 10=Bright orange blazer £70
+PLT (key: plt): 0=Ribbed bodycon midi dress £22, 1=Oversized blazer dress £38, 2=Knitted lounge co-ord £30, 3=Satin cowl-neck top £16, 4=Wide-leg tailored trousers £28, 5=Faux-leather mini skirt £22, 6=Slinky maxi dress £26, 7=Cropped puffer jacket £40, 8=Cut-out bandage dress £25, 9=Neon green co-ord set £35, 10=Hot pink corset top £18
+MONKI (key: monki): 0=Mom-fit jeans £35, 1=Oversized graphic tee £15, 2=Ribbed knit midi dress £30, 3=Cropped cardigan £28, 4=Wide-leg cord trousers £32, 5=Pleated mini skirt £22, 6=Boxy denim jacket £45, 7=Slinky cami dress £25, 8=Fluffy knit jumper £30, 9=Bright orange cargo pants £36
+BERSHKA (key: bershka): 0=Baggy carpenter jeans £29.99, 1=Oversized poplin shirt £22.99, 2=Knitted vest top £15.99, 3=Faux-leather trench £45.99, 4=Slinky halter midi dress £19.99, 5=Cargo parachute trousers £29.99, 6=Cropped boxy tee £12.99, 7=Pleated tennis skirt £19.99, 8=Acid-wash denim jacket £39.99, 9=Neon green crop top £12.99
+PULL&BEAR (key: pullbear): 0=Relaxed straight jeans £29.99, 1=Oversized hoodie £25.99, 2=Boxy knit jumper £27.99, 3=Flowy wide trousers £25.99, 4=Cropped poplin shirt £19.99, 5=Ribbed midi dress £22.99, 6=Faux-leather bomber £45.99, 7=Denim mini skirt £19.99, 8=Baggy cargo trousers £29.99, 9=Bright orange windbreaker £39.99
+
+Keep responses short and conversational. Only include the RECOMMENDATIONS block when you have specific items to suggest. Do not mention you are Claude or made by Anthropic.`;
 
   function handleEnter(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -710,89 +757,131 @@
     }
   }
 
-
-const stylistMessages = [];
-
-
-const STYLIST_SYSTEM = `You are DRAPE's AI Stylist — a warm, witty, and genuinely helpful personal shopper.
-You know this user's style profile: size M, 5'4", loves neutral palettes, loose tailoring, earthy pinks and soft blues. Avoids orange and neons. Budget around £20–80 per item.
-You have access to retailers including Zara, ARKET, Mango, COS, H&M, ASOS, Uniqlo, River Island and more.
-Keep responses short, conversational and human — never robotic or listy.
-When recommending items, be specific with names and rough prices.
-Never mention you are Claude or made by Anthropic. You are DRAPE's stylist.
-Ask one question at a time.`;
-
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-
-  const cw = document.getElementById('chatWindow');
-
-
-  // Create and append user bubble
-  const userBubble = document.createElement('div');
-  userBubble.className = 'chat-bubble user fade-up';
-  userBubble.textContent = text;
-  cw.appendChild(userBubble);
-
-
-  input.value = '';
-  stylistMessages.push({ role: 'user', content: text });
-
-
-  // Create and append typing indicator bubble
-  const botBubble = document.createElement('div');
-  botBubble.className = 'chat-bubble bot fade-up';
-  botBubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div><span>...</span>';
-  cw.appendChild(botBubble);
-
-
-  cw.scrollTop = cw.scrollHeight;
-
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
-        max_tokens: 300,
-        system: STYLIST_SYSTEM,
-        messages: stylistMessages
-      })
+  function setRating(n) {
+    document.querySelectorAll('.stars span').forEach((s, i) => {
+      s.classList.toggle('empty', i >= n);
     });
+  }
 
+  function parseRecommendations(text) {
+    const match = text.match(/RECOMMENDATIONS:(\[.*?\])/s);
+    if (!match) return null;
+    try { return JSON.parse(match[1]); } catch { return null; }
+  }
 
-    const data = await response.json();
+  function cleanText(text) {
+    return text.replace(/RECOMMENDATIONS:\[.*?\]/s, '').trim();
+  }
 
+  function renderRecCards(recs) {
+    if (!recs || !recs.length) return '';
+    const cards = recs.map(r => {
+      const retailerKey = Object.keys(RETAILERS).find(k => RETAILERS[k].name === r.retailer) || r.retailer.toLowerCase().replace(/[^a-z]/g,'');
+      const retailer = RETAILERS[retailerKey];
+      if (!retailer || !retailer.items[r.index]) return '';
+      const it = retailer.items[r.index];
+      const high = it.m >= 75;
+      const badgeClass = high ? 'rc-badge-high' : (it.m >= 50 ? 'rc-badge-mid' : 'rc-badge-low');
+      const cardId = 'crec-' + retailerKey + '-' + r.index;
+      return `<div class="chat-rec-card${high ? ' rc-high' : ''}" onclick="openProductFromRetailer('${retailerKey}', ${r.index})">
+        <div class="chat-rec-img">
+          <div class="rc-illustration">${garmentIcon(it.k)}</div>
+          <div class="chat-rec-badge rc-badge ${badgeClass}">${it.m}%</div>
+        </div>
+        <div class="chat-rec-info">
+          <div class="chat-rec-brand">${retailer.name}</div>
+          <div class="chat-rec-name">${it.n}</div>
+          <div class="chat-rec-price">${it.p}</div>
+          <button class="chat-rec-btn" id="${cardId}" onclick="event.stopPropagation(); chatRecAddToCart('${retailerKey}', ${r.index}, this)">Add to cart</button>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="chat-recs">${cards}</div>`;
+  }
 
-    if (!response.ok) {
-      console.error('API error:', data);
-      botBubble.querySelector('span').textContent = "Sorry, something went wrong — try again in a moment.";
-      return;
-    }
+  function chatRecAddToCart(key, idx, btn) {
+    const r = RETAILERS[key];
+    if (!r || !r.items[idx]) return;
+    const it = r.items[idx];
+    const sizeTag = (it.t || []).find(t => /size/i.test(t)) || '';
+    Cart.add({ id: 'i:' + r.name + ':' + it.n, retailer: r.name, name: it.n, priceLabel: it.p, price: parsePrice(it.p), size: sizeTag, match: it.m, k: it.k });
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    btn.disabled = true;
+    toast(it.n + ' added to cart');
+  }
 
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
 
-    const reply = data.content[0].text;
-    stylistMessages.push({ role: 'assistant', content: reply });
+    const cw = document.getElementById('chatWindow');
 
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble user fade-up';
+    userBubble.textContent = text;
+    cw.appendChild(userBubble);
 
-    // Update the typing bubble with the real reply
-    botBubble.querySelector('span').textContent = reply;
+    input.value = '';
+    stylistMessages.push({ role: 'user', content: text });
+
+    const botBubble = document.createElement('div');
+    botBubble.className = 'chat-bubble bot fade-up';
+    botBubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div><span class="chat-msg-text">...</span>';
+    cw.appendChild(botBubble);
     cw.scrollTop = cw.scrollHeight;
 
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 500,
+          system: STYLIST_SYSTEM,
+          messages: stylistMessages
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        botBubble.querySelector('.chat-msg-text').textContent = "Sorry, something went wrong — try again in a moment.";
+        return;
+      }
+
+      const rawReply = data.content[0].text;
+      stylistMessages.push({ role: 'assistant', content: rawReply });
+
+      const recs = parseRecommendations(rawReply);
+      const displayText = cleanText(rawReply);
+
+      botBubble.querySelector('.chat-msg-text').textContent = displayText;
+
+      if (recs && recs.length) {
+        hasRecommended = true;
+        const recsHtml = renderRecCards(recs);
+        if (recsHtml) {
+          const recsDiv = document.createElement('div');
+          recsDiv.innerHTML = recsHtml;
+          botBubble.appendChild(recsDiv.firstChild);
+        }
+        // Show rating after first recommendation
+        const rating = document.getElementById('chatRating');
+        if (rating) rating.style.display = 'flex';
+      }
+
+      cw.scrollTop = cw.scrollHeight;
 
     } catch (err) {
       console.error('API Error:', err);
-      botBubble.querySelector('span').textContent = "Sorry, something went wrong — try again in a moment.";
+      botBubble.querySelector('.chat-msg-text').textContent = "Sorry, something went wrong — try again in a moment.";
     }
   }  // ─── RETAILER CATALOG ───
   function toggleRcFilter(el) {
@@ -2019,7 +2108,7 @@ async function sendMessage() {
      ONBOARDING FLOW
      ══════════════════════════════════════════════════════ */
   (function () {
-    const OB_TOTAL = 6;
+    const OB_TOTAL = 8;
     let obStep = 0;
     let obName = '';
 
@@ -2058,6 +2147,62 @@ async function sendMessage() {
       shirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/></svg>',
       coat:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M38 18 L22 30 L28 62 V132 H52 L56 70 H64 L68 132 H92 V62 L98 30 L82 18 L60 34 Z"/></svg>',
     };
+
+    const OB_COLOUR_GROUPS = [
+      { id: 'neutrals',  name: 'Neutrals',      shades: ['#FAFAF5','#EDE0C8','#C4A882','#A08060','#2C1810'] },
+      { id: 'greys',     name: 'Greys & black',  shades: ['#E8E4DE','#B4B2A9','#7A7870','#444441','#1A1A18'] },
+      { id: 'pinks',     name: 'Pinks & mauves', shades: ['#F5E4E8','#D4A0A8','#C47A8A','#A04060','#6B2040'] },
+      { id: 'blues',     name: 'Blues',          shades: ['#D4E4F4','#A8B8D4','#6888A8','#184880','#0A2040'] },
+      { id: 'greens',    name: 'Greens',         shades: ['#D8ECD0','#A8C890','#8B9B7A','#4A7040','#2A3A2A'] },
+      { id: 'reds',      name: 'Reds',           shades: ['#FDE8E8','#F4A0A0','#E83030','#A82020','#601010'] },
+      { id: 'oranges',   name: 'Oranges',        shades: ['#FDE8D0','#F4A868','#E87830','#B84810','#782808'] },
+      { id: 'yellows',   name: 'Yellows',        shades: ['#FFF8D0','#FAE070','#E8C020','#B09010','#706008'] },
+      { id: 'purples',   name: 'Purples',        shades: ['#F0E0F8','#D090E8','#A050C8','#7030A0','#401060'] },
+      { id: 'teals',     name: 'Teals',          shades: ['#E0F8F4','#90D8C8','#40B8A0','#207860','#104830'] },
+    ];
+
+    const obLoveSelected  = new Set();
+    const obAvoidSelected = new Set();
+
+    function obBuildColourGrid(containerId, selectedSet) {
+      const g = document.getElementById(containerId);
+      if (!g) return;
+      g.innerHTML = '';
+      OB_COLOUR_GROUPS.forEach(group => {
+        const card = document.createElement('div');
+        card.className = 'ob-colour-card' + (selectedSet.has(group.id) ? ' ob-colour-selected' : '');
+        card.onclick = () => {
+          if (selectedSet.has(group.id)) {
+            selectedSet.delete(group.id);
+            card.classList.remove('ob-colour-selected');
+          } else {
+            selectedSet.add(group.id);
+            card.classList.add('ob-colour-selected');
+          }
+        };
+        const swatchRow = document.createElement('div');
+        swatchRow.className = 'ob-colour-swatches';
+        group.shades.forEach(hex => {
+          const seg = document.createElement('div');
+          seg.className = 'ob-colour-seg';
+          seg.style.background = hex;
+          swatchRow.appendChild(seg);
+        });
+        const footer = document.createElement('div');
+        footer.className = 'ob-colour-footer';
+        const nameEl = document.createElement('span');
+        nameEl.className = 'ob-colour-name';
+        nameEl.textContent = group.name;
+        const tick = document.createElement('div');
+        tick.className = 'ob-colour-tick';
+        tick.innerHTML = '&#10003;';
+        footer.appendChild(nameEl);
+        footer.appendChild(tick);
+        card.appendChild(swatchRow);
+        card.appendChild(footer);
+        g.appendChild(card);
+      });
+    }
 
     function obBuildDots() {
       const c = document.getElementById('obDots');
@@ -2109,8 +2254,10 @@ async function sendMessage() {
       obStep = n;
       document.getElementById('ob' + obStep).classList.add('active');
       obBuildDots();
-      if (n === 4) document.getElementById('obNameInReady').textContent = obName;
-      if (n === 5) document.getElementById('obNameInSignup').textContent = obName;
+      if (n === 2) obBuildColourGrid('obLoveGrid', obLoveSelected);
+      if (n === 3) obBuildColourGrid('obAvoidGrid', obAvoidSelected);
+      if (n === 6) document.getElementById('obNameInReady').textContent = obName;
+      if (n === 7) document.getElementById('obNameInSignup').textContent = obName;
     };
 
     window.obNextFromName = function() {
@@ -2123,7 +2270,7 @@ async function sendMessage() {
     window.obSendReset = function() {
       const email = document.getElementById('obResetEmail').value.trim() || 'your email';
       document.getElementById('obResetEmailDisplay').textContent = email;
-      obGoTo(9);
+      obGoTo(11);
     };
 
     window.obFinish = function() {
@@ -2133,7 +2280,7 @@ async function sendMessage() {
     };
 
     function obStartProcessing() {
-      obGoTo(3);
+      obGoTo(5);
       const labels = ['Analysing your taste...','Learning your preferences...','Matching across retailers...','Calculating match scores...','Almost ready...'];
       let idx = 0;
       const lbl = document.getElementById('obProcLabel');
@@ -2142,7 +2289,7 @@ async function sendMessage() {
         idx++;
         lbl.textContent = labels[Math.min(idx, labels.length - 1)];
         bar.style.width = Math.min(idx * 22, 100) + '%';
-        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(4), 400); }
+        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(6), 400); }
       }, 700);
     }
 
@@ -2152,9 +2299,7 @@ async function sendMessage() {
     obBuildTags();
     obBuildFeed();
 
-    if (!localStorage.getItem('drape_onboarded')) {
-      document.getElementById('onboarding').style.display = 'flex';
-    }
+    document.getElementById('onboarding').style.display = 'flex';
   })();
 </script>
 
