@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <!-- ─── TOP NAV ─── -->
 <nav>
   <a class="nav-logo" href="#" onclick="return showSection('feed')">DRAPE</a>
@@ -27,9 +28,144 @@
 </nav>
 
 <!-- ══════════════════════════════════════
+     ONBOARDING FLOW
+══════════════════════════════════════ -->
+<div id="onboarding" style="display:none;position:fixed;inset:0;z-index:500;background:var(--off-white);flex-direction:column;">
+
+  <div class="ob-nav">
+    <span class="ob-logo">DRAPE</span>
+    <div class="ob-dots" id="obDots"></div>
+  </div>
+
+  <div class="ob-screen active" id="ob0">
+    <div class="ob-body">
+      <div class="ob-heading">Welcome to DRAPE</div>
+      <div class="ob-sub">Your personal AI stylist across every retailer. Let's start with your name.</div>
+      <input class="ob-input" id="obNameInput" type="text" placeholder="Your first name" autocomplete="off">
+      <button class="ob-btn" onclick="obNextFromName()">Continue</button>
+      <div class="ob-link" onclick="obGoTo(7)">Already have an account? Sign in</div>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob1">
+    <div class="ob-body">
+      <div class="ob-heading">What's your style, <span id="obNameInDNA"></span>?</div>
+      <div class="ob-sub">Pick the vibes that feel like you. This builds your style DNA.</div>
+      <div class="ob-tag-grid" id="obTagGrid"></div>
+      <button class="ob-btn" onclick="obGoTo(2)">Next</button>
+    </div>
+  </div>
+
+  <div class="ob-screen ob-screen-feed" id="ob2">
+    <div class="ob-feed-header">
+      <div class="ob-heading" style="font-size:24px;">Like the looks you love</div>
+      <div class="ob-sub" style="margin-bottom:0;max-width:100%;text-align:center;">Tap the heart on outfits that feel like you.</div>
+    </div>
+    <div class="ob-feed-scroll">
+      <div class="ob-feed-grid" id="obFeedGrid"></div>
+    </div>
+    <div class="ob-feed-footer">
+      <button class="ob-btn" id="obFeedBtn" style="max-width:480px;">Done — build my profile</button>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob3">
+    <div class="ob-body">
+      <div style="text-align:center;max-width:340px;">
+        <div class="ob-spinner"></div>
+        <div class="ob-heading" style="font-size:22px;">Formulating your style profile</div>
+        <div class="ob-proc-label" id="obProcLabel">Analysing your taste...</div>
+        <div class="ob-prog-wrap"><div class="ob-prog-bar" id="obProgBar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob4">
+    <div class="ob-body">
+      <div class="ob-check-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Style profile formulated</div>
+      <div class="ob-sub" style="margin-bottom:20px;">Fashion recommendations ready for you, <span id="obNameInReady" style="color:var(--gold);font-weight:500;"></span>.</div>
+      <ul class="ob-check-list">
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Style DNA analysed</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Outfit preferences learned</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
+      </ul>
+      <button class="ob-btn" onclick="obGoTo(5)">See my recommendations</button>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob5">
+    <div class="ob-body">
+      <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Your recommendations are ready</div>
+      <div class="ob-sub" style="margin-bottom:20px;">Sign up to unlock your personalised feed, <span id="obNameInSignup" style="color:var(--gold);font-weight:500;"></span>.</div>
+      <div class="ob-card">
+        <div class="ob-field-wrap"><div class="ob-field-label">Email</div><input class="ob-field" type="email" placeholder="you@example.com"></div>
+        <div class="ob-field-wrap"><div class="ob-field-label">Password</div><input class="ob-field" type="password" placeholder="Create a password"></div>
+        <div class="ob-field-wrap"><div class="ob-field-label">Confirm password</div><input class="ob-field" type="password" placeholder="Repeat your password"></div>
+        <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Create account &amp; see my feed</button>
+        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Already have an account? Sign in</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob6"></div>
+
+  <div class="ob-screen" id="ob7">
+    <div class="ob-body">
+      <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Welcome back</div>
+      <div class="ob-sub" style="margin-bottom:20px;">Sign in to your DRAPE account.</div>
+      <div class="ob-card">
+        <div class="ob-field-wrap"><div class="ob-field-label">Email</div><input class="ob-field" type="email" placeholder="you@example.com"></div>
+        <div class="ob-field-wrap">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <div class="ob-field-label" style="margin-bottom:0;">Password</div>
+            <span class="ob-link" style="margin-top:0;" onclick="obGoTo(8)">Forgot password?</span>
+          </div>
+          <input class="ob-field" type="password" placeholder="Your password">
+        </div>
+        <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Sign in</button>
+        <div class="ob-link" onclick="obGoTo(0)" style="margin-top:10px;">Don't have an account? Sign up</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob8">
+    <div class="ob-body">
+      <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Reset your password</div>
+      <div class="ob-sub" style="margin-bottom:24px;">Enter the email address on your account and we'll send you a reset link.</div>
+      <div class="ob-card">
+        <div class="ob-field-wrap" style="margin-bottom:16px;">
+          <div class="ob-field-label">Email address</div>
+          <input class="ob-field" id="obResetEmail" type="email" placeholder="you@example.com">
+        </div>
+        <button class="ob-btn" style="max-width:100%;" onclick="obSendReset()">Send reset link</button>
+        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Back to sign in</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob9">
+    <div class="ob-body">
+      <div class="ob-email-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Check your inbox</div>
+      <div class="ob-sub" style="margin-bottom:24px;">We've sent a reset link to <span id="obResetEmailDisplay" style="color:var(--gold);font-weight:500;"></span>. It may take a minute to arrive.</div>
+      <button class="ob-btn" onclick="obGoTo(7)">Back to sign in</button>
+      <div class="ob-link" onclick="obGoTo(8)" style="margin-top:10px;">Didn't get it? Resend</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
      SECTION 1: FEED
 ══════════════════════════════════════ -->
 <section id="feed" class="active">
+
 
   <div class="feed-hero fade-up">
     <h1>One app.<br><em>Every retailer.</em><br>One AI that knows you.</h1>
@@ -43,12 +179,15 @@
     </div>
   </div>
 
+
   <div class="feed-content">
+
 
   <div class="search-wrapper fade-up delay-1">
     <input class="search-input" type="text" placeholder="Search retailers, brands, styles…">
     <button class="search-btn">Search</button>
   </div>
+
 
   <div class="pill-row fade-up delay-1">
     <span class="pill on" onclick="togglePill(this)">For you</span>
@@ -58,6 +197,7 @@
     <span class="pill" onclick="togglePill(this)">Accessories</span>
     <span class="pill" onclick="togglePill(this)">Shoes</span>
   </div>
+
 
   <div class="stylist-bar fade-up delay-2" onclick="return showSection('stylist')">
     <div class="stylist-bar-left">
@@ -72,6 +212,7 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,245,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </div>
 
+
   <div class="section-label fade-up delay-2">Followed Retailers</div>
   <div class="featured-card fade-up delay-2" onclick="openRetailer('zara')" style="cursor:pointer;">
     <div>
@@ -81,6 +222,7 @@
     </div>
     <div style="width:64px;height:64px;background:var(--gold-pale);border-radius:8px;border:1px solid var(--gold-border);"></div>
   </div>
+
 
   <div class="section-label fade-up delay-3">All Retailers</div>
   <div class="retailers-grid fade-up delay-3">
@@ -98,9 +240,12 @@
     <div class="retailer-tile" onclick="openRetailer('zara')"><div class="r-name" style="color:var(--gold);">Zara</div></div>
   </div>
 
+
   </div>
 
+
 </section>
+
 
 <!-- ══════════════════════════════════════
      SECTION 2: AI STYLIST
@@ -124,11 +269,13 @@
       </div>
     </div>
 
+
     <div class="chat-window" id="chatWindow">
       <div class="chat-bubble bot fade-up">
         <div class="bubble-tag">DRAPE AI</div>
         Hi! What can I help you with today?
       </div>
+
 
     <div class="chat-input-area">
       <div class="chat-rating">
@@ -149,13 +296,16 @@
   </div>
 </section>
 
+
 <!-- ══════════════════════════════════════
      SECTION 3: SOCIAL
 ══════════════════════════════════════ -->
 <section id="social" style="padding:64px 0 0;">
 
+
   <!-- Immersive one-post-per-screen feed (rendered dynamically) -->
   <div class="reels" id="reelsFeed"></div>
+
 
   <!-- Prev / next jump chevrons (desktop) -->
   <div class="reels-chevrons">
@@ -166,6 +316,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
   </div>
+
 
   <!-- Comments panel: side drawer on desktop, bottom sheet on mobile -->
   <div class="comments-overlay" id="commentsOverlay" onclick="closeComments()">
@@ -187,13 +338,16 @@
     </div>
   </div>
 
+
 </section>
+
 
 <!-- ══════════════════════════════════════
      SECTION 4: PROFILE
 ══════════════════════════════════════ -->
 <section id="profile">
   <div class="profile-layout">
+
 
     <div class="profile-header fade-up">
       <div class="profile-av-large">AB</div>
@@ -210,7 +364,9 @@
       <button class="btn-outline" style="font-size:13px;padding:10px 20px;">Edit profile</button>
     </div>
 
+
     <div class="profile-grid fade-up delay-1">
+
 
       <div class="profile-card">
         <h3>What DRAPE knows</h3>
@@ -224,6 +380,7 @@
           <a class="export-link" href="#">Export my data</a>
         </div>
       </div>
+
 
       <div class="profile-card">
         <h3>Your style DNA</h3>
@@ -249,6 +406,7 @@
         <div class="avoids-row">Orange<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
       </div>
 
+
       <div class="profile-card" style="grid-column:1/-1;">
         <h3>Body & fit</h3>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
@@ -259,10 +417,13 @@
         </div>
       </div>
 
+
     </div>
+
 
   </div>
 </section>
+
 
 <!-- ══════════════════════════════════════
      SECTION 6: CART + UNIFIED CHECKOUT
@@ -271,6 +432,7 @@
   <div id="cartRoot"></div>
 </section>
 
+
 <!-- ══════════════════════════════════════
      SECTION 7: PRODUCT DETAIL PAGE (PDP)
 ══════════════════════════════════════ -->
@@ -278,9 +440,11 @@
   <div id="productRoot"></div>
 </section>
 
+
 <!-- SECTION 5: RETAILER CATALOG
 ══════════════════════════════════════ -->
 <section id="retailer" style="padding-top:64px;padding-bottom:72px;">
+
 
   <!-- Sub-nav -->
   <div class="rc-nav">
@@ -301,6 +465,7 @@
       <svg class="rc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
     </div>
   </div>
+
 
   <!-- Brand hero -->
   <div class="rc-hero">
@@ -340,6 +505,7 @@
     </div>
   </div>
 
+
   <!-- Toolbar -->
   <div class="rc-toolbar">
     <div class="rc-search">
@@ -363,6 +529,7 @@
     </select>
   </div>
 
+
   <!-- Results bar -->
   <div class="rc-results-bar">
     <span class="rc-results-count" id="rc-results-count">1,247 items · showing best matches for you first</span>
@@ -380,10 +547,13 @@
     </div>
   </div>
 
+
   <!-- Product grid (populated by renderRetailer -> renderCard) -->
   <div class="rc-grid" id="rcGrid"></div>
 
+
 </section>
+
 
 <!-- ─── BOTTOM NAV ─── -->
 <nav class="bottom-nav">
@@ -412,15 +582,18 @@
   </button>
 </nav>
 
+
 <!-- Compose FAB (social only) -->
 <button class="compose-btn" id="composeFab" style="display:none;" title="New post">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 </button>
 
+
 <script src="config.js"></script>
 <script>
   const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product'];
   const BASE_SECTIONS = ['feed', 'stylist', 'social', 'profile', 'cart'];
+
 
   /* Low-level: show one section + sync the nav highlight. No URL side-effects. */
   function _renderSection(id) {
@@ -445,6 +618,7 @@
     window.scrollTo(0, 0);
   }
 
+
   /* -- Hash router ----------------------------------------------
      Real URLs: #/feed ... #/cart for tabs, #/store/:id for a store,
      #/product/:token for a PDP. openRetailer / openProduct push their
@@ -452,11 +626,13 @@
      and a store/product URL survives a refresh. */
   function navHash(t) { if (location.hash === t) applyRoute(); else location.hash = t; }
 
+
   function showSection(id) {
     if (id === 'cart') cartView = 'cart';   // a fresh Cart click always opens the basket
     navHash('#/' + id);
     return false;                           // cancels the host <a href="#"> default
   }
+
 
   function applyRoute() {
     const h = location.hash || '';
@@ -476,7 +652,9 @@
     }
   }
 
+
   window.addEventListener('hashchange', applyRoute);
+
 
   // Initial display state (overlayed sections hidden until routed)
   document.getElementById('stylist').style.display = 'none';
@@ -485,14 +663,17 @@
   document.getElementById('cart').style.display = 'none';
   document.getElementById('product').style.display = 'none';
 
+
   function togglePill(el) {
     el.classList.toggle('on');
   }
+
 
   function setAdvisor(btn) {
     document.querySelectorAll('.advisor-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   }
+
 
   function toggleLike(btn) {
     btn.classList.toggle('liked');
@@ -506,11 +687,13 @@
     }
   }
 
+
   function setRating(n) {
     document.querySelectorAll('.stars span').forEach((s, i) => {
       s.classList.toggle('empty', i >= n);
     });
   }
+
 
   const botReplies = [
     "Got it — earthy pinks and soft blues, no orange. Let me pull some looks together for you ✨",
@@ -519,6 +702,7 @@
   ];
   let replyIndex = 0;
 
+
   function handleEnter(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -526,7 +710,9 @@
     }
   }
 
+
 const stylistMessages = [];
+
 
 const STYLIST_SYSTEM = `You are DRAPE's AI Stylist — a warm, witty, and genuinely helpful personal shopper.
 You know this user's style profile: size M, 5'4", loves neutral palettes, loose tailoring, earthy pinks and soft blues. Avoids orange and neons. Budget around £20–80 per item.
@@ -536,12 +722,15 @@ When recommending items, be specific with names and rough prices.
 Never mention you are Claude or made by Anthropic. You are DRAPE's stylist.
 Ask one question at a time.`;
 
+
 async function sendMessage() {
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text) return;
 
+
   const cw = document.getElementById('chatWindow');
+
 
   // Create and append user bubble
   const userBubble = document.createElement('div');
@@ -549,8 +738,10 @@ async function sendMessage() {
   userBubble.textContent = text;
   cw.appendChild(userBubble);
 
+
   input.value = '';
   stylistMessages.push({ role: 'user', content: text });
+
 
   // Create and append typing indicator bubble
   const botBubble = document.createElement('div');
@@ -558,7 +749,9 @@ async function sendMessage() {
   botBubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div><span>...</span>';
   cw.appendChild(botBubble);
 
+
   cw.scrollTop = cw.scrollHeight;
+
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -577,7 +770,9 @@ async function sendMessage() {
       })
     });
 
+
     const data = await response.json();
+
 
     if (!response.ok) {
       console.error('API error:', data);
@@ -585,12 +780,15 @@ async function sendMessage() {
       return;
     }
 
+
     const reply = data.content[0].text;
     stylistMessages.push({ role: 'assistant', content: reply });
+
 
     // Update the typing bubble with the real reply
     botBubble.querySelector('span').textContent = reply;
     cw.scrollTop = cw.scrollHeight;
+
 
     } catch (err) {
       console.error('API Error:', err);
@@ -601,6 +799,7 @@ async function sendMessage() {
     document.querySelectorAll('.rc-filter').forEach(f => f.classList.remove('on'));
     el.classList.add('on');
   }
+
 
   /* ─── RETAILER CATALOGS ───────────────────────────────
      Each item: n=name, p=price, w=was(optional), m=match%, t=tags, k=image keyword */
@@ -818,7 +1017,9 @@ async function sendMessage() {
     }
   };
 
+
   const HEART_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
 
   /* ─── Minimalist garment illustrations (one per category) ─── */
   const _svg = p => `<svg viewBox="0 0 120 150" fill="rgba(255,255,255,0.28)" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${p}</svg>`;
@@ -846,6 +1047,7 @@ async function sendMessage() {
     sneaker: 'shoe', sneakers: 'shoe', trainers: 'shoe', boot: 'shoe', loafer: 'shoe'
   };
   const garmentIcon = cat => GARMENT[GARMENT_MAP[cat] || 'tee'];
+
 
   function renderCard(it, brand, key, idx) {
     const high = it.m >= 75;
@@ -877,6 +1079,7 @@ async function sendMessage() {
       </div>`;
   }
 
+
   function renderRetailer(key) {
     const r = RETAILERS[key];
     if (!r) return;
@@ -898,10 +1101,12 @@ async function sendMessage() {
     document.querySelectorAll('#retailer .rc-filter').forEach((f, i) => f.classList.toggle('on', i === 0));
   }
 
+
   function openRetailer(key) {
     if (!RETAILERS[key]) return;
     navHash('#/store/' + key);   // router -> renderRetailer(key) + show
   }
+
 
   /* ─── SOCIAL FEED ─────────────────────────────────────
      Instagram-style scrollable feed. Each post is an outfit;
@@ -921,6 +1126,7 @@ async function sendMessage() {
   'https://images.unsplash.com/photo-1475180098004-ca77a66827be?w=420&q=80',
   'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=420&q=80',
   'https://images.unsplash.com/photo-1554412933-514a83d2f3c8?w=420&q=80',];
+
 
   /* item: n=name, p=price, k=garment keyword (drives the illustration) */
   const POSTS = [
@@ -1037,6 +1243,7 @@ async function sendMessage() {
     }
   ];
 
+
   function renderReel(post, i) {
     const garments = `<img src="${OUTFIT_IMGS[i % OUTFIT_IMGS.length]}" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;border-radius:inherit;" alt="outfit">`;
     const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
@@ -1092,6 +1299,7 @@ async function sendMessage() {
       </div>`;
   }
 
+
   /* ─── Rail actions ─── */
   function bumpRail(btn) {
     btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
@@ -1113,6 +1321,7 @@ async function sendMessage() {
   }
   /* Adds the whole look (every tagged item) to the unified cart — see addLookToCart below */
 
+
   /* ─── Comments panel (drawer / bottom sheet) ─── */
   function openComments(i) {
     const post = POSTS[i];
@@ -1125,6 +1334,7 @@ async function sendMessage() {
   function closeComments() {
     document.getElementById('commentsOverlay').classList.remove('open');
   }
+
 
   /* Pad each post's thread so the comments shown match the count on the post */
   const COMMENT_POOL = [
@@ -1151,9 +1361,11 @@ async function sendMessage() {
     p.thread = full;            // thread length now equals the comment count shown
   });
 
+
   /* ─── Snap navigation: wheel, arrow keys and chevrons all move one post ─── */
   const reelsEl = document.getElementById('reelsFeed');
   reelsEl.innerHTML = POSTS.map(renderReel).join('');
+
 
   /* One gesture = exactly one post — handled by native CSS scroll-snap:
      the container is `scroll-snap-type: y mandatory` and every .reel is
@@ -1167,8 +1379,10 @@ async function sendMessage() {
   let reelAnimating = false;  // a programmatic smooth-scroll (arrows / keys) is in flight
   let reelSettleTimer = null;
 
+
   const clampReel = i => Math.max(0, Math.min(POSTS.length - 1, i));
   const reelIndexFromScroll = () => clampReel(Math.round(reelsEl.scrollTop / reelsEl.clientHeight));
+
 
   function onReelSettle() {
     reelAnimating = false;
@@ -1185,13 +1399,16 @@ async function sendMessage() {
   // Chevrons + arrow keys both call this -> always exactly one post.
   function reelsScroll(dir) { goToReel((reelAnimating ? reelIndex : reelIndexFromScroll()) + dir); }
 
+
   // Authoritative settle (modern browsers) + debounced fallback (touch / no scrollend support).
   reelsEl.addEventListener('scrollend', onReelSettle);
   let reelScrollIdle = null;
   reelsEl.addEventListener('scroll', () => { clearTimeout(reelScrollIdle); reelScrollIdle = setTimeout(onReelSettle, 120); });
 
+
   /* No wheel handler: native scroll-snap (mandatory + snap-stop:always) gives a
      smooth Reels/TikTok trackpad feel and still lands one post per gesture. */
+
 
   document.addEventListener('keydown', e => {
     if (!document.getElementById('social').classList.contains('active')) return;
@@ -1200,6 +1417,7 @@ async function sendMessage() {
     if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); reelsScroll(1); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); reelsScroll(-1); }
   });
+
 
   /* ══════════════════════════════════════════════════════
      UNIFIED CART — one app-wide store, persisted to
@@ -1246,8 +1464,10 @@ async function sendMessage() {
     };
   })();
 
+
   const parsePrice = s => { const v = parseFloat(String(s).replace(/[^0-9.]/g, '')); return isNaN(v) ? 0 : v; };
   const money = n => '£' + n.toFixed(2);
+
 
   /* Social item names embed the retailer (e.g. "Zara linen blouse") — split it out */
   const KNOWN_BRANDS = ['& Other Stories', 'Pretty Little Thing', 'River Island', 'New Balance', 'Pull&Bear', 'Bershka', 'Uniqlo', 'ARKET', 'Mango', 'Monki', 'ASOS', 'Zara', 'H&M', 'COS'];
@@ -1262,6 +1482,7 @@ async function sendMessage() {
     const sizeTag = (it.t || []).find(t => /size/i.test(t)) || '';
     return { id: 'i:' + brand + ':' + it.n, retailer: brand, name: it.n, priceLabel: it.p, price: parsePrice(it.p), size: sizeTag, match: it.m, k: it.k };
   }
+
 
   /* ─── Add-to-cart / save entry points wired to every button ─── */
   function addRetailerItem(key, idx, btn) {
@@ -1291,6 +1512,7 @@ async function sendMessage() {
     toast(post.items.length + ' items added to cart');
   }
 
+
   function flashBtn(btn, label) {
     if (!btn || btn._flashing) return;
     const orig = btn.textContent;
@@ -1299,6 +1521,7 @@ async function sendMessage() {
     btn.classList.add('rc-btn-added');
     setTimeout(() => { btn.textContent = orig; btn.classList.remove('rc-btn-added'); btn._flashing = false; }, 1400);
   }
+
 
   let _toastTimer = null;
   function toast(msg) {
@@ -1310,6 +1533,7 @@ async function sendMessage() {
     _toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
   }
 
+
   function renderCartBadges(state) {
     const n = state.items.reduce((a, i) => a + i.qty, 0);
     ['navCartCount', 'bnavCartCount'].forEach(id => {
@@ -1320,9 +1544,11 @@ async function sendMessage() {
     });
   }
 
+
   /* ─── Cart page + unified checkout ─── */
   let cartView = 'cart';     // 'cart' | 'delivery' | 'payment' | 'confirmation'
   let lastOrder = null;
+
 
   function groupByRetailer(items) {
     const map = new Map();
@@ -1332,6 +1558,7 @@ async function sendMessage() {
   const esc = id => String(id).replace(/'/g, "\\'");
   const cartThumb = k => `<div class="cart-thumb"><div class="cart-thumb-ill">${garmentIcon(k)}</div></div>`;
 
+
   function renderCartPage() {
     const root = document.getElementById('cartRoot');
     if (!root) return;
@@ -1339,6 +1566,7 @@ async function sendMessage() {
     else if (cartView === 'confirmation') root.innerHTML = renderConfirmation();
     else root.innerHTML = renderBasket();
   }
+
 
   function renderBasket() {
     const st = Cart.get();
@@ -1387,6 +1615,7 @@ async function sendMessage() {
       </div>`;
   }
 
+
   function cartLine(it) {
     const meta = [it.size, (it.match ? it.match + '% match' : '')].filter(Boolean).join(' · ');
     return `
@@ -1412,6 +1641,7 @@ async function sendMessage() {
       </div>`;
   }
 
+
   function renderSavedBlock() {
     const st = Cart.get();
     if (!st.saved.length) return '';
@@ -1434,15 +1664,18 @@ async function sendMessage() {
     return `<div class="cart-page"><div class="cart-main"><div class="cart-group saved-group"><div class="cart-group-head"><span class="cart-group-name">Saved for later</span><span class="cart-group-meta">${st.saved.length}</span></div>${lines}</div></div></div>`;
   }
 
+
   function cartRemove(id) { Cart.remove(id); toast('Removed from cart'); }
   function cartQty(id, d) { const it = Cart.get().items.find(i => i.id === id); if (!it) return; if (it.qty + d < 1) Cart.remove(id); else Cart.setQty(id, it.qty + d); }
   function savedRemove(id) { Cart.removeSaved(id); }
   function savedMove(id) { Cart.moveToCart(id); toast('Moved to cart'); }
 
+
   function goCheckout() { if (!Cart.count()) return; cartView = 'delivery'; renderCartPage(); window.scrollTo(0, 0); }
   function backToCart() { cartView = 'cart'; renderCartPage(); window.scrollTo(0, 0); }
   function goPayment() { cartView = 'payment'; renderCartPage(); window.scrollTo(0, 0); }
   function checkoutBack() { cartView = 'delivery'; renderCartPage(); window.scrollTo(0, 0); }
+
 
   function renderCheckoutStep(step) {
     const st = Cart.get();
@@ -1485,6 +1718,7 @@ async function sendMessage() {
     return `<div class="checkout-wrap">${head}<div class="checkout-body">${body}</div></div>`;
   }
 
+
   function placeOrder() {
     const st = Cart.get();
     if (!st.items.length) return;
@@ -1506,6 +1740,7 @@ async function sendMessage() {
     window.scrollTo(0, 0);
   }
 
+
   function renderConfirmation() {
     const o = lastOrder || { parts: [], retailers: 0, total: 0, ref: '' };
     const list = o.parts.map(p => `<li>${p}</li>`).join('');
@@ -1523,11 +1758,13 @@ async function sendMessage() {
       </div>`;
   }
 
+
   /* Live badges + keep the basket view in sync with the store */
   Cart.subscribe(state => {
     renderCartBadges(state);
     if (document.getElementById('cart').classList.contains('active') && cartView === 'cart') renderCartPage();
   });
+
 
   /* ══════════════════════════════════════════════════════
      PRODUCT DETAIL PAGE — store cards AND social chips both
@@ -1536,6 +1773,7 @@ async function sendMessage() {
   const BRAND_KEY = {};
   Object.keys(RETAILERS).forEach(k => { BRAND_KEY[RETAILERS[k].name.toLowerCase()] = k; });
   const brandKey = name => BRAND_KEY[String(name).toLowerCase()] || null;
+
 
   /* style tags inferred from garment type (social chips carry no tag data) */
   const STYLE_TAGS = {
@@ -1546,6 +1784,7 @@ async function sendMessage() {
     bag: ['Accessory', 'Neutral tone'], shoe: ['Comfortable sole', 'Versatile']
   };
   const styleTagsFor = k => STYLE_TAGS[GARMENT_MAP[k] || 'tee'] || ['Everyday', 'Versatile'];
+
 
   function productFromRetailer(key, idx) {
     const r = RETAILERS[key]; if (!r || !r.items[idx]) return null;
@@ -1573,8 +1812,10 @@ async function sendMessage() {
     return null;
   }
 
+
   let currentProduct = null, pdpSize = 'M', pdpQty = 1;
   function goBackFromProduct() { if (window.history.length > 1) history.back(); else showSection('feed'); }
+
 
   /* deterministic per-product mock copy + reviews (stable, but varies by product) */
   function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h; }
@@ -1610,6 +1851,7 @@ async function sendMessage() {
         </div>
       </div>`;
   }
+
 
   const REVIEW_NAMES = ['Sophie T.', 'Maya R.', 'Imani K.', 'Chloe B.', 'Hannah L.', 'Priya S.', 'Elena G.', 'Ruby M.', 'Noor A.', 'Daria V.', 'Freya W.', 'Aisha M.'];
   const REVIEW_TEXTS = [
@@ -1666,6 +1908,7 @@ async function sendMessage() {
       </div>`;
   }
 
+
   function renderRecs(p) {
     const pool = [];
     if (p.retailerKey && RETAILERS[p.retailerKey]) {
@@ -1691,6 +1934,7 @@ async function sendMessage() {
     }).join('');
     return `<div class="pdp-section"><h3 class="pdp-h3">You might also like</h3><div class="pdp-recs">${cards}</div></div>`;
   }
+
 
   function renderProductPage() {
     const p = currentProduct;
@@ -1746,6 +1990,7 @@ async function sendMessage() {
     `;
   }
 
+
   function setPdpSize(s, btn) { pdpSize = s; document.querySelectorAll('.pdp-size-btn').forEach(b => b.classList.remove('on')); if (btn) btn.classList.add('on'); }
   function pdpQtyChange(d) { pdpQty = Math.max(1, pdpQty + d); const el = document.getElementById('pdpQtyVal'); if (el) el.textContent = pdpQty; }
   function pdpCartLine() {
@@ -1766,9 +2011,153 @@ async function sendMessage() {
     navHash('#/cart');   // router renders the cart in the delivery step + shows it
   }
 
+
   /* Resolve the initial URL (supports deep-link / refresh on a store or product). */
   applyRoute();
+
+  /* ══════════════════════════════════════════════════════
+     ONBOARDING FLOW
+     ══════════════════════════════════════════════════════ */
+  (function () {
+    const OB_TOTAL = 6;
+    let obStep = 0;
+    let obName = '';
+
+    const OB_TAGS = ['Quiet luxury','Relaxed tailoring','Soft feminine','Minimalist','Streetwear','Y2K','Coastal','Office siren','Smart casual','Earthy tones','Cosy knits','Statement pieces'];
+
+    const OB_OUTFITS = [
+      {name:'Linen wide-leg trousers',label:'Zara',k:'trousers'},
+      {name:'Satin slip midi dress',label:'Mango',k:'dress'},
+      {name:'Oversized linen blazer',label:'ARKET',k:'blazer'},
+      {name:'Ribbed knit jumper',label:'H&M',k:'knit'},
+      {name:'Pleated midi skirt',label:'COS',k:'skirt'},
+      {name:'Poplin shirt dress',label:'Zara',k:'shirt'},
+      {name:'Merino crew-neck',label:'Uniqlo',k:'knit'},
+      {name:'Draped midi dress',label:'COS',k:'dress'},
+      {name:'Tailored wide-leg trousers',label:'River Island',k:'trousers'},
+      {name:'Oversized wool coat',label:'ARKET',k:'coat'},
+      {name:'Satin cowl-neck top',label:'PLT',k:'shirt'},
+      {name:'Cropped wool cardigan',label:'Zara',k:'knit'},
+      {name:'Belted trench coat',label:'Mango',k:'coat'},
+      {name:'Sculpted A-line skirt',label:'COS',k:'skirt'},
+      {name:'Linen A-line dress',label:'ARKET',k:'dress'},
+      {name:'Wide-leg twill trousers',label:'H&M',k:'trousers'},
+      {name:'Knitted halter top',label:'Mango',k:'knit'},
+      {name:'Organic poplin shirt',label:'ARKET',k:'shirt'},
+      {name:'Ribbed bodycon dress',label:'PLT',k:'dress'},
+      {name:'Faux-leather blazer',label:'Bershka',k:'blazer'},
+      {name:'Straight-leg jeans',label:'Uniqlo',k:'trousers'},
+    ];
+
+    const OB_SVGS = {
+      dress:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 Q60 32 76 22 L70 70 L92 136 H28 L50 70 Z"/></svg>',
+      trousers:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M36 20 H84 L80 138 H62 L60 74 L58 138 H40 Z"/></svg>',
+      blazer:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 L30 32 L36 58 V128 H54 L57 64 H63 L66 128 H84 V58 L90 32 L76 22 L60 36 Z"/></svg>',
+      knit:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 26 Q60 36 78 26 L98 42 L86 70 L78 60 V124 H42 V60 L34 70 L22 42 Z"/></svg>',
+      skirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 24 H78 L94 132 H26 Z"/></svg>',
+      shirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/></svg>',
+      coat:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M38 18 L22 30 L28 62 V132 H52 L56 70 H64 L68 132 H92 V62 L98 30 L82 18 L60 34 Z"/></svg>',
+    };
+
+    function obBuildDots() {
+      const c = document.getElementById('obDots');
+      c.innerHTML = '';
+      if (obStep >= OB_TOTAL) return;
+      for (let i = 0; i < OB_TOTAL; i++) {
+        const d = document.createElement('div');
+        d.className = 'ob-dot' + (i <= obStep ? ' done' : '');
+        c.appendChild(d);
+      }
+    }
+
+    function obBuildTags() {
+      const g = document.getElementById('obTagGrid');
+      g.innerHTML = '';
+      OB_TAGS.forEach(t => {
+        const el = document.createElement('span');
+        el.className = 'ob-tag';
+        el.textContent = t;
+        el.onclick = () => el.classList.toggle('on');
+        g.appendChild(el);
+      });
+    }
+
+    function obBuildFeed() {
+      const g = document.getElementById('obFeedGrid');
+      g.innerHTML = '';
+      OB_OUTFITS.forEach((o, i) => {
+        const card = document.createElement('div');
+        card.className = 'ob-outfit-card';
+        card.id = 'oboc' + i;
+        card.innerHTML = '<div class="ob-outfit-img">' + (OB_SVGS[o.k] || OB_SVGS.shirt) + '</div>'
+          + '<div class="ob-outfit-footer">'
+          + '<div><div class="ob-outfit-name">' + o.name + '</div>'
+          + '<div class="ob-outfit-label">' + o.label + '</div></div>'
+          + '<button class="ob-heart" id="obhb' + i + '" onclick="obToggleHeart(' + i + ')" aria-label="Like outfit">&#9829;</button>'
+          + '</div>';
+        g.appendChild(card);
+      });
+    }
+
+    window.obToggleHeart = function(i) {
+      document.getElementById('obhb' + i).classList.toggle('liked');
+      document.getElementById('oboc' + i).classList.toggle('liked');
+    };
+
+    window.obGoTo = function(n) {
+      document.getElementById('ob' + obStep).classList.remove('active');
+      obStep = n;
+      document.getElementById('ob' + obStep).classList.add('active');
+      obBuildDots();
+      if (n === 4) document.getElementById('obNameInReady').textContent = obName;
+      if (n === 5) document.getElementById('obNameInSignup').textContent = obName;
+    };
+
+    window.obNextFromName = function() {
+      const val = document.getElementById('obNameInput').value.trim();
+      obName = val || 'there';
+      document.getElementById('obNameInDNA').textContent = obName;
+      obGoTo(1);
+    };
+
+    window.obSendReset = function() {
+      const email = document.getElementById('obResetEmail').value.trim() || 'your email';
+      document.getElementById('obResetEmailDisplay').textContent = email;
+      obGoTo(9);
+    };
+
+    window.obFinish = function() {
+      localStorage.setItem('drape_onboarded', '1');
+      document.getElementById('onboarding').style.display = 'none';
+      showSection('social');
+    };
+
+    function obStartProcessing() {
+      obGoTo(3);
+      const labels = ['Analysing your taste...','Learning your preferences...','Matching across retailers...','Calculating match scores...','Almost ready...'];
+      let idx = 0;
+      const lbl = document.getElementById('obProcLabel');
+      const bar = document.getElementById('obProgBar');
+      const iv = setInterval(() => {
+        idx++;
+        lbl.textContent = labels[Math.min(idx, labels.length - 1)];
+        bar.style.width = Math.min(idx * 22, 100) + '%';
+        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(4), 400); }
+      }, 700);
+    }
+
+    document.getElementById('obFeedBtn').onclick = obStartProcessing;
+
+    obBuildDots();
+    obBuildTags();
+    obBuildFeed();
+
+    if (!localStorage.getItem('drape_onboarded')) {
+      document.getElementById('onboarding').style.display = 'flex';
+    }
+  })();
 </script>
+
 
 </body>
 </html>
