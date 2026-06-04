@@ -1206,49 +1206,7 @@ section.active { display: block; }
 
 .ob-email-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--gold-pale); border: 1.5px solid var(--gold-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
 
-/* ─── PASTE THIS INTO YOUR style.css ─── */
-/* Either replace the existing AI STYLIST section or append at the end */
-
-/* ─── AI STYLIST LAYOUT — reply bar pinned to bottom ─── */
-#stylist.active {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-  min-height: unset !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-.stylist-page {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  padding-top: 64px !important;
-}
-.chat-window {
-  flex: 1 !important;
-  min-height: 0 !important;
-  overflow-y: auto !important;
-  padding: 28px max(40px, calc((100% - 820px) / 2)) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
-  background: var(--cream) !important;
-}
-.chat-input-area {
-  flex-shrink: 0 !important;
-}
-.chat-rating {
-  display: none;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.chat-rating.visible { display: flex; }
-
-/* ─── STYLIST PRODUCT RECOMMENDATION CARDS ─── */
+/* ─── STYLIST RECOMMENDATION CARDS ─── */
 .chat-recs {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
