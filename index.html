@@ -2223,9 +2223,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     obBuildTags();
     obBuildFeed();
 
-    if (!localStorage.getItem('drape_onboarded')) {
-      document.getElementById('onboarding').style.display = 'flex';
-    }
+    document.getElementById('onboarding').style.display = 'flex';
   })();
 </script>
 
