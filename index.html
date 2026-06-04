@@ -43,7 +43,7 @@
       <div class="ob-sub">Your personal AI stylist across every retailer. Let's start with your name.</div>
       <input class="ob-input" id="obNameInput" type="text" placeholder="Your first name" autocomplete="off">
       <button class="ob-btn" onclick="obNextFromName()">Continue</button>
-      <div class="ob-link" onclick="obGoTo(7)">Already have an account? Sign in</div>
+      <div class="ob-link" onclick="obGoTo(9)">Already have an account? Sign in</div>
     </div>
   </div>
 
@@ -56,7 +56,25 @@
     </div>
   </div>
 
-  <div class="ob-screen ob-screen-feed" id="ob2">
+  <div class="ob-screen" id="ob2">
+    <div class="ob-body">
+      <div class="ob-heading">Colours you love</div>
+      <div class="ob-sub">Select the colour families that feel like your wardrobe.</div>
+      <div class="ob-colour-grid" id="obLoveGrid"></div>
+      <button class="ob-btn" onclick="obGoTo(3)" style="margin-top:20px;">Next</button>
+    </div>
+  </div>
+
+  <div class="ob-screen" id="ob3">
+    <div class="ob-body">
+      <div class="ob-heading">Colours you avoid</div>
+      <div class="ob-sub">These get filtered out of your recommendations.</div>
+      <div class="ob-colour-grid" id="obAvoidGrid"></div>
+      <button class="ob-btn" onclick="obGoTo(4)" style="margin-top:20px;">Next</button>
+    </div>
+  </div>
+
+  <div class="ob-screen ob-screen-feed" id="ob4">
     <div class="ob-feed-header">
       <div class="ob-heading" style="font-size:24px;">Like the looks you love</div>
       <div class="ob-sub" style="margin-bottom:0;max-width:100%;text-align:center;">Tap the heart on outfits that feel like you.</div>
@@ -69,7 +87,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob3">
+  <div class="ob-screen" id="ob5">
     <div class="ob-body">
       <div style="text-align:center;max-width:340px;">
         <div class="ob-spinner"></div>
@@ -80,7 +98,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob4">
+  <div class="ob-screen" id="ob6">
     <div class="ob-body">
       <div class="ob-check-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -93,11 +111,11 @@
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
       </ul>
-      <button class="ob-btn" onclick="obGoTo(5)">See my recommendations</button>
+      <button class="ob-btn" onclick="obGoTo(7)">See my recommendations</button>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob5">
+  <div class="ob-screen" id="ob7">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Your recommendations are ready</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign up to unlock your personalised feed, <span id="obNameInSignup" style="color:var(--gold);font-weight:500;"></span>.</div>
@@ -106,14 +124,14 @@
         <div class="ob-field-wrap"><div class="ob-field-label">Password</div><input class="ob-field" type="password" placeholder="Create a password"></div>
         <div class="ob-field-wrap"><div class="ob-field-label">Confirm password</div><input class="ob-field" type="password" placeholder="Repeat your password"></div>
         <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Create account &amp; see my feed</button>
-        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Already have an account? Sign in</div>
+        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Already have an account? Sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob6"></div>
+  <div class="ob-screen" id="ob8"></div>
 
-  <div class="ob-screen" id="ob7">
+  <div class="ob-screen" id="ob9">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Welcome back</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign in to your DRAPE account.</div>
@@ -132,7 +150,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob8">
+  <div class="ob-screen" id="ob10">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Reset your password</div>
       <div class="ob-sub" style="margin-bottom:24px;">Enter the email address on your account and we'll send you a reset link.</div>
@@ -142,20 +160,20 @@
           <input class="ob-field" id="obResetEmail" type="email" placeholder="you@example.com">
         </div>
         <button class="ob-btn" style="max-width:100%;" onclick="obSendReset()">Send reset link</button>
-        <div class="ob-link" onclick="obGoTo(7)" style="margin-top:10px;">Back to sign in</div>
+        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Back to sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob9">
+  <div class="ob-screen" id="ob11">
     <div class="ob-body">
       <div class="ob-email-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Check your inbox</div>
       <div class="ob-sub" style="margin-bottom:24px;">We've sent a reset link to <span id="obResetEmailDisplay" style="color:var(--gold);font-weight:500;"></span>. It may take a minute to arrive.</div>
-      <button class="ob-btn" onclick="obGoTo(7)">Back to sign in</button>
-      <div class="ob-link" onclick="obGoTo(8)" style="margin-top:10px;">Didn't get it? Resend</div>
+      <button class="ob-btn" onclick="obGoTo(9)">Back to sign in</button>
+      <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Didn't get it? Resend</div>
     </div>
   </div>
 
@@ -2090,7 +2108,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
      ONBOARDING FLOW
      ══════════════════════════════════════════════════════ */
   (function () {
-    const OB_TOTAL = 6;
+    const OB_TOTAL = 8;
     let obStep = 0;
     let obName = '';
 
@@ -2129,6 +2147,62 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       shirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/></svg>',
       coat:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M38 18 L22 30 L28 62 V132 H52 L56 70 H64 L68 132 H92 V62 L98 30 L82 18 L60 34 Z"/></svg>',
     };
+
+    const OB_COLOUR_GROUPS = [
+      { id: 'neutrals',  name: 'Neutrals',      shades: ['#FAFAF5','#EDE0C8','#C4A882','#A08060','#2C1810'] },
+      { id: 'greys',     name: 'Greys & black',  shades: ['#E8E4DE','#B4B2A9','#7A7870','#444441','#1A1A18'] },
+      { id: 'pinks',     name: 'Pinks & mauves', shades: ['#F5E4E8','#D4A0A8','#C47A8A','#A04060','#6B2040'] },
+      { id: 'blues',     name: 'Blues',          shades: ['#D4E4F4','#A8B8D4','#6888A8','#184880','#0A2040'] },
+      { id: 'greens',    name: 'Greens',         shades: ['#D8ECD0','#A8C890','#8B9B7A','#4A7040','#2A3A2A'] },
+      { id: 'reds',      name: 'Reds',           shades: ['#FDE8E8','#F4A0A0','#E83030','#A82020','#601010'] },
+      { id: 'oranges',   name: 'Oranges',        shades: ['#FDE8D0','#F4A868','#E87830','#B84810','#782808'] },
+      { id: 'yellows',   name: 'Yellows',        shades: ['#FFF8D0','#FAE070','#E8C020','#B09010','#706008'] },
+      { id: 'purples',   name: 'Purples',        shades: ['#F0E0F8','#D090E8','#A050C8','#7030A0','#401060'] },
+      { id: 'teals',     name: 'Teals',          shades: ['#E0F8F4','#90D8C8','#40B8A0','#207860','#104830'] },
+    ];
+
+    const obLoveSelected  = new Set();
+    const obAvoidSelected = new Set();
+
+    function obBuildColourGrid(containerId, selectedSet) {
+      const g = document.getElementById(containerId);
+      if (!g) return;
+      g.innerHTML = '';
+      OB_COLOUR_GROUPS.forEach(group => {
+        const card = document.createElement('div');
+        card.className = 'ob-colour-card' + (selectedSet.has(group.id) ? ' ob-colour-selected' : '');
+        card.onclick = () => {
+          if (selectedSet.has(group.id)) {
+            selectedSet.delete(group.id);
+            card.classList.remove('ob-colour-selected');
+          } else {
+            selectedSet.add(group.id);
+            card.classList.add('ob-colour-selected');
+          }
+        };
+        const swatchRow = document.createElement('div');
+        swatchRow.className = 'ob-colour-swatches';
+        group.shades.forEach(hex => {
+          const seg = document.createElement('div');
+          seg.className = 'ob-colour-seg';
+          seg.style.background = hex;
+          swatchRow.appendChild(seg);
+        });
+        const footer = document.createElement('div');
+        footer.className = 'ob-colour-footer';
+        const nameEl = document.createElement('span');
+        nameEl.className = 'ob-colour-name';
+        nameEl.textContent = group.name;
+        const tick = document.createElement('div');
+        tick.className = 'ob-colour-tick';
+        tick.innerHTML = '&#10003;';
+        footer.appendChild(nameEl);
+        footer.appendChild(tick);
+        card.appendChild(swatchRow);
+        card.appendChild(footer);
+        g.appendChild(card);
+      });
+    }
 
     function obBuildDots() {
       const c = document.getElementById('obDots');
@@ -2180,8 +2254,10 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       obStep = n;
       document.getElementById('ob' + obStep).classList.add('active');
       obBuildDots();
-      if (n === 4) document.getElementById('obNameInReady').textContent = obName;
-      if (n === 5) document.getElementById('obNameInSignup').textContent = obName;
+      if (n === 2) obBuildColourGrid('obLoveGrid', obLoveSelected);
+      if (n === 3) obBuildColourGrid('obAvoidGrid', obAvoidSelected);
+      if (n === 6) document.getElementById('obNameInReady').textContent = obName;
+      if (n === 7) document.getElementById('obNameInSignup').textContent = obName;
     };
 
     window.obNextFromName = function() {
@@ -2194,7 +2270,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     window.obSendReset = function() {
       const email = document.getElementById('obResetEmail').value.trim() || 'your email';
       document.getElementById('obResetEmailDisplay').textContent = email;
-      obGoTo(9);
+      obGoTo(11);
     };
 
     window.obFinish = function() {
@@ -2204,7 +2280,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     };
 
     function obStartProcessing() {
-      obGoTo(3);
+      obGoTo(5);
       const labels = ['Analysing your taste...','Learning your preferences...','Matching across retailers...','Calculating match scores...','Almost ready...'];
       let idx = 0;
       const lbl = document.getElementById('obProcLabel');
@@ -2213,7 +2289,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
         idx++;
         lbl.textContent = labels[Math.min(idx, labels.length - 1)];
         bar.style.width = Math.min(idx * 22, 100) + '%';
-        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(4), 400); }
+        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(6), 400); }
       }, 700);
     }
 
