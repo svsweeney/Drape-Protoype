@@ -278,7 +278,7 @@
 
 
     <div class="chat-input-area">
-      <div class="chat-rating">
+      <div class="chat-rating" id="chat-rating" style = "display:none;">
         <span>Rate this response:</span>
         <div class="stars">
           <span onclick="setRating(1)">★</span>
@@ -695,13 +695,41 @@
   }
 
 
-  const botReplies = [
-    "Got it — earthy pinks and soft blues, no orange. Let me pull some looks together for you ✨",
-    "Perfect. Smart casual with a feminine edge — I'm thinking relaxed tailoring, maybe a linen piece. Give me a sec.",
-    "On it! Filtering now for pieces under £100 across Zara, Mango and ARKET. Back in a moment…",
-  ];
-  let replyIndex = 0;
+  // ─── PASTE THIS IN YOUR index.html SCRIPT BLOCK ───
+  // Replace your existing sendMessage function, botReplies, replyIndex,
+  // setRating, and handleEnter with everything below.
+  // It requires RETAILERS and garmentIcon to already exist in the same script block
+  // (they do in your doc5 file).
 
+  const stylistMessages = [];
+  let hasRecommended = false;
+
+  const STYLIST_SYSTEM = `You are DRAPE's AI Stylist — a warm, witty, and genuinely helpful personal shopper.
+You know this user's style profile: size M, 5'4", loves neutral palettes, loose tailoring, earthy pinks and soft blues. Avoids orange and neons. Budget around £20–80 per item.
+
+Ask the user clarifying questions before giving any recommendations. It's very important to ask questions one at a time.
+
+IMPORTANT: When recommending products, you MUST only recommend items that exist in the DRAPE catalogue below. Always pick 2-4 real items from this list that best match the user's request. Format recommendations by outputting a special JSON block at the end of your message like this:
+
+RECOMMENDATIONS:[{"retailer":"Zara","index":0},{"retailer":"Mango","index":2}]
+
+The retailer must match exactly (case-sensitive). The index is the item's position (0-based) in that retailer's items array.
+
+Available catalogue:
+ZARA (key: zara): 0=Linen wide-leg trousers £39.99, 1=Satin slip midi dress £49.99, 2=Oversized linen blazer £69.99, 3=Ribbed knit top £25.99, 4=Pleated midi skirt £35.99, 5=Cropped wool cardigan £45.99, 6=Poplin shirt dress £39.99, 7=High-waist tailored trousers £39.99, 8=Floral print maxi dress £59.99, 9=Faux-leather biker jacket £69.99, 10=Knitted polo vest £29.99, 11=Neon orange crop jacket £55.99
+H&M (key: hm): 0=Rib-knit jumper £19.99, 1=Wide-leg twill trousers £27.99, 2=Oversized cotton shirt £24.99, 3=Linen-blend midi dress £34.99, 4=Ribbed tank top £9.99, 5=Tailored blazer £44.99, 6=Pleated trousers £29.99, 7=Cropped denim jacket £34.99, 8=Floral wrap dress £29.99, 9=Sequin mini dress £39.99, 10=Neon pink hoodie £24.99
+MANGO (key: mango): 0=Linen-blend blazer £59.99, 1=Wide-leg flowy trousers £35.99, 2=Satin midi slip skirt £39.99, 3=Knitted halter top £25.99, 4=Oversized poplin shirt £29.99, 5=Belted trench coat £79.99, 6=Ribbed knit dress £45.99, 7=Pleated palazzo trousers £39.99, 8=Floral midi dress £49.99, 9=Leather-effect leggings £35.99, 10=Fuchsia tailored suit £99.99
+ASOS (key: asos): 0=ASOS DESIGN slouchy trousers £28, 1=Ribbed midi dress £32, 2=Oversized dad blazer £55, 3=Knitted lounge set £40, 4=Straight-leg jeans £30, 5=Linen shirt £26, 6=Pleated maxi skirt £34, 7=Faux-leather trench £65, 8=Bias-cut slip dress £28, 9=Cargo mini skirt £25, 10=Bright orange co-ord £42
+UNIQLO (key: uniqlo): 0=Smart ankle trousers £29.90, 1=Supima cotton crew tee £14.90, 2=Merino-blend jumper £34.90, 3=Linen-blend shirt £29.90, 4=Pleated wide trousers £39.90, 5=Rayon midi dress £39.90, 6=Ultra Light Down jacket £69.90, 7=Ribbed knit cardigan £34.90, 8=Wide straight jeans £39.90, 9=Fleece half-zip £24.90
+ARKET (key: arket): 0=Heavyweight cotton tee £25, 1=Wool-blend tailored trousers £89, 2=Oversized wool coat £165, 3=Merino crew-neck jumper £69, 4=Linen A-line dress £79, 5=Organic poplin shirt £55, 6=Pleated midi skirt £69, 7=Relaxed tapered jeans £75, 8=Quilted liner jacket £115, 9=Knitted polo shirt £49
+COS (key: cos): 0=Voluminous wide trousers £89, 1=Draped midi dress £115, 2=Oversized wool-blend coat £190, 3=Cashmere roll-neck £125, 4=Organic-cotton poplin shirt £69, 5=Sculpted A-line skirt £79, 6=Tailored straight-leg trousers £89, 7=Knitted column dress £99, 8=Relaxed selvedge jeans £89, 9=Structured leather tote £150
+RIVER ISLAND (key: riverisland): 0=Tailored wide-leg trousers £40, 1=Satin slip midi dress £45, 2=Oversized boyfriend blazer £65, 3=Ribbed knit jumper £32, 4=Pleated midi skirt £38, 5=Oversized poplin shirt £30, 6=Straight-leg jeans £40, 7=Belted trench coat £85, 8=Bias-cut maxi dress £48, 9=Faux-leather mini skirt £35, 10=Bright orange blazer £70
+PLT (key: plt): 0=Ribbed bodycon midi dress £22, 1=Oversized blazer dress £38, 2=Knitted lounge co-ord £30, 3=Satin cowl-neck top £16, 4=Wide-leg tailored trousers £28, 5=Faux-leather mini skirt £22, 6=Slinky maxi dress £26, 7=Cropped puffer jacket £40, 8=Cut-out bandage dress £25, 9=Neon green co-ord set £35, 10=Hot pink corset top £18
+MONKI (key: monki): 0=Mom-fit jeans £35, 1=Oversized graphic tee £15, 2=Ribbed knit midi dress £30, 3=Cropped cardigan £28, 4=Wide-leg cord trousers £32, 5=Pleated mini skirt £22, 6=Boxy denim jacket £45, 7=Slinky cami dress £25, 8=Fluffy knit jumper £30, 9=Bright orange cargo pants £36
+BERSHKA (key: bershka): 0=Baggy carpenter jeans £29.99, 1=Oversized poplin shirt £22.99, 2=Knitted vest top £15.99, 3=Faux-leather trench £45.99, 4=Slinky halter midi dress £19.99, 5=Cargo parachute trousers £29.99, 6=Cropped boxy tee £12.99, 7=Pleated tennis skirt £19.99, 8=Acid-wash denim jacket £39.99, 9=Neon green crop top £12.99
+PULL&BEAR (key: pullbear): 0=Relaxed straight jeans £29.99, 1=Oversized hoodie £25.99, 2=Boxy knit jumper £27.99, 3=Flowy wide trousers £25.99, 4=Cropped poplin shirt £19.99, 5=Ribbed midi dress £22.99, 6=Faux-leather bomber £45.99, 7=Denim mini skirt £19.99, 8=Baggy cargo trousers £29.99, 9=Bright orange windbreaker £39.99
+
+Keep responses short and conversational. Only include the RECOMMENDATIONS block when you have specific items to suggest. Do not mention you are Claude or made by Anthropic.`;
 
   function handleEnter(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -710,89 +738,131 @@
     }
   }
 
-
-const stylistMessages = [];
-
-
-const STYLIST_SYSTEM = `You are DRAPE's AI Stylist — a warm, witty, and genuinely helpful personal shopper.
-You know this user's style profile: size M, 5'4", loves neutral palettes, loose tailoring, earthy pinks and soft blues. Avoids orange and neons. Budget around £20–80 per item.
-You have access to retailers including Zara, ARKET, Mango, COS, H&M, ASOS, Uniqlo, River Island and more.
-Keep responses short, conversational and human — never robotic or listy.
-When recommending items, be specific with names and rough prices.
-Never mention you are Claude or made by Anthropic. You are DRAPE's stylist.
-Ask one question at a time.`;
-
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-
-  const cw = document.getElementById('chatWindow');
-
-
-  // Create and append user bubble
-  const userBubble = document.createElement('div');
-  userBubble.className = 'chat-bubble user fade-up';
-  userBubble.textContent = text;
-  cw.appendChild(userBubble);
-
-
-  input.value = '';
-  stylistMessages.push({ role: 'user', content: text });
-
-
-  // Create and append typing indicator bubble
-  const botBubble = document.createElement('div');
-  botBubble.className = 'chat-bubble bot fade-up';
-  botBubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div><span>...</span>';
-  cw.appendChild(botBubble);
-
-
-  cw.scrollTop = cw.scrollHeight;
-
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
-        max_tokens: 300,
-        system: STYLIST_SYSTEM,
-        messages: stylistMessages
-      })
+  function setRating(n) {
+    document.querySelectorAll('.stars span').forEach((s, i) => {
+      s.classList.toggle('empty', i >= n);
     });
+  }
 
+  function parseRecommendations(text) {
+    const match = text.match(/RECOMMENDATIONS:(\[.*?\])/s);
+    if (!match) return null;
+    try { return JSON.parse(match[1]); } catch { return null; }
+  }
 
-    const data = await response.json();
+  function cleanText(text) {
+    return text.replace(/RECOMMENDATIONS:\[.*?\]/s, '').trim();
+  }
 
+  function renderRecCards(recs) {
+    if (!recs || !recs.length) return '';
+    const cards = recs.map(r => {
+      const retailerKey = Object.keys(RETAILERS).find(k => RETAILERS[k].name === r.retailer) || r.retailer.toLowerCase().replace(/[^a-z]/g,'');
+      const retailer = RETAILERS[retailerKey];
+      if (!retailer || !retailer.items[r.index]) return '';
+      const it = retailer.items[r.index];
+      const high = it.m >= 75;
+      const badgeClass = high ? 'rc-badge-high' : (it.m >= 50 ? 'rc-badge-mid' : 'rc-badge-low');
+      const cardId = 'crec-' + retailerKey + '-' + r.index;
+      return `<div class="chat-rec-card${high ? ' rc-high' : ''}" onclick="openProductFromRetailer('${retailerKey}', ${r.index})">
+        <div class="chat-rec-img">
+          <div class="rc-illustration">${garmentIcon(it.k)}</div>
+          <div class="chat-rec-badge rc-badge ${badgeClass}">${it.m}%</div>
+        </div>
+        <div class="chat-rec-info">
+          <div class="chat-rec-brand">${retailer.name}</div>
+          <div class="chat-rec-name">${it.n}</div>
+          <div class="chat-rec-price">${it.p}</div>
+          <button class="chat-rec-btn" id="${cardId}" onclick="event.stopPropagation(); chatRecAddToCart('${retailerKey}', ${r.index}, this)">Add to cart</button>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="chat-recs">${cards}</div>`;
+  }
 
-    if (!response.ok) {
-      console.error('API error:', data);
-      botBubble.querySelector('span').textContent = "Sorry, something went wrong — try again in a moment.";
-      return;
-    }
+  function chatRecAddToCart(key, idx, btn) {
+    const r = RETAILERS[key];
+    if (!r || !r.items[idx]) return;
+    const it = r.items[idx];
+    const sizeTag = (it.t || []).find(t => /size/i.test(t)) || '';
+    Cart.add({ id: 'i:' + r.name + ':' + it.n, retailer: r.name, name: it.n, priceLabel: it.p, price: parsePrice(it.p), size: sizeTag, match: it.m, k: it.k });
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    btn.disabled = true;
+    toast(it.n + ' added to cart');
+  }
 
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
 
-    const reply = data.content[0].text;
-    stylistMessages.push({ role: 'assistant', content: reply });
+    const cw = document.getElementById('chatWindow');
 
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble user fade-up';
+    userBubble.textContent = text;
+    cw.appendChild(userBubble);
 
-    // Update the typing bubble with the real reply
-    botBubble.querySelector('span').textContent = reply;
+    input.value = '';
+    stylistMessages.push({ role: 'user', content: text });
+
+    const botBubble = document.createElement('div');
+    botBubble.className = 'chat-bubble bot fade-up';
+    botBubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div><span class="chat-msg-text">...</span>';
+    cw.appendChild(botBubble);
     cw.scrollTop = cw.scrollHeight;
 
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 500,
+          system: STYLIST_SYSTEM,
+          messages: stylistMessages
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        botBubble.querySelector('.chat-msg-text').textContent = "Sorry, something went wrong — try again in a moment.";
+        return;
+      }
+
+      const rawReply = data.content[0].text;
+      stylistMessages.push({ role: 'assistant', content: rawReply });
+
+      const recs = parseRecommendations(rawReply);
+      const displayText = cleanText(rawReply);
+
+      botBubble.querySelector('.chat-msg-text').textContent = displayText;
+
+      if (recs && recs.length) {
+        hasRecommended = true;
+        const recsHtml = renderRecCards(recs);
+        if (recsHtml) {
+          const recsDiv = document.createElement('div');
+          recsDiv.innerHTML = recsHtml;
+          botBubble.appendChild(recsDiv.firstChild);
+        }
+        // Show rating after first recommendation
+        const rating = document.getElementById('chatRating');
+        if (rating) rating.style.display = 'flex';
+      }
+
+      cw.scrollTop = cw.scrollHeight;
 
     } catch (err) {
       console.error('API Error:', err);
-      botBubble.querySelector('span').textContent = "Sorry, something went wrong — try again in a moment.";
+      botBubble.querySelector('.chat-msg-text').textContent = "Sorry, something went wrong — try again in a moment.";
     }
   }  // ─── RETAILER CATALOG ───
   function toggleRcFilter(el) {
