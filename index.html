@@ -43,7 +43,7 @@
       <div class="ob-sub">Your personal AI stylist across every retailer. Let's start with your name.</div>
       <input class="ob-input" id="obNameInput" type="text" placeholder="Your first name" autocomplete="off">
       <button class="ob-btn" onclick="obNextFromName()">Continue</button>
-      <div class="ob-link" onclick="obGoTo(9)">Already have an account? Sign in</div>
+      <div class="ob-link" onclick="obGoTo(10)">Already have an account? Sign in</div>
     </div>
   </div>
 
@@ -74,7 +74,189 @@
     </div>
   </div>
 
-  <div class="ob-screen ob-screen-feed" id="ob4">
+  <div class="ob-screen ob-screen-scroll" id="ob4">
+    <div class="ob-body-scroll">
+      <div class="ob-sf-header">
+        <div>
+          <div class="ob-heading">Your size &amp; fit</div>
+          <div class="ob-sub">We'll filter every retailer to items that actually fit you.</div>
+        </div>
+        <button class="ob-guide-btn" onclick="obOpenGuide()">📏 Size guide</button>
+      </div>
+
+      <div class="ob-sf-section-label">Gender sizing</div>
+      <div class="ob-sf-toggle" id="obGenderToggle">
+        <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obGenderToggle', this)">Women's</button>
+        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obGenderToggle', this)">Men's</button>
+        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obGenderToggle', this)">Both</button>
+      </div>
+
+      <div class="ob-sf-section-label" style="margin-top:14px;">Size system</div>
+      <div class="ob-sf-toggle" id="obSystemToggle">
+        <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obSystemToggle', this)">UK</button>
+        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">EU</button>
+        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">US</button>
+        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">AUS</button>
+      </div>
+
+      <div class="ob-sf-divider"></div>
+      <div class="ob-sf-section-label">Height</div>
+      <div class="ob-sf-height-row">
+        <input class="ob-sf-text-input ob-sf-short" id="obHeightFt" type="text" placeholder="5">
+        <input class="ob-sf-text-input ob-sf-short" id="obHeightIn" type="text" placeholder='4"'>
+        <div class="ob-sf-unit-toggle" id="obHeightUnit">
+          <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obHeightUnit', this); obToggleHeightUnit(this)">ft / in</button>
+          <button class="ob-sf-toggle-btn" onclick="obSetToggle('obHeightUnit', this); obToggleHeightUnit(this)">cm</button>
+        </div>
+      </div>
+
+      <div class="ob-sf-divider"></div>
+      <div class="ob-sf-section-label">Tops &amp; outerwear</div>
+      <div class="ob-sf-field-row">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">T-shirts &amp; tops</div>
+          <select class="ob-sf-select" id="obSizeTshirt"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="ob-sf-field" data-gender="women">
+          <div class="ob-sf-field-label">Shirts &amp; blouses</div>
+          <select class="ob-sf-select" id="obSizeShirt"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+      </div>
+      <div class="ob-sf-field-row">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Knitwear &amp; jumpers</div>
+          <select class="ob-sf-select" id="obSizeKnit"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Jackets &amp; coats</div>
+          <select class="ob-sf-select" id="obSizeJacket"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+      </div>
+
+      <div class="ob-sf-divider"></div>
+      <div class="ob-sf-section-label">Bottoms</div>
+      <div class="ob-sf-field-row">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Waist</div>
+          <input class="ob-sf-text-input" id="obSizeWaist" type="text" placeholder='e.g. 30"'>
+          <div class="ob-sf-hint">inches or cm</div>
+        </div>
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Inside leg</div>
+          <input class="ob-sf-text-input" id="obSizeLeg" type="text" placeholder='e.g. 30"'>
+          <div class="ob-sf-hint">inches or cm</div>
+        </div>
+      </div>
+      <div class="ob-sf-field-row" data-gender="women">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Skirts</div>
+          <select class="ob-sf-select" id="obSizeSkirt"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="ob-sf-field"></div>
+      </div>
+
+      <div class="ob-sf-divider" data-gender="women"></div>
+      <div class="ob-sf-section-label" data-gender="women">Dresses &amp; occasionwear</div>
+      <div class="ob-sf-field-row" data-gender="women">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Dresses</div>
+          <select class="ob-sf-select" id="obSizeDress"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Jumpsuits</div>
+          <select class="ob-sf-select" id="obSizeJumpsuit"><option value="">—</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+        </div>
+      </div>
+
+      <div class="ob-sf-divider"></div>
+      <div class="ob-sf-section-label">Footwear</div>
+      <div class="ob-sf-field-row">
+        <div class="ob-sf-field">
+          <div class="ob-sf-field-label">Shoe size</div>
+          <select class="ob-sf-select" id="obSizeShoe">
+            <option value="">—</option>
+            <option>3</option><option>4</option><option>5</option><option>6</option>
+            <option>7</option><option>8</option><option>9</option><option>10</option>
+          </select>
+        </div>
+        <div class="ob-sf-field"></div>
+      </div>
+
+      <button class="ob-btn" onclick="obGoTo(5)" style="margin-top:20px;flex-shrink:0;">Next</button>
+    </div>
+  </div>
+
+  <!-- SIZE GUIDE OVERLAY -->
+  <div class="ob-guide-overlay" id="obGuideOverlay">
+    <div class="ob-guide-sheet">
+      <div class="ob-guide-head">
+        <span class="ob-guide-title">Size guide</span>
+        <button class="ob-guide-close" onclick="obCloseGuide()">✕ Close</button>
+      </div>
+      <div class="ob-guide-body">
+        <div class="ob-guide-gender-toggle">
+          <button class="ob-sf-toggle-btn active" id="obGuideWomen" onclick="obGuideGender('women')">Women's</button>
+          <button class="ob-sf-toggle-btn" id="obGuideMen" onclick="obGuideGender('men')">Men's</button>
+        </div>
+
+        <div class="ob-guide-section">How to measure</div>
+        <div class="ob-guide-step"><div class="ob-guide-num">1</div><div><strong>Chest / bust</strong> — around the fullest part of your chest, tape parallel to the floor. <span>Leave a finger's width of room.</span></div></div>
+        <div class="ob-guide-step"><div class="ob-guide-num">2</div><div><strong>Waist</strong> — around your natural waist, roughly an inch above your belly button. <span>Breathe out naturally first.</span></div></div>
+        <div class="ob-guide-step"><div class="ob-guide-num">3</div><div><strong>Hips</strong> — around the fullest part of your hips, 7–9 inches below your waist. <span>Stand with feet together.</span></div></div>
+        <div class="ob-guide-step"><div class="ob-guide-num">4</div><div><strong>Inside leg</strong> — from your crotch seam to the bottom of your ankle. <span>Stand straight, feet slightly apart.</span></div></div>
+
+        <div class="ob-guide-divider"></div>
+        <div class="ob-guide-section ob-guide-section-women">Women's clothing sizes</div>
+        <table class="ob-guide-table ob-guide-section-women">
+          <tr><th>Size</th><th>Chest (in)</th><th>Waist (in)</th><th>Hips (in)</th></tr>
+          <tr><td>XS</td><td>30–32</td><td>22–24</td><td>32–34</td></tr>
+          <tr><td>S</td><td>32–34</td><td>24–26</td><td>34–36</td></tr>
+          <tr><td>M</td><td>34–36</td><td>26–28</td><td>36–38</td></tr>
+          <tr><td>L</td><td>36–38</td><td>28–30</td><td>38–40</td></tr>
+          <tr><td>XL</td><td>38–40</td><td>30–32</td><td>40–42</td></tr>
+        </table>
+        <div class="ob-guide-section ob-guide-section-men" style="display:none;">Men's clothing sizes</div>
+        <table class="ob-guide-table ob-guide-section-men" style="display:none;">
+          <tr><th>Size</th><th>Chest (in)</th><th>Waist (in)</th><th>Neck (in)</th></tr>
+          <tr><td>XS</td><td>34–36</td><td>28–30</td><td>14–14.5</td></tr>
+          <tr><td>S</td><td>36–38</td><td>30–32</td><td>14.5–15</td></tr>
+          <tr><td>M</td><td>38–40</td><td>32–34</td><td>15–15.5</td></tr>
+          <tr><td>L</td><td>40–42</td><td>34–36</td><td>15.5–16</td></tr>
+          <tr><td>XL</td><td>42–44</td><td>36–38</td><td>16–16.5</td></tr>
+        </table>
+
+        <div class="ob-guide-divider"></div>
+        <div class="ob-guide-section">Jeans &amp; trousers — waist sizes</div>
+        <table class="ob-guide-table">
+          <tr><th>Waist (in)</th><th>UK women's</th><th>UK men's</th><th>EU</th></tr>
+          <tr><td>26"</td><td>8</td><td>—</td><td>36</td></tr>
+          <tr><td>28"</td><td>10</td><td>28</td><td>38</td></tr>
+          <tr><td>30"</td><td>12</td><td>30</td><td>40</td></tr>
+          <tr><td>32"</td><td>14</td><td>32</td><td>42</td></tr>
+          <tr><td>34"</td><td>16</td><td>34</td><td>44</td></tr>
+        </table>
+
+        <div class="ob-guide-divider"></div>
+        <div class="ob-guide-section">Shoe sizes</div>
+        <table class="ob-guide-table">
+          <tr><th>UK W</th><th>UK M</th><th>EU</th><th>US W</th><th>US M</th></tr>
+          <tr><td>4</td><td>3</td><td>37</td><td>6</td><td>5</td></tr>
+          <tr><td>5</td><td>4</td><td>38</td><td>7</td><td>6</td></tr>
+          <tr><td>6</td><td>5</td><td>39</td><td>8</td><td>7</td></tr>
+          <tr><td>7</td><td>6</td><td>40</td><td>9</td><td>8</td></tr>
+          <tr><td>8</td><td>7</td><td>41</td><td>10</td><td>9</td></tr>
+        </table>
+
+        <div class="ob-guide-divider"></div>
+        <div class="ob-guide-section">Tips</div>
+        <div class="ob-guide-tip"><span class="ob-guide-tip-icon">↗</span><div>Between sizes? <span>Size up for outerwear and knitwear, size down for fitted tops and dresses.</span></div></div>
+        <div class="ob-guide-tip"><span class="ob-guide-tip-icon">⚖</span><div>Sizes vary by brand — <span>DRAPE shows each retailer's own label once your measurements are saved.</span></div></div>
+        <div class="ob-guide-tip"><span class="ob-guide-tip-icon">📐</span><div>No tape measure? <span>Use a piece of string, then lay it flat against a ruler.</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-screen ob-screen-feed" id="ob5">
     <div class="ob-feed-header">
       <div class="ob-heading" style="font-size:24px;">Like the looks you love</div>
       <div class="ob-sub" style="margin-bottom:0;max-width:100%;text-align:center;">Tap the heart on outfits that feel like you.</div>
@@ -87,7 +269,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob5">
+  <div class="ob-screen" id="ob6">
     <div class="ob-body">
       <div style="text-align:center;max-width:340px;">
         <div class="ob-spinner"></div>
@@ -98,7 +280,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob6">
+  <div class="ob-screen" id="ob7">
     <div class="ob-body">
       <div class="ob-check-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -111,11 +293,11 @@
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
         <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
       </ul>
-      <button class="ob-btn" onclick="obGoTo(7)">See my recommendations</button>
+      <button class="ob-btn" onclick="obGoTo(8)">See my recommendations</button>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob7">
+  <div class="ob-screen" id="ob8">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Your recommendations are ready</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign up to unlock your personalised feed, <span id="obNameInSignup" style="color:var(--gold);font-weight:500;"></span>.</div>
@@ -124,14 +306,14 @@
         <div class="ob-field-wrap"><div class="ob-field-label">Password</div><input class="ob-field" type="password" placeholder="Create a password"></div>
         <div class="ob-field-wrap"><div class="ob-field-label">Confirm password</div><input class="ob-field" type="password" placeholder="Repeat your password"></div>
         <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Create account &amp; see my feed</button>
-        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Already have an account? Sign in</div>
+        <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Already have an account? Sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob8"></div>
+  <div class="ob-screen" id="ob9"></div>
 
-  <div class="ob-screen" id="ob9">
+  <div class="ob-screen" id="ob10">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Welcome back</div>
       <div class="ob-sub" style="margin-bottom:20px;">Sign in to your DRAPE account.</div>
@@ -140,7 +322,7 @@
         <div class="ob-field-wrap">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
             <div class="ob-field-label" style="margin-bottom:0;">Password</div>
-            <span class="ob-link" style="margin-top:0;" onclick="obGoTo(8)">Forgot password?</span>
+            <span class="ob-link" style="margin-top:0;" onclick="obGoTo(11)">Forgot password?</span>
           </div>
           <input class="ob-field" type="password" placeholder="Your password">
         </div>
@@ -150,7 +332,7 @@
     </div>
   </div>
 
-  <div class="ob-screen" id="ob10">
+  <div class="ob-screen" id="ob11">
     <div class="ob-body">
       <div class="ob-heading" style="font-size:24px;margin-bottom:6px;">Reset your password</div>
       <div class="ob-sub" style="margin-bottom:24px;">Enter the email address on your account and we'll send you a reset link.</div>
@@ -160,20 +342,20 @@
           <input class="ob-field" id="obResetEmail" type="email" placeholder="you@example.com">
         </div>
         <button class="ob-btn" style="max-width:100%;" onclick="obSendReset()">Send reset link</button>
-        <div class="ob-link" onclick="obGoTo(9)" style="margin-top:10px;">Back to sign in</div>
+        <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Back to sign in</div>
       </div>
     </div>
   </div>
 
-  <div class="ob-screen" id="ob11">
+  <div class="ob-screen" id="ob12">
     <div class="ob-body">
       <div class="ob-email-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Check your inbox</div>
       <div class="ob-sub" style="margin-bottom:24px;">We've sent a reset link to <span id="obResetEmailDisplay" style="color:var(--gold);font-weight:500;"></span>. It may take a minute to arrive.</div>
-      <button class="ob-btn" onclick="obGoTo(9)">Back to sign in</button>
-      <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Didn't get it? Resend</div>
+      <button class="ob-btn" onclick="obGoTo(10)">Back to sign in</button>
+      <div class="ob-link" onclick="obGoTo(11)" style="margin-top:10px;">Didn't get it? Resend</div>
     </div>
   </div>
 
@@ -369,7 +551,7 @@
 
 
     <div class="profile-header fade-up">
-      <div class="profile-av-large">AB</div>
+      <div class="profile-av-large" id="profileAvatar">AB</div>
       <div style="flex:1;">
         <div class="profile-name">Alicia Baquero</div>
         <div class="profile-sub">Size M · 5'4" · Colombian · London</div>
@@ -412,30 +594,29 @@
           <span class="dna-tag">Streetwear-lite</span>
         </div>
         <h3>Colour palette</h3>
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+        <div id="profilePalette" style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
           <div style="width:28px;height:28px;border-radius:50%;background:#D4A0A8;border:1px solid var(--gold-border);"></div>
           <div style="width:28px;height:28px;border-radius:50%;background:#A8B8D4;border:1px solid var(--gold-border);"></div>
           <div style="width:28px;height:28px;border-radius:50%;background:#E8D9C8;border:1px solid var(--gold-border);"></div>
           <div style="width:28px;height:28px;border-radius:50%;background:#C4A882;border:1px solid var(--gold-border);"></div>
-          <div style="font-size:12px;color:var(--text-muted);margin-left:4px;">Avoids: orange</div>
         </div>
         <h3 style="margin-bottom:8px;">Avoids</h3>
-        <div class="avoids-row">Neons · bright red<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
-        <div class="avoids-row">Fast fashion<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
-        <div class="avoids-row">Orange<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
-      </div>
+        <div id="profileAvoids">
+          <div class="avoids-row">Neons · bright red<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
+          <div class="avoids-row">Orange<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
+        </div>
+      `</div>
 
 
       <div class="profile-card" style="grid-column:1/-1;">
-        <h3>Body & fit</h3>
+        <h3>Body &amp; fit</h3>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
-          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Height</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">5'4"</div></div>
-          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Size</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">UK 10 / M</div></div>
-          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Budget</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">£20–80 / item</div></div>
-          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Next event</div><div style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">Dinner · Fri 23</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Height</div><div id="profileHeight" style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">—</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Size</div><div id="profileSize" style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">—</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Waist</div><div id="profileWaist" style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">—</div></div>
+          <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Shoe size</div><div id="profileShoe" style="font-size:18px;font-family:var(--font-display);color:var(--text-dark);">—</div></div>
         </div>
       </div>
-
 
     </div>
 
@@ -2100,6 +2281,58 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     navHash('#/cart');   // router renders the cart in the delivery step + shows it
   }
 
+  function loadUserProfile() {
+    let profile;
+    try { profile = JSON.parse(localStorage.getItem('drape_profile')); } catch(e) {}
+    if (!profile) return;
+
+    const nameEl = document.querySelector('.profile-name');
+    if (nameEl && profile.name) nameEl.textContent = profile.name;
+
+    const avatarEl = document.getElementById('profileAvatar');
+    if (avatarEl && profile.name) {
+      const parts = profile.name.trim().split(' ');
+      avatarEl.textContent = parts.map(p => p[0]).join('').toUpperCase().slice(0, 2);
+    }
+
+    const dnaEl = document.querySelector('.dna-tags');
+    if (dnaEl && profile.styleDNA && profile.styleDNA.length) {
+      dnaEl.innerHTML = profile.styleDNA.map(t => `<span class="dna-tag">${t}</span>`).join('');
+    }
+
+    const GROUP_COLOURS = {
+      neutrals:'#EDE0C8', greys:'#B4B2A9', pinks:'#D4A0A8',
+      blues:'#A8B8D4', greens:'#8B9B7A', reds:'#E83030',
+      oranges:'#E87830', yellows:'#E8C020', purples:'#A050C8', teals:'#40B8A0',
+    };
+    const paletteEl = document.getElementById('profilePalette');
+    if (paletteEl && profile.coloursLove && profile.coloursLove.length) {
+      paletteEl.innerHTML = profile.coloursLove.map(id =>
+        `<div style="width:28px;height:28px;border-radius:50%;background:${GROUP_COLOURS[id]||'#ccc'};border:1px solid var(--gold-border);" title="${id}"></div>`
+      ).join('');
+    }
+
+    const avoidsEl = document.getElementById('profileAvoids');
+    if (avoidsEl && profile.coloursAvoid && profile.coloursAvoid.length) {
+      avoidsEl.innerHTML = profile.coloursAvoid.map(id =>
+        `<div class="avoids-row">${id.charAt(0).toUpperCase()+id.slice(1)}<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>`
+      ).join('');
+    }
+
+    const s = profile.sizes;
+    if (s) {
+      const heightEl = document.getElementById('profileHeight');
+      if (heightEl && s.height) heightEl.textContent = s.height;
+      const sizeEl = document.getElementById('profileSize');
+      if (sizeEl) { const ms = s.tshirt||s.dress||s.shirt||s.knit||''; if (ms) sizeEl.textContent = (s.system||'UK') + ' ' + ms; }
+      const waistEl = document.getElementById('profileWaist');
+      if (waistEl && s.waist) waistEl.textContent = s.waist;
+      const shoeEl = document.getElementById('profileShoe');
+      if (shoeEl && s.shoe) shoeEl.textContent = (s.system||'UK') + ' ' + s.shoe;
+    }
+  }
+
+  loadUserProfile();
 
   /* Resolve the initial URL (supports deep-link / refresh on a store or product). */
   applyRoute();
@@ -2108,7 +2341,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
      ONBOARDING FLOW
      ══════════════════════════════════════════════════════ */
   (function () {
-    const OB_TOTAL = 8;
+    const OB_TOTAL = 9;
     let obStep = 0;
     let obName = '';
 
@@ -2204,6 +2437,106 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       });
     }
 
+    window.obSetToggle = function(groupId, btn) {
+      document.getElementById(groupId).querySelectorAll('.ob-sf-toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (groupId === 'obGenderToggle') obApplyGender(btn.textContent.trim());
+      if (groupId === 'obSystemToggle') obApplySizeSystem(btn.textContent.trim());
+    };
+
+    function obApplyGender(gender) {
+      const isMen = gender === "Men's";
+      document.querySelectorAll('#ob4 [data-gender="women"]').forEach(el => {
+        el.style.display = isMen ? 'none' : '';
+      });
+    }
+
+    function obApplySizeSystem(system) {
+      // Update shoe size options based on system
+      const shoeSelect = document.getElementById('obSizeShoe');
+      const currentVal = shoeSelect.value;
+      const options = {
+        'UK':  ['—','3','4','5','6','7','8','9','10','11','12'],
+        'EU':  ['—','36','37','38','39','40','41','42','43','44','45'],
+        'US':  ['—','5','6','7','8','9','10','11','12','13'],
+        'AUS': ['—','3','4','5','6','7','8','9','10','11','12'],
+      };
+      const opts = options[system] || options['UK'];
+      shoeSelect.innerHTML = opts.map(o => `<option value="${o === '—' ? '' : o}">${o}</option>`).join('');
+
+      // Update waist/leg placeholder units
+      const isEU = system === 'EU';
+      const waistEl = document.getElementById('obSizeWaist');
+      const legEl   = document.getElementById('obSizeLeg');
+      if (waistEl) waistEl.placeholder = isEU ? 'e.g. 76 cm' : 'e.g. 30"';
+      if (legEl)   legEl.placeholder   = isEU ? 'e.g. 76 cm' : 'e.g. 30"';
+
+      // Update waist/leg hint text
+      document.querySelectorAll('#ob4 .ob-sf-hint').forEach(el => {
+        el.textContent = isEU ? 'centimetres' : 'inches or cm';
+      });
+
+      // Update clothing size options for EU (numeric) vs letter sizes
+      const letterSizes = ['—','XS','S','M','L','XL','XXL'];
+      const euWomenSizes = ['—','32','34','36','38','40','42','44'];
+      const euMenSizes   = ['—','44','46','48','50','52','54','56'];
+      const useEU = system === 'EU';
+      const gender = document.querySelector('#obGenderToggle .ob-sf-toggle-btn.active')?.textContent.trim() || "Women's";
+      const euSizes = gender === "Men's" ? euMenSizes : euWomenSizes;
+
+      ['obSizeTshirt','obSizeShirt','obSizeKnit','obSizeJacket','obSizeSkirt','obSizeDress','obSizeJumpsuit'].forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        const sizes = useEU ? euSizes : letterSizes;
+        sel.innerHTML = sizes.map(o => `<option value="${o === '—' ? '' : o}">${o}</option>`).join('');
+      });
+    }
+
+    window.obToggleHeightUnit = function(btn) {
+      const isCm = btn.textContent.trim() === 'cm';
+      const ftEl = document.getElementById('obHeightFt');
+      const inEl = document.getElementById('obHeightIn');
+      if (isCm) {
+        ftEl.placeholder = 'cm'; ftEl.style.width = '90px';
+        inEl.style.display = 'none';
+      } else {
+        ftEl.placeholder = '5'; ftEl.style.width = '';
+        inEl.style.display = '';
+      }
+    };
+
+    window.obOpenGuide  = function() { document.getElementById('obGuideOverlay').classList.add('open'); };
+    window.obCloseGuide = function() { document.getElementById('obGuideOverlay').classList.remove('open'); };
+
+    window.obGuideGender = function(g) {
+      document.getElementById('obGuideWomen').classList.toggle('active', g === 'women');
+      document.getElementById('obGuideMen').classList.toggle('active', g === 'men');
+      document.querySelectorAll('.ob-guide-section-women').forEach(el => el.style.display = g === 'women' ? '' : 'none');
+      document.querySelectorAll('.ob-guide-section-men').forEach(el => el.style.display = g === 'men' ? '' : 'none');
+    };
+
+    function obCollectSizes() {
+      const gender = document.querySelector('#obGenderToggle .ob-sf-toggle-btn.active')?.textContent.trim() || '';
+      const system = document.querySelector('#obSystemToggle .ob-sf-toggle-btn.active')?.textContent.trim() || 'UK';
+      const isCm = document.querySelector('#obHeightUnit .ob-sf-toggle-btn.active')?.textContent.trim() === 'cm';
+      const height = isCm
+        ? (document.getElementById('obHeightFt').value.trim() + ' cm')
+        : (document.getElementById('obHeightFt').value.trim() + "'" + document.getElementById('obHeightIn').value.trim());
+      return {
+        gender, system, height,
+        tshirt:   document.getElementById('obSizeTshirt').value,
+        shirt:    document.getElementById('obSizeShirt').value,
+        knit:     document.getElementById('obSizeKnit').value,
+        jacket:   document.getElementById('obSizeJacket').value,
+        waist:    document.getElementById('obSizeWaist').value,
+        leg:      document.getElementById('obSizeLeg').value,
+        skirt:    document.getElementById('obSizeSkirt').value,
+        dress:    document.getElementById('obSizeDress').value,
+        jumpsuit: document.getElementById('obSizeJumpsuit').value,
+        shoe:     document.getElementById('obSizeShoe').value,
+      };
+    }
+
     function obBuildDots() {
       const c = document.getElementById('obDots');
       c.innerHTML = '';
@@ -2256,8 +2589,8 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       obBuildDots();
       if (n === 2) obBuildColourGrid('obLoveGrid', obLoveSelected);
       if (n === 3) obBuildColourGrid('obAvoidGrid', obAvoidSelected);
-      if (n === 6) document.getElementById('obNameInReady').textContent = obName;
-      if (n === 7) document.getElementById('obNameInSignup').textContent = obName;
+      if (n === 7) document.getElementById('obNameInReady').textContent = obName;
+      if (n === 8) document.getElementById('obNameInSignup').textContent = obName;
     };
 
     window.obNextFromName = function() {
@@ -2270,17 +2603,30 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     window.obSendReset = function() {
       const email = document.getElementById('obResetEmail').value.trim() || 'your email';
       document.getElementById('obResetEmailDisplay').textContent = email;
-      obGoTo(11);
+      obGoTo(12);
     };
 
     window.obFinish = function() {
+      const sizes = obCollectSizes();
+      const profile = {
+        name: obName,
+        styleDNA: Array.from(document.querySelectorAll('#obTagGrid .ob-tag.on')).map(el => el.textContent),
+        coloursLove: Array.from(obLoveSelected),
+        coloursAvoid: Array.from(obAvoidSelected),
+        outfitLikes: Array.from(document.querySelectorAll('.ob-outfit-card.liked')).map(el => ({
+          name:  el.querySelector('.ob-outfit-name')?.textContent  || '',
+          label: el.querySelector('.ob-outfit-label')?.textContent || '',
+        })),
+        sizes,
+      };
       localStorage.setItem('drape_onboarded', '1');
+      localStorage.setItem('drape_profile', JSON.stringify(profile));
       document.getElementById('onboarding').style.display = 'none';
       showSection('social');
     };
 
     function obStartProcessing() {
-      obGoTo(5);
+      obGoTo(6);
       const labels = ['Analysing your taste...','Learning your preferences...','Matching across retailers...','Calculating match scores...','Almost ready...'];
       let idx = 0;
       const lbl = document.getElementById('obProcLabel');
@@ -2289,7 +2635,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
         idx++;
         lbl.textContent = labels[Math.min(idx, labels.length - 1)];
         bar.style.width = Math.min(idx * 22, 100) + '%';
-        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(6), 400); }
+        if (idx >= 5) { clearInterval(iv); setTimeout(() => obGoTo(7), 400); }
       }, 700);
     }
 
