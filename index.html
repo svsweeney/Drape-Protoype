@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DRAPE — Wear What You Mean</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&family=Pinyon+Script&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
 
 <!-- ─── TOP NAV ─── -->
 <nav>
-  <a class="nav-logo" href="#" onclick="return showSection('feed')">DRAPE</a>
+  <a class="nav-logo" href="#" onclick="return showSection('feed')">Drape</a>
   <div class="nav-links">
     <a href="#" onclick="return showSection('feed')" id="nav-feed" class="active">Discover</a>
     <a href="#" onclick="return showSection('stylist')" id="nav-stylist">AI Stylist</a>
@@ -33,7 +34,7 @@
 <div id="onboarding" style="display:none;position:fixed;inset:0;z-index:500;background:var(--off-white);flex-direction:column;">
 
   <div class="ob-nav">
-    <span class="ob-logo">DRAPE</span>
+    <span class="ob-logo">Drape</span>
     <div class="ob-dots" id="obDots"></div>
   </div>
 
@@ -283,15 +284,15 @@
   <div class="ob-screen" id="ob7">
     <div class="ob-body">
       <div class="ob-check-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Style profile formulated</div>
       <div class="ob-sub" style="margin-bottom:20px;">Fashion recommendations ready for you, <span id="obNameInReady" style="color:var(--gold);font-weight:500;"></span>.</div>
       <ul class="ob-check-list">
-        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Style DNA analysed</li>
-        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Outfit preferences learned</li>
-        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
-        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Style DNA analysed</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Outfit preferences learned</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Match scores calculated across 12 retailers</li>
+        <li><div class="ob-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Fashion recommendations formulated</li>
       </ul>
       <button class="ob-btn" onclick="obGoTo(8)">See my recommendations</button>
     </div>
@@ -305,7 +306,7 @@
         <div class="ob-field-wrap"><div class="ob-field-label">Email</div><input class="ob-field" type="email" placeholder="you@example.com"></div>
         <div class="ob-field-wrap"><div class="ob-field-label">Password</div><input class="ob-field" type="password" placeholder="Create a password"></div>
         <div class="ob-field-wrap"><div class="ob-field-label">Confirm password</div><input class="ob-field" type="password" placeholder="Repeat your password"></div>
-        <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish()">Create account &amp; see my feed</button>
+        <button class="ob-btn" style="max-width:100%;margin-top:8px;" onclick="obFinish(true)">Create account &amp; see my feed</button>
         <div class="ob-link" onclick="obGoTo(10)" style="margin-top:10px;">Already have an account? Sign in</div>
       </div>
     </div>
@@ -350,7 +351,7 @@
   <div class="ob-screen" id="ob12">
     <div class="ob-body">
       <div class="ob-email-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="ob-heading" style="font-size:22px;margin-bottom:6px;">Check your inbox</div>
       <div class="ob-sub" style="margin-bottom:24px;">We've sent a reset link to <span id="obResetEmailDisplay" style="color:var(--gold);font-weight:500;"></span>. It may take a minute to arrive.</div>
@@ -384,8 +385,8 @@
 
 
   <div class="search-wrapper fade-up delay-1">
-    <input class="search-input" type="text" placeholder="Search retailers, brands, styles…">
-    <button class="search-btn">Search</button>
+    <input class="search-input" id="homeSearch" type="text" placeholder="Search retailers, brands, styles…" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();submitHomeSearch();}">
+    <button class="search-btn" onclick="submitHomeSearch()">Search</button>
   </div>
 
 
@@ -402,15 +403,23 @@
   <div class="stylist-bar fade-up delay-2" onclick="return showSection('stylist')">
     <div class="stylist-bar-left">
       <div class="stylist-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
       <div>
         <div class="stylist-bar-title">Ask your AI Stylist</div>
         <div class="stylist-bar-sub">Tell us what you need — we'll find the perfect look</div>
       </div>
     </div>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,245,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(26,23,20,0.55)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </div>
+
+
+  <!-- Filtered product results for the active pill (shared catalogue, same cards as store pages) -->
+  <div class="section-label fade-up delay-2 home-grid-head">
+    <span id="homeGridLabel">For you</span>
+    <span id="homeGridCount" class="home-grid-count"></span>
+  </div>
+  <div class="rc-grid home-grid fade-up delay-2" id="homeGrid"></div>
 
 
   <div class="section-label fade-up delay-2">Followed Retailers</div>
@@ -427,17 +436,17 @@
   <div class="section-label fade-up delay-3">All Retailers</div>
   <div class="retailers-grid fade-up delay-3">
     <div class="retailer-tile" onclick="openRetailer('hm')"><div class="r-name">H&M</div></div>
-    <div class="retailer-tile" onclick="openRetailer('asos')"><div class="r-name" style="color:var(--gold);">ASOS</div></div>
-    <div class="retailer-tile" onclick="openRetailer('mango')"><div class="r-name" style="color:#c0392b;">Mango</div></div>
-    <div class="retailer-tile" onclick="openRetailer('uniqlo')"><div class="r-name" style="color:#c0392b;">Uniqlo</div></div>
-    <div class="retailer-tile" onclick="openRetailer('plt')"><div class="r-name" style="color:var(--gold);">Pretty Little Thing</div></div>
+    <div class="retailer-tile" onclick="openRetailer('asos')"><div class="r-name">ASOS</div></div>
+    <div class="retailer-tile" onclick="openRetailer('mango')"><div class="r-name">Mango</div></div>
+    <div class="retailer-tile" onclick="openRetailer('uniqlo')"><div class="r-name">Uniqlo</div></div>
+    <div class="retailer-tile" onclick="openRetailer('plt')"><div class="r-name">Pretty Little Thing</div></div>
     <div class="retailer-tile" onclick="openRetailer('riverisland')"><div class="r-name">River Island</div></div>
     <div class="retailer-tile" onclick="openRetailer('arket')"><div class="r-name">ARKET</div></div>
     <div class="retailer-tile" onclick="openRetailer('cos')"><div class="r-name">COS</div></div>
-    <div class="retailer-tile" onclick="openRetailer('monki')"><div class="r-name" style="color:#4a7c3f;">Monki</div></div>
+    <div class="retailer-tile" onclick="openRetailer('monki')"><div class="r-name">Monki</div></div>
     <div class="retailer-tile" onclick="openRetailer('bershka')"><div class="r-name">Bershka</div></div>
-    <div class="retailer-tile" onclick="openRetailer('pullbear')"><div class="r-name" style="color:#4a7c3f;">Pull&Bear</div></div>
-    <div class="retailer-tile" onclick="openRetailer('zara')"><div class="r-name" style="color:var(--gold);">Zara</div></div>
+    <div class="retailer-tile" onclick="openRetailer('pullbear')"><div class="r-name">Pull&Bear</div></div>
+    <div class="retailer-tile" onclick="openRetailer('zara')"><div class="r-name">Zara</div></div>
   </div>
 
 
@@ -533,7 +542,7 @@
         <div class="comment-av">AB</div>
         <input class="comment-input" id="commentInput" type="text" placeholder="Add a comment…">
         <button class="comment-send" aria-label="Send comment">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8953F" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
     </div>
@@ -687,14 +696,14 @@
       <div class="rc-stylist-bar" onclick="return showSection('stylist')">
         <div class="rc-stylist-bar-left">
           <div class="rc-stylist-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <div>
             <div class="rc-stylist-title">Ask your AI Stylist</div>
             <div class="rc-stylist-sub" id="rc-stylist-sub">Get help finding the right look from this retailer</div>
           </div>
         </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(250,250,245,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(26,23,20,0.55)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </div>
       <p class="rc-brand-sub" id="rc-hero-sub">Summer sale · Up to 30% off · Free delivery over £50</p>
       <div class="rc-brand-tags" id="rc-hero-tags"></div>
@@ -710,22 +719,22 @@
   <div class="rc-toolbar">
     <div class="rc-search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <span id="rc-search-text">Search</span>
+      <input id="rcSearchInput" class="rc-search-input" type="text" placeholder="Search…" autocomplete="off" oninput="setStoreQuery(this.value)">
     </div>
     <div class="rc-filters">
-      <span class="rc-filter on">All</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">New in</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Tops</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Trousers</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Dresses</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Outerwear</span>
-      <span class="rc-filter" onclick="toggleRcFilter(this)">Sale</span>
+      <span class="rc-filter on" data-cat="all"       onclick="setStoreCat(this,'all')">All</span>
+      <span class="rc-filter"    data-cat="newin"     onclick="setStoreCat(this,'newin')">New in</span>
+      <span class="rc-filter"    data-cat="tops"      onclick="setStoreCat(this,'tops')">Tops</span>
+      <span class="rc-filter"    data-cat="trousers"  onclick="setStoreCat(this,'trousers')">Trousers</span>
+      <span class="rc-filter"    data-cat="dresses"   onclick="setStoreCat(this,'dresses')">Dresses</span>
+      <span class="rc-filter"    data-cat="outerwear" onclick="setStoreCat(this,'outerwear')">Outerwear</span>
+      <span class="rc-filter"    data-cat="sale"      onclick="setStoreCat(this,'sale')">Sale</span>
     </div>
-    <select class="rc-sort">
-      <option>Sort: Best match</option>
-      <option>Price: low–high</option>
-      <option>Price: high–low</option>
-      <option>Newest first</option>
+    <select class="rc-sort" id="rcSort" onchange="setStoreSort(this.value)">
+      <option value="best">Sort: Best match</option>
+      <option value="price-low">Price: low–high</option>
+      <option value="price-high">Price: high–low</option>
+      <option value="newest">Newest first</option>
     </select>
   </div>
 
@@ -733,15 +742,15 @@
   <!-- Results bar -->
   <div class="rc-results-bar">
     <span class="rc-results-count" id="rc-results-count">1,247 items · showing best matches for you first</span>
-    <button class="rc-size-btn" onclick="this.classList.toggle('on')">
+    <button class="rc-size-btn" id="rcSizeBtn" onclick="toggleStoreSize(this)">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
       Show my size only
     </button>
     <div class="rc-view-toggle">
-      <button class="rc-view-btn on" aria-label="Grid view">
+      <button class="rc-view-btn on" data-view="grid" aria-label="Grid view" onclick="setStoreView(this,'grid')">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       </button>
-      <button class="rc-view-btn" aria-label="List view">
+      <button class="rc-view-btn" data-view="list" aria-label="List view" onclick="setStoreView(this,'list')">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
       </button>
     </div>
@@ -785,7 +794,7 @@
 
 <!-- Compose FAB (social only) -->
 <button class="compose-btn" id="composeFab" style="display:none;" title="New post">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FAFAF5" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 </button>
 
 
@@ -864,8 +873,50 @@
   document.getElementById('product').style.display = 'none';
 
 
+  /* ─── HOME / FEED filter pills (single-select, default "For you") ─────────
+     Pulls from the SHARED catalogue across ALL retailers (ALL_PRODUCTS), so
+     each result card opens its PDP and adds to the same unified cart. */
+  let homeFilter = 'For you';
   function togglePill(el) {
-    el.classList.toggle('on');
+    document.querySelectorAll('.pill-row .pill').forEach(p => p.classList.remove('on'));
+    el.classList.add('on');
+    homeFilter = el.textContent.trim();
+    renderHomeGrid();
+  }
+  function renderHomeGrid() {
+    const grid = document.getElementById('homeGrid');
+    if (!grid) return;
+    let list = ALL_PRODUCTS.slice();
+    switch (homeFilter) {
+      case "Today's Deals": list = list.filter(e => e.it.onSale).sort((a, b) => b.it.m - a.it.m); break;
+      case 'Trending':      list = list.filter(e => e.it.trending).sort((a, b) => b.it.trendingScore - a.it.trendingScore); break;
+      case 'Clothing':      list = list.filter(e => ['tops', 'trousers', 'dresses', 'outerwear'].includes(e.it.category)).sort((a, b) => b.it.m - a.it.m); break;
+      case 'Accessories':   list = list.filter(e => e.it.category === 'accessories').sort((a, b) => b.it.m - a.it.m); break;
+      case 'Shoes':         list = list.filter(e => e.it.category === 'shoes').sort((a, b) => b.it.m - a.it.m); break;
+      default:              list.sort((a, b) => b.it.m - a.it.m); // For you → best match first
+    }
+    const lbl = document.getElementById('homeGridLabel');
+    if (lbl) lbl.textContent = homeFilter;
+    const cnt = document.getElementById('homeGridCount');
+    if (cnt) cnt.textContent = list.length + ' item' + (list.length === 1 ? '' : 's');
+    const top = list.slice(0, 24);
+    grid.innerHTML = top.length
+      ? top.map(e => renderCard(e.it, e.brand, e.key, e.idx)).join('')
+      : '<div class="rc-grid-empty">Nothing here right now — try another filter.</div>';
+  }
+  /* Search submit (click or Enter) → open the AI Stylist with the typed text
+     as the opening query. Empty submit opens the stylist with no prefilled prompt. */
+  function submitHomeSearch() {
+    const inp = document.getElementById('homeSearch');
+    const q = inp ? inp.value.trim() : '';
+    showSection('stylist');
+    if (q) { askStylist(q); if (inp) inp.value = ''; }
+  }
+  function askStylist(q) {
+    const ci = document.getElementById('chatInput');
+    if (!ci) return;
+    ci.value = q;
+    sendMessage();
   }
 
 
@@ -1065,9 +1116,69 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       botBubble.querySelector('.chat-msg-text').textContent = "Sorry, something went wrong — try again in a moment.";
     }
   }  // ─── RETAILER CATALOG ───
-  function toggleRcFilter(el) {
-    document.querySelectorAll('.rc-filter').forEach(f => f.classList.remove('on'));
+
+  /* ═══ STORE PAGE controls — ONE shared implementation for all 12 retailers.
+     Category tab + sort + "show my size only" + the store search box all
+     narrow the SAME set; the grid/list toggle re-lays it out; the count line
+     reflects the active filter. Everything is driven off the current store's
+     catalogue (storeState.key), never hardcoded per store. */
+  const storeState = { key: null, cat: 'all', sort: 'best', sizeOnly: false, view: 'grid', query: '' };
+  const STORE_SORT_LABEL = {
+    best: 'best matches for you first', 'price-low': 'price: low to high',
+    'price-high': 'price: high to low', newest: 'newest first'
+  };
+
+  function storeFilteredItems() {
+    const r = RETAILERS[storeState.key];
+    if (!r) return [];
+    let list = r.items.map((it, idx) => ({ it, idx }));
+    switch (storeState.cat) {
+      case 'newin':     list = list.filter(e => e.it.newIn); break;
+      case 'tops':      list = list.filter(e => e.it.category === 'tops'); break;
+      case 'trousers':  list = list.filter(e => e.it.category === 'trousers'); break;
+      case 'dresses':   list = list.filter(e => e.it.category === 'dresses'); break;
+      case 'outerwear': list = list.filter(e => e.it.category === 'outerwear'); break;
+      case 'sale':      list = list.filter(e => e.it.onSale); break;
+    }
+    if (storeState.sizeOnly) list = list.filter(e => e.it.availableInMySize);
+    const q = storeState.query.trim().toLowerCase();
+    if (q) list = list.filter(e => e.it.n.toLowerCase().includes(q));
+    switch (storeState.sort) {
+      case 'price-low':  list.sort((a, b) => a.it.priceNum - b.it.priceNum); break;
+      case 'price-high': list.sort((a, b) => b.it.priceNum - a.it.priceNum); break;
+      case 'newest':     list.sort((a, b) => (b.it.newIn - a.it.newIn) || (b.it.m - a.it.m)); break;
+      default:           list.sort((a, b) => b.it.m - a.it.m); // best match
+    }
+    return list;
+  }
+
+  function renderStoreGrid() {
+    const r = RETAILERS[storeState.key];
+    if (!r) return;
+    const list = storeFilteredItems();
+    const grid = document.getElementById('rcGrid');
+    grid.classList.toggle('rc-grid-list', storeState.view === 'list');
+    grid.innerHTML = list.length
+      ? list.map(e => renderCard(e.it, r.name, storeState.key, e.idx)).join('')
+      : '<div class="rc-grid-empty">No items match these filters. Try clearing one.</div>';
+    const count = document.getElementById('rc-results-count');
+    if (count) count.textContent = list.length + ' item' + (list.length === 1 ? '' : 's') + ' · ' + STORE_SORT_LABEL[storeState.sort];
+  }
+
+  function setStoreCat(el, cat) {
+    storeState.cat = cat;
+    document.querySelectorAll('#retailer .rc-filter').forEach(f => f.classList.remove('on'));
     el.classList.add('on');
+    renderStoreGrid();
+  }
+  function setStoreSort(val)   { storeState.sort = val; renderStoreGrid(); }
+  function toggleStoreSize(btn){ storeState.sizeOnly = btn.classList.toggle('on'); renderStoreGrid(); }
+  function setStoreQuery(val)  { storeState.query = val; renderStoreGrid(); }
+  function setStoreView(btn, view) {
+    storeState.view = view;
+    document.querySelectorAll('#retailer .rc-view-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    renderStoreGrid();
   }
 
 
@@ -1307,7 +1418,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   };
   // Map every catalogue keyword to one of the drawn icons
   const GARMENT_MAP = {
-    trousers: 'trousers', leggings: 'trousers', jeans: 'trousers', denim: 'trousers',
+    trousers: 'trousers', leggings: 'trousers', jeans: 'trousers', denim: 'jacket',
     skirt: 'skirt', dress: 'dress', top: 'tee', tshirt: 'tee',
     knit: 'sweater', sweater: 'sweater', cardigan: 'sweater',
     shirt: 'shirt', blouse: 'shirt', hoodie: 'hoodie',
@@ -1317,6 +1428,71 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     sneaker: 'shoe', sneakers: 'shoe', trainers: 'shoe', boot: 'shoe', loafer: 'shoe'
   };
   const garmentIcon = cat => GARMENT[GARMENT_MAP[cat] || 'tee'];
+
+
+  /* ─── Canonical product fields (shared source of truth) ──────────────────
+     Every view — home filter pills, store category tabs, PDP, and the cart —
+     reads these SAME enriched records, so an item's category, discount, newIn
+     and size never diverge between its card, its PDP and a store tab. */
+  const K_TO_CATEGORY = {
+    trousers:'trousers', jeans:'trousers', leggings:'trousers', skirt:'trousers',
+    dress:'dresses',
+    top:'tops', tshirt:'tops', tee:'tops', knit:'tops', sweater:'tops', shirt:'tops', blouse:'tops', hoodie:'tops',
+    blazer:'outerwear', jacket:'outerwear', coat:'outerwear', cardigan:'outerwear', denim:'outerwear', suit:'outerwear',
+    handbag:'accessories', bag:'accessories', tote:'accessories', clutch:'accessories', belt:'accessories', scarf:'accessories',
+    shoe:'shoes', heel:'shoes', heels:'shoes', mule:'shoes', sandal:'shoes',
+    sneaker:'shoes', sneakers:'shoes', trainers:'shoes', boot:'shoes', loafer:'shoes', flats:'shoes'
+  };
+  const MY_SIZE = 'M';
+  const _priceNum = s => { const v = parseFloat(String(s).replace(/[^0-9.]/g, '')); return isNaN(v) ? 0 : v; };
+
+  /* A few shoes & accessories so the Shoes / Accessories filters return real
+     results (the original catalogue carried neither). Same {n,p,w?,m,t,k} shape. */
+  const EXTRA_ITEMS = {
+    zara:        [ { n: 'Leather slingback flats', p: '£45.99', m: 84, t: ['Your size 38', 'Neutral tone'], k: 'shoe' },
+                   { n: 'Woven leather tote', p: '£49.99', m: 80, t: ['Neutral tone'], k: 'bag' } ],
+    mango:       [ { n: 'Square-toe leather mules', p: '£59.99', m: 86, t: ['Your size 38', 'Soft feminine'], k: 'mule' },
+                   { n: 'Leather shoulder bag', p: '£49.99', w: '£69.99', m: 79, t: ['Neutral tone', 'Sale'], k: 'bag' } ],
+    uniqlo:      [ { n: 'Leather-look trainers', p: '£39.90', m: 81, t: ['Your size 38', 'Casual'], k: 'sneaker' } ],
+    arket:       [ { n: 'Leather penny loafers', p: '£135.00', m: 88, t: ['Your size 38', 'Neutral tone'], k: 'loafer' },
+                   { n: 'Canvas weekend bag', p: '£95.00', m: 74, t: ['Neutral tone'], k: 'bag' } ],
+    cos:         [ { n: 'Sculpted heel sandals', p: '£135.00', w: '£175.00', m: 83, t: ['Your size 38', 'Statement', 'Sale'], k: 'heel' },
+                   { n: 'Leather card holder', p: '£45.00', m: 70, t: ['Neutral tone'], k: 'bag' } ],
+    plt:         [ { n: 'Strappy stiletto heels', p: '£28.00', m: 58, t: ['Your size 38', 'Going out'], k: 'heel' },
+                   { n: 'Mini shoulder bag', p: '£18.00', w: '£26.00', m: 52, t: ['Going out', 'Sale'], k: 'bag' } ],
+    riverisland: [ { n: 'Pointed court heels', p: '£42.00', m: 76, t: ['Your size 38', 'Smart casual'], k: 'heel' } ],
+    asos:        [ { n: 'Chunky chelsea boots', p: '£45.00', m: 72, t: ['Your size 38', 'Trend-led'], k: 'boot' } ]
+  };
+
+  Object.keys(RETAILERS).forEach(key => {
+    const r = RETAILERS[key];
+    if (EXTRA_ITEMS[key]) r.items.push(...EXTRA_ITEMS[key]);
+    r.items.forEach((it, idx) => {
+      it.category      = K_TO_CATEGORY[it.k] || 'tops';
+      it.originalPrice = it.w ? _priceNum(it.w) : null;   // null when not discounted
+      it.salePrice     = it.w ? _priceNum(it.p) : null;
+      it.priceNum      = _priceNum(it.p);
+      it.onSale        = !!it.w;
+      const tagStr     = (it.t || []).join(' ');
+      const sizeMatch  = /your size\s+(\S+)/i.exec(tagStr);
+      it.size          = sizeMatch ? sizeMatch[1] : (it.category === 'accessories' ? 'One size' : MY_SIZE);
+      it.availableInMySize = /your size/i.test(tagStr) || it.category === 'accessories';
+      it.newIn         = idx < 3;   // freshest arrivals first in each store
+      it.trending      = /trend-led|statement|going out|party|bold/i.test(tagStr) || (idx % 4 === 2);
+      it.trendingScore = it.m + (it.trending ? 25 : 0);
+    });
+  });
+
+  /* Flattened view of every retailer's catalogue, used by the Home filter grid.
+     Each entry keeps its retailer key + index so cards link to the right PDP
+     (#/product/r.<key>.<idx>) and add to the shared cart. */
+  const ALL_PRODUCTS = [];
+  Object.keys(RETAILERS).forEach(key => {
+    RETAILERS[key].items.forEach((it, idx) => ALL_PRODUCTS.push({ it, brand: RETAILERS[key].name, key, idx }));
+  });
+
+  // Paint the default Home grid ("For you") now that the catalogue is enriched.
+  renderHomeGrid();
 
 
   function renderCard(it, brand, key, idx) {
@@ -1330,8 +1506,8 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
             onmouseenter="this.style.background='var(--off-white)';this.style.color='var(--text-mid)';"
             onmouseleave="this.style.background='';this.style.color='';">Save for later</button>`
       : `<button class="rc-btn rc-btn-add" onclick="event.stopPropagation(); addRetailerItem('${key}', ${idx}, this)"
-            onmouseenter="this.style.background='#8C6E2A';this.style.color='#FAFAF5';this.style.borderColor='#8C6E2A';"
-            onmouseleave="this.style.background='';this.style.color='';this.style.borderColor='';">Add to cart</button>`;
+            onmouseenter="this.style.opacity='0.88';"
+            onmouseleave="this.style.opacity='';">Add to cart</button>`;
     return `
       <div class="rc-card${high ? ' rc-high' : ''}" onclick="openProductFromRetailer('${key}', ${idx})">
         <div class="rc-img">
@@ -1353,6 +1529,13 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   function renderRetailer(key) {
     const r = RETAILERS[key];
     if (!r) return;
+    // Reset the shared store controls to defaults for the newly opened store
+    storeState.key = key;
+    storeState.cat = 'all';
+    storeState.sort = 'best';
+    storeState.sizeOnly = false;
+    storeState.view = 'grid';
+    storeState.query = '';
     document.getElementById('rc-brand-name').textContent = r.name;
     document.getElementById('rc-matched-text').textContent = r.matched + ' items matched to you';
     const logoEl = document.getElementById('rc-logo-text');
@@ -1364,11 +1547,15 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     document.getElementById('rc-hero-sub').textContent = r.sub;
     document.getElementById('rc-hero-tags').innerHTML = r.tags.map(t => `<span class="rc-brand-tag">${t}</span>`).join('');
     document.getElementById('rc-match-num').textContent = r.match + '%';
-    document.getElementById('rc-search-text').textContent = 'Search ' + r.name + '…';
-    document.getElementById('rc-results-count').textContent = r.count + ' items · showing best matches for you first';
-    document.getElementById('rcGrid').innerHTML = r.items.map((it, idx) => renderCard(it, r.name, key, idx)).join('');
-    // reset filter pills to "All"
-    document.querySelectorAll('#retailer .rc-filter').forEach((f, i) => f.classList.toggle('on', i === 0));
+    const searchEl = document.getElementById('rcSearchInput');
+    if (searchEl) searchEl.placeholder = 'Search ' + r.name + '…', searchEl.value = '';
+    const sortEl = document.getElementById('rcSort');
+    if (sortEl) sortEl.value = 'best';
+    const sizeBtn = document.getElementById('rcSizeBtn');
+    if (sizeBtn) sizeBtn.classList.remove('on');
+    document.querySelectorAll('#retailer .rc-filter').forEach(f => f.classList.toggle('on', f.dataset.cat === 'all'));
+    document.querySelectorAll('#retailer .rc-view-btn').forEach(b => b.classList.toggle('on', b.dataset.view === 'grid'));
+    renderStoreGrid();
   }
 
 
@@ -1402,7 +1589,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   const POSTS = [
     {
       user: 'Sofia Chen', handle: '@sofiastyles', av: 'SC', time: '2h ago',
-      match: 87, likes: 142, comments: 18, liked: true,
+      match: 87, likes: 141, comments: 18, liked: false,
       items: [
         { n: 'Zara linen blouse', p: '£35', k: 'blouse' },
         { n: 'Mango wide-leg trousers', p: '£49', k: 'trousers' },
@@ -1514,6 +1701,26 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   ];
 
 
+  /* ═══ Per-user social state — which posts THIS account has liked / saved.
+     Persisted to localStorage and scoped to the account; a brand-new account
+     (signup) starts empty, so nothing is pre-liked or pre-saved. The numeric
+     `post.likes` in the data is the BASE count (everyone else); the user's own
+     like is added on top only when they tap it. ═══ */
+  const Social = (function () {
+    const KEY = 'drape_social_v1';
+    let state = { likes: [], saves: [] };
+    try { const raw = JSON.parse(localStorage.getItem(KEY)); if (raw) state = { likes: raw.likes || [], saves: raw.saves || [] }; } catch (e) {}
+    const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+    return {
+      isLiked: i => state.likes.includes(i),
+      isSaved: i => state.saves.includes(i),
+      setLike: (i, on) => { state.likes = state.likes.filter(x => x !== i); if (on) state.likes.push(i); persist(); },
+      setSave: (i, on) => { state.saves = state.saves.filter(x => x !== i); if (on) state.saves.push(i); persist(); },
+      reset:   () => { state = { likes: [], saves: [] }; persist(); }
+    };
+  })();
+
+
   function renderReel(post, i) {
     const garments = `<img src="${OUTFIT_IMGS[i % OUTFIT_IMGS.length]}" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;border-radius:inherit;" alt="outfit">`;
     const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
@@ -1544,9 +1751,9 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
           </div>
           <div class="reel-rail">
             <div class="rail-avatar">${post.av}</div>
-            <button class="rail-btn rail-like${post.liked ? ' on' : ''}" onclick="toggleReelLike(this, ${i})" aria-label="Like">
-              <span class="rail-icon">${railHeart(post.liked)}</span>
-              <span class="rail-count" data-likes>${post.likes}</span>
+            <button class="rail-btn rail-like${Social.isLiked(i) ? ' on' : ''}" onclick="toggleReelLike(this, ${i})" aria-label="Like">
+              <span class="rail-icon">${railHeart(Social.isLiked(i))}</span>
+              <span class="rail-count" data-likes>${post.likes + (Social.isLiked(i) ? 1 : 0)}</span>
             </button>
             <button class="rail-btn" onclick="openComments(${i})" aria-label="Comments">
               <span class="rail-icon">${RAIL_COMMENT}</span>
@@ -1556,9 +1763,9 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
               <span class="rail-icon">${RAIL_SHARE}</span>
               <span class="rail-count">Share</span>
             </button>
-            <button class="rail-btn rail-save" onclick="toggleSave(this)" aria-label="Save">
-              <span class="rail-icon">${railSave(false)}</span>
-              <span class="rail-count">Save</span>
+            <button class="rail-btn rail-save${Social.isSaved(i) ? ' on' : ''}" onclick="toggleSave(this, ${i})" aria-label="Save">
+              <span class="rail-icon">${railSave(Social.isSaved(i))}</span>
+              <span class="rail-count">${Social.isSaved(i) ? 'Saved' : 'Save'}</span>
             </button>
             <button class="rail-btn rail-cart" onclick="addLookToCart(${i}, this)" aria-label="Add to cart">
               <span class="rail-icon">${RAIL_CART}</span>
@@ -1575,18 +1782,19 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
   }
   function toggleReelLike(btn, i) {
-    const post = POSTS[i];
-    post.liked = !post.liked;
-    post.likes += post.liked ? 1 : -1;
-    btn.classList.toggle('on', post.liked);
-    btn.querySelector('.rail-icon').innerHTML = railHeart(post.liked);
-    btn.querySelector('[data-likes]').textContent = post.likes;
+    const liked = !Social.isLiked(i);
+    Social.setLike(i, liked);                 // persist per user
+    btn.classList.toggle('on', liked);
+    btn.querySelector('.rail-icon').innerHTML = railHeart(liked);
+    btn.querySelector('[data-likes]').textContent = POSTS[i].likes + (liked ? 1 : 0);
     bumpRail(btn);
   }
-  function toggleSave(btn) {
-    const on = btn.classList.toggle('on');
-    btn.querySelector('.rail-icon').innerHTML = railSave(on);
-    btn.querySelector('.rail-count').textContent = on ? 'Saved' : 'Save';
+  function toggleSave(btn, i) {
+    const saved = !Social.isSaved(i);
+    Social.setSave(i, saved);                 // persist per user
+    btn.classList.toggle('on', saved);
+    btn.querySelector('.rail-icon').innerHTML = railSave(saved);
+    btn.querySelector('.rail-count').textContent = saved ? 'Saved' : 'Save';
     bumpRail(btn);
   }
   /* Adds the whole look (every tagged item) to the unified cart — see addLookToCart below */
@@ -2017,7 +2225,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     return `
       <div class="checkout-wrap confirm-wrap">
         <div class="confirm-card">
-          <div class="confirm-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="confirm-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h1 class="cart-title">Order placed</h1>
           <p class="cart-sub">One order, ${o.retailers} retailer${o.retailers > 1 ? 's' : ''} — we'll handle the rest.</p>
           <ul class="confirm-list">${list}</ul>
@@ -2372,13 +2580,13 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     ];
 
     const OB_SVGS = {
-      dress:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 Q60 32 76 22 L70 70 L92 136 H28 L50 70 Z"/></svg>',
-      trousers:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M36 20 H84 L80 138 H62 L60 74 L58 138 H40 Z"/></svg>',
-      blazer:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 L30 32 L36 58 V128 H54 L57 64 H63 L66 128 H84 V58 L90 32 L76 22 L60 36 Z"/></svg>',
-      knit:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 26 Q60 36 78 26 L98 42 L86 70 L78 60 V124 H42 V60 L34 70 L22 42 Z"/></svg>',
-      skirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 24 H78 L94 132 H26 Z"/></svg>',
-      shirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/></svg>',
-      coat:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="#B8953F" stroke-width="2.5" style="width:48px;height:auto"><path d="M38 18 L22 30 L28 62 V132 H52 L56 70 H64 L68 132 H92 V62 L98 30 L82 18 L60 34 Z"/></svg>',
+      dress:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 Q60 32 76 22 L70 70 L92 136 H28 L50 70 Z"/></svg>',
+      trousers:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M36 20 H84 L80 138 H62 L60 74 L58 138 H40 Z"/></svg>',
+      blazer:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M44 22 L30 32 L36 58 V128 H54 L57 64 H63 L66 128 H84 V58 L90 32 L76 22 L60 36 Z"/></svg>',
+      knit:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 26 Q60 36 78 26 L98 42 L86 70 L78 60 V124 H42 V60 L34 70 L22 42 Z"/></svg>',
+      skirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M42 24 H78 L94 132 H26 Z"/></svg>',
+      shirt:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M46 22 L30 30 L24 46 L36 52 V124 H84 V52 L96 46 L90 30 L74 22 L60 34 Z"/></svg>',
+      coat:'<svg viewBox="0 0 120 150" fill="rgba(184,149,63,0.18)" stroke="var(--gold)" stroke-width="2.5" style="width:48px;height:auto"><path d="M38 18 L22 30 L28 62 V132 H52 L56 70 H64 L68 132 H92 V62 L98 30 L82 18 L60 34 Z"/></svg>',
     };
 
     const OB_COLOUR_GROUPS = [
@@ -2606,7 +2814,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       obGoTo(12);
     };
 
-    window.obFinish = function() {
+    window.obFinish = function(isSignup) {
       const sizes = obCollectSizes();
       const profile = {
         name: obName,
@@ -2621,6 +2829,11 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       };
       localStorage.setItem('drape_onboarded', '1');
       localStorage.setItem('drape_profile', JSON.stringify(profile));
+      // A brand-new account starts with nothing liked or saved.
+      if (isSignup) {
+        Social.reset();
+        reelsEl.innerHTML = POSTS.map(renderReel).join('');
+      }
       document.getElementById('onboarding').style.display = 'none';
       showSection('social');
     };
@@ -2649,6 +2862,6 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   })();
 </script>
 
-
+1
 </body>
 </html>
