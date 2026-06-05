@@ -1,0 +1,250 @@
+# DRAPE — Brand Identity System
+
+**Version 1.0 — June 2026**
+**Tagline:** Wear what you mean.
+
+---
+
+## Brand Essence
+
+Drape exists at the intersection of personal style and intelligent technology. The brand makes personal shopping accessible to Gen Z fast fashion consumers by embedding an AI stylist inside retailer apps they already use.
+
+The identity draws from the visual language of contemporary luxury (Jacquemus, The Row, Lemaire) but deliberately strips back exclusivity. The goal is warmth without pretension, taste without gatekeeping.
+
+---
+
+## Logo
+
+### Primary wordmark
+- Typeface: Pinyon Script
+- Title case, natural letter-spacing
+- Used on hero placements, splash screens, pitch decks, and signage
+- The script wordmark is the face of the brand. It should feel handwritten, personal, like a signature.
+
+### Caps wordmark (secondary)
+- Typeface: Playfair Display, 400 weight
+- All caps, letter-spacing 0.18em
+- Used when the script is too delicate for the context (small sizes, dark busy backgrounds, footer text)
+
+### Monogram
+- Single letterform "D" in Pinyon Script
+- Used for app icon, favicon, watermarks, compact brand marks
+- Always paired with the wordmark in small type below when space allows
+
+### Logo clear space
+- Minimum clear space around any logo mark: 1x the cap height of the wordmark on all sides
+- Never place the logo on busy photography or patterned backgrounds without a solid backing surface
+
+### Logo dont's
+- Never stretch, rotate, or outline the wordmark
+- Never use the gold on a yellow or orange background
+- Never set the tagline in a typeface other than Cormorant Garamond
+
+---
+
+## Colour Palette
+
+### Core palette
+
+| Name | Hex | Usage |
+|------|-----|-------|
+| Warm white | #FAF8F5 | Primary background, cards, surfaces |
+| Rich black | #1A1714 | Primary text, dark mode background, monogram |
+| Muted gold | #C4A265 | Primary accent, CTAs, interactive highlights |
+| Warm stone | #8A7D6B | Secondary text, captions, metadata |
+| Sand | #E8DED0 | Dividers, subtle fills, secondary backgrounds |
+
+### Extended palette
+
+| Name | Hex | Usage |
+|------|-----|-------|
+| Cream | #F5F0E8 | Card backgrounds on warm white surfaces |
+| Terracotta | #B87A56 | Seasonal accent, editorial highlights |
+| Soft sage | #A8B09A | Success states, positive feedback |
+| Mist | #D4D0C8 | Disabled states, placeholder text |
+| Deep espresso | #2C2520 | Dark mode elevated surfaces |
+
+### Colour rules
+- Gold is never used as a background fill for large areas. It is an accent only.
+- Warm white (#FAF8F5) is preferred over pure white (#FFFFFF). Pure white feels clinical and breaks the warmth.
+- On dark backgrounds, use gold (#C4A265) for headings and warm white (#FAF8F5) for body text. Never use pure white on dark.
+- Text on gold buttons: Rich black (#1A1714), never white.
+- Minimum contrast ratio: 4.5:1 for body text, 3:1 for large text and UI components.
+
+---
+
+## Typography
+
+### Typeface system
+
+| Role | Typeface | Weight | Size | Tracking |
+|------|----------|--------|------|----------|
+| Logo / Signature | Pinyon Script | 400 | 40-64px | 0 |
+| Display / Caps alternate | Playfair Display | 400 | 32-48px | 0.18em |
+| Editorial headings | Cormorant Garamond | 300, 400 | 24-36px | 0.04em |
+| Body text | Inter or system sans | 400 | 14-16px | 0 |
+| Captions / metadata | Inter or system sans | 400 | 11-13px | 0.02em |
+| Buttons / labels | Inter or system sans | 500 | 13-14px | 0.04em |
+
+### Typography rules
+- The Pinyon Script wordmark is a signature, not a typeface for general use. It appears only as the logo and monogram. Never set body text, headings, or UI labels in Pinyon Script.
+- Headings are always serif. Body is always sans-serif. Never reverse this.
+- Cormorant Garamond at 300 weight is the signature of the brand. It should feel like it is barely there.
+- Avoid bold weights on serif text. The brand voice is quiet confidence, not volume.
+- Line height for body text: 1.6 to 1.7. Line height for headings: 1.2.
+- Paragraph width should not exceed 65 characters for readability.
+
+---
+
+## Photography and Imagery
+
+### Style
+- Warm, natural lighting. Mediterranean warmth preferred over studio harshness.
+- Full-body or three-quarter shots. Outfit is the subject, not the face.
+- Backgrounds: warm neutrals, architecture, natural textures (stone, linen, sand).
+- No stark white studio backgrounds. No neon. No heavy post-processing.
+
+### Colour grading
+- Slight warm shift: pull shadows toward amber, highlights toward cream.
+- Desaturate by 10-15%. Drape imagery should never look hyperreal.
+- Black point: lift slightly (never crush to true black).
+
+### Composition
+- Generous negative space. At least 30% of the frame should be empty.
+- Subject off-centre where possible. Editorial, not catalogue.
+- When showing outfits, every piece should be identifiable. No cropping shoes or accessories unless intentional.
+
+---
+
+## UI Components
+
+### Cards
+- Background: Warm white (#FAF8F5) or Cream (#F5F0E8)
+- Border: 0.5px solid Sand (#E8DED0)
+- Border radius: 12px
+- Padding: 16px to 20px
+- No drop shadows. Depth is created through background colour separation, not elevation.
+
+### Buttons
+
+| Type | Background | Text | Border |
+|------|-----------|------|--------|
+| Primary CTA | Muted gold #C4A265 | Rich black #1A1714 | None |
+| Secondary | Transparent | Rich black #1A1714 | 0.5px solid #E8DED0 |
+| Ghost | Transparent | Warm stone #8A7D6B | None |
+
+- Border radius on all buttons: 8px
+- Height: 44px minimum (touch target)
+- Text: 13px, 500 weight, 0.04em tracking, uppercase
+
+### Input fields
+- Background: Warm white (#FAF8F5)
+- Border: 0.5px solid Sand (#E8DED0), Muted gold on focus
+- Border radius: 8px
+- Height: 44px
+- Placeholder text: Mist (#D4D0C8)
+
+### Tags and pills
+- Background: Sand (#E8DED0)
+- Text: Warm stone (#8A7D6B), 12px, 500 weight
+- Border radius: 20px (full pill)
+- Padding: 4px 12px
+- Active state: Gold background, Rich black text
+
+### Navigation bar
+- Background: Warm white (#FAF8F5)
+- Active icon/label: Muted gold (#C4A265)
+- Inactive icon/label: Warm stone (#8A7D6B)
+- Icon size: 24px
+- Label: 10px, 400 weight
+
+---
+
+## Layout Principles
+
+### Spacing scale
+- 4px — tight internal padding
+- 8px — default gap between inline elements
+- 12px — gap within card content
+- 16px — card padding, section gaps
+- 24px — between card groups
+- 32px — major section breaks
+- 48px — page-level vertical rhythm
+
+### Grid
+- Mobile: single column, 16px side margins
+- Tablet: 2 columns, 20px gutter
+- Desktop: 3 or 4 columns, 24px gutter
+- Max content width: 1200px, centred
+
+### Negative space
+- Treat white space as a design element, not leftover. The brand breathes.
+- Product grids should have equal vertical and horizontal gutters.
+- Never stack more than three content blocks without a visual break (divider, spacing, or colour change).
+
+---
+
+## Tone of Voice
+
+### Principles
+- Confident but not loud. Say less.
+- Specific over generic. "A linen overshirt for the walk home" over "A versatile wardrobe essential."
+- First person where appropriate. Drape talks to you, not at you.
+- No exclamation marks in product copy. Excitement comes from the product, not the punctuation.
+
+### Examples
+
+| Context | Wrong | Right |
+|---------|-------|-------|
+| Outfit suggestion | "Check out this amazing look!" | "A modern look for the city. Spring weight." |
+| Empty closet state | "Start adding items to your closet!" | "Your closet is empty. Add what you already own." |
+| Data transparency | "We value your privacy and are committed to protecting your data." | "Here is what Drape knows. Delete anything, any time." |
+| Push notification | "New styles just for you! Don't miss out!" | "New picks based on your last save." |
+
+---
+
+## Brand Application
+
+### App icon
+- Monogram "D" in Pinyon Script on Rich black (#1A1714) background
+- No border radius override, use system default
+- Gold (#C4A265) letterform on black, or black letterform on warm white
+
+### Social media
+- Profile picture: Pinyon Script monogram on black
+- Post style: single product image with generous warm white border, editorial caption underneath
+- Grid rhythm: alternate between outfit photography and typographic quotes in Cormorant Garamond on cream backgrounds
+
+### Pitch decks
+- Use the Pinyon Script wordmark on title slides
+- Section headers in Cormorant Garamond, 300 weight
+- Body text in Inter or system sans
+- Background: Warm white. Use Rich black for section divider slides only.
+- Gold as accent colour for data points, callouts, and CTA elements
+
+---
+
+## Dark Mode
+
+| Element | Light mode | Dark mode |
+|---------|-----------|-----------|
+| Background | Warm white #FAF8F5 | Rich black #1A1714 |
+| Elevated surface | Cream #F5F0E8 | Deep espresso #2C2520 |
+| Primary text | Rich black #1A1714 | Warm white #FAF8F5 |
+| Secondary text | Warm stone #8A7D6B | Mist #D4D0C8 |
+| Accent | Muted gold #C4A265 | Muted gold #C4A265 |
+| Borders | Sand #E8DED0 | #3A352F |
+| Button primary | Gold bg, black text | Gold bg, black text |
+
+Gold stays constant across both modes. It is the anchor of the brand.
+
+---
+
+## File Naming Convention
+
+- Logo files: `drape-logo-[variant]-[color].svg`
+- Examples: `drape-logo-wordmark-dark.svg`, `drape-logo-monogram-gold.svg`, `drape-logo-lowercase-light.svg`
+
+---
+
+*Drape. Wear what you mean.*
