@@ -562,12 +562,12 @@
       <div class="profile-av-large" id="profileAvatar">AB</div>
       <div style="flex:1;">
         <div class="profile-name">Alicia Baquero</div>
-        <div class="profile-sub">Size M · 5'4" · Colombian · London</div>
+        <div class="profile-sub" id="profileSub"></div>
         <div class="profile-stats">
-          <div class="stat-item"><div class="stat-num">314</div><div class="stat-lbl">Matched</div></div>
-          <div class="stat-item"><div class="stat-num">18</div><div class="stat-lbl">Saved</div></div>
-          <div class="stat-item"><div class="stat-num">5</div><div class="stat-lbl">Ordered</div></div>
-          <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Posts</div></div>
+          <div class="stat-item"><div class="stat-num" id="statMatched">—</div><div class="stat-lbl">Matched</div></div>
+          <div class="stat-item"><div class="stat-num" id="statSaved">—</div><div class="stat-lbl">Saved</div></div>
+          <div class="stat-item"><div class="stat-num" id="statOrdered">—</div><div class="stat-lbl">Ordered</div></div>
+          <div class="stat-item"><div class="stat-num" id="statPosts">—</div><div class="stat-lbl">Posts</div></div>
         </div>
       </div>
       <button class="btn-outline" style="font-size:13px;padding:10px 20px;">Edit profile</button>
@@ -579,11 +579,7 @@
 
       <div class="profile-card">
         <h3>What DRAPE knows</h3>
-        <div class="knows-row"><span class="knows-label">Neutral palettes</span><div class="knows-track"><div class="knows-fill" style="width:80%"></div></div><span class="knows-pct">80%</span></div>
-        <div class="knows-row"><span class="knows-label">Oversized fits</span><div class="knows-track"><div class="knows-fill" style="width:65%"></div></div><span class="knows-pct">65%</span></div>
-        <div class="knows-row"><span class="knows-label">Loose tailoring</span><div class="knows-track"><div class="knows-fill" style="width:55%"></div></div><span class="knows-pct">55%</span></div>
-        <div class="knows-row"><span class="knows-label">Minimal print</span><div class="knows-track"><div class="knows-fill" style="width:70%"></div></div><span class="knows-pct">70%</span></div>
-        <div class="knows-row"><span class="knows-label">Bold colour</span><div class="knows-track"><div class="knows-fill" style="width:22%"></div></div><span class="knows-pct">22%</span></div>
+        <div id="knowsRows"></div>
         <div style="margin-top:6px;padding-top:10px;border-top:0.5px solid var(--divider);">
           <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">You own everything DRAPE knows. Tap to edit or delete — instantly.</div>
           <a class="export-link" href="#">Export my data</a>
@@ -593,27 +589,12 @@
 
       <div class="profile-card">
         <h3>Your style DNA</h3>
-        <div class="dna-tags" style="margin-bottom:16px;">
-          <span class="dna-tag">Soft feminine</span>
-          <span class="dna-tag">Relaxed tailoring</span>
-          <span class="dna-tag">Earthy pinks</span>
-          <span class="dna-tag">Minimal print</span>
-          <span class="dna-tag">Smart casual</span>
-          <span class="dna-tag">Streetwear-lite</span>
-        </div>
+        <div class="dna-tags" style="margin-bottom:16px;" id="profileDNA"></div>
         <h3>Colour palette</h3>
-        <div id="profilePalette" style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#D4A0A8;border:1px solid var(--gold-border);"></div>
-          <div style="width:28px;height:28px;border-radius:50%;background:#A8B8D4;border:1px solid var(--gold-border);"></div>
-          <div style="width:28px;height:28px;border-radius:50%;background:#E8D9C8;border:1px solid var(--gold-border);"></div>
-          <div style="width:28px;height:28px;border-radius:50%;background:#C4A882;border:1px solid var(--gold-border);"></div>
-        </div>
+        <div id="profilePalette" style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;"></div>
         <h3 style="margin-bottom:8px;">Avoids</h3>
-        <div id="profileAvoids">
-          <div class="avoids-row">Neons · bright red<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
-          <div class="avoids-row">Orange<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>
-        </div>
-      `</div>
+        <div id="profileAvoids"></div>
+      </div>
 
 
       <div class="profile-card" style="grid-column:1/-1;">
@@ -2488,11 +2469,21 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     navHash('#/cart');   // router renders the cart in the delivery step + shows it
   }
 
+  const GROUP_COLOURS = {
+    neutrals:'#EDE0C8', greys:'#B4B2A9', pinks:'#D4A0A8',
+    blues:'#A8B8D4', greens:'#8B9B7A', reds:'#E83030',
+    oranges:'#E87830', yellows:'#E8C020', purples:'#A050C8', teals:'#40B8A0',
+  };
+
+  // Map style tags to "what DRAPE knows" preference bars
+  const TAG_PCT = {};
+
   function loadUserProfile() {
     let profile;
     try { profile = JSON.parse(localStorage.getItem('drape_profile')); } catch(e) {}
     if (!profile) return;
 
+    // Name + avatar
     const nameEl = document.querySelector('.profile-name');
     if (nameEl && profile.name) nameEl.textContent = profile.name;
 
@@ -2502,40 +2493,78 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       avatarEl.textContent = parts.map(p => p[0]).join('').toUpperCase().slice(0, 2);
     }
 
-    const dnaEl = document.querySelector('.dna-tags');
-    if (dnaEl && profile.styleDNA && profile.styleDNA.length) {
-      dnaEl.innerHTML = profile.styleDNA.map(t => `<span class="dna-tag">${t}</span>`).join('');
+    // Subtitle: blank for now, can be extended later
+    const subEl = document.getElementById('profileSub');
+    if (subEl) subEl.textContent = '';
+
+    // Stats — derive from cart + social data where possible, else 0
+    const cartState = Cart.get();
+    const ordered = cartState.items.length; // items currently in cart as proxy
+    document.getElementById('statMatched') && (document.getElementById('statMatched').textContent = '0');
+    document.getElementById('statSaved') && (document.getElementById('statSaved').textContent = cartState.saved.length);
+    document.getElementById('statOrdered') && (document.getElementById('statOrdered').textContent = '0');
+    document.getElementById('statPosts') && (document.getElementById('statPosts').textContent = '0');
+
+   // What DRAPE knows — built from style DNA tags
+    const knowsEl = document.getElementById('knowsRows');
+    if (knowsEl && profile.styleDNA && profile.styleDNA.length) {
+      knowsEl.innerHTML = profile.styleDNA.slice(0, 5).map(tag => {
+        const pct = TAG_PCT[tag] || 0;
+        return `<div class="knows-row">
+          <span class="knows-label">${tag}</span>
+          <div class="knows-track"><div class="knows-fill" style="width:${pct}%"></div></div>
+          <span class="knows-pct">${pct}%</span>
+        </div>`;
+      }).join('');
+    } else if (knowsEl) {
+      knowsEl.innerHTML = '<div style="font-size:13px;color:var(--text-muted);">Complete onboarding to see your style profile.</div>';
     }
 
-    const GROUP_COLOURS = {
-      neutrals:'#EDE0C8', greys:'#B4B2A9', pinks:'#D4A0A8',
-      blues:'#A8B8D4', greens:'#8B9B7A', reds:'#E83030',
-      oranges:'#E87830', yellows:'#E8C020', purples:'#A050C8', teals:'#40B8A0',
-    };
+    // Style DNA tags
+    const dnaEl = document.getElementById('profileDNA');
+    if (dnaEl && profile.styleDNA && profile.styleDNA.length) {
+      dnaEl.innerHTML = profile.styleDNA.map(t => `<span class="dna-tag">${t}</span>`).join('');
+    } else if (dnaEl) {
+      dnaEl.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">No style tags yet.</span>';
+    }
+
+    // Colour palette (loves)
     const paletteEl = document.getElementById('profilePalette');
     if (paletteEl && profile.coloursLove && profile.coloursLove.length) {
       paletteEl.innerHTML = profile.coloursLove.map(id =>
-        `<div style="width:28px;height:28px;border-radius:50%;background:${GROUP_COLOURS[id]||'#ccc'};border:1px solid var(--gold-border);" title="${id}"></div>`
+        `<div title="${id}" style="width:28px;height:28px;border-radius:50%;background:${GROUP_COLOURS[id]||'#ccc'};border:1px solid var(--gold-border);"></div>`
       ).join('');
+    } else if (paletteEl) {
+      paletteEl.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">No colours selected.</span>';
     }
 
+    // Avoids
     const avoidsEl = document.getElementById('profileAvoids');
     if (avoidsEl && profile.coloursAvoid && profile.coloursAvoid.length) {
       avoidsEl.innerHTML = profile.coloursAvoid.map(id =>
         `<div class="avoids-row">${id.charAt(0).toUpperCase()+id.slice(1)}<span class="del-btn" onclick="this.closest('.avoids-row').style.opacity='0.4'">✕ delete</span></div>`
       ).join('');
+    } else if (avoidsEl) {
+      avoidsEl.innerHTML = '<div style="font-size:13px;color:var(--text-muted);padding:8px 0;">Nothing avoided yet.</div>';
     }
 
+    // Body & fit
     const s = profile.sizes;
     if (s) {
       const heightEl = document.getElementById('profileHeight');
-      if (heightEl && s.height) heightEl.textContent = s.height;
+      if (heightEl) heightEl.textContent = (s.height && s.height.trim().length > 1) ? s.height : '—';
+
       const sizeEl = document.getElementById('profileSize');
-      if (sizeEl) { const ms = s.tshirt||s.dress||s.shirt||s.knit||''; if (ms) sizeEl.textContent = (s.system||'UK') + ' ' + ms; }
+      if (sizeEl) {
+        const ms = s.tshirt || s.dress || s.shirt || s.knit || '';
+        sizeEl.textContent = ms ? 'UK ' + ms : '—';
+      }
+
       const waistEl = document.getElementById('profileWaist');
-      if (waistEl && s.waist) waistEl.textContent = s.waist;
+      if (waistEl) waistEl.textContent = s.waist || '—';
+
       const shoeEl = document.getElementById('profileShoe');
-      if (shoeEl && s.shoe) shoeEl.textContent = (s.system||'UK') + ' ' + s.shoe;
+      if (shoeEl) shoeEl.textContent = s.shoe ? 'UK ' + s.shoe : '—';
     }
   }
 
@@ -2729,9 +2758,11 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       const gender = obCurrentGender === 'men' ? "Men's" : "Women's";
       const system = 'UK';
       const isCm = document.querySelector('#obHeightUnit .ob-sf-toggle-btn.active')?.textContent.trim() === 'cm';
+      const ftVal = document.getElementById('obHeightFt').value.trim();
+      const inVal = document.getElementById('obHeightIn').value.trim();
       const height = isCm
-        ? (document.getElementById('obHeightFt').value.trim() + ' cm')
-        : (document.getElementById('obHeightFt').value.trim() + "'" + document.getElementById('obHeightIn').value.trim());
+        ? (ftVal ? ftVal + ' cm' : '')
+        : (ftVal || inVal) ? (ftVal ? ftVal + "'" : '') + (inVal ? inVal + '"' : '') : '';
       return {
         gender, system, height,
         tshirt:   document.getElementById('obSizeTshirt').value,
@@ -2831,12 +2862,14 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       };
       localStorage.setItem('drape_onboarded', '1');
       localStorage.setItem('drape_profile', JSON.stringify(profile));
-      // A brand-new account starts with nothing liked or saved.
+      console.log('Profile saved:', profile.styleDNA);
+
       if (isSignup) {
         Social.reset();
         reelsEl.innerHTML = POSTS.map(renderReel).join('');
       }
       document.getElementById('onboarding').style.display = 'none';
+      loadUserProfile();
       showSection('social');
     };
 
