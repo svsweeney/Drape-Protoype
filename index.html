@@ -762,6 +762,65 @@
 
 </section>
 
+<!-- ══════════════════════════════════════
+     SECTION 8: SAVED POSTS
+══════════════════════════════════════ -->
+<section id="saved-posts" style="padding-top:64px;padding-bottom:80px;">
+  <div style="max-width:860px;margin:0 auto;padding:32px 24px 0;">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:0.5px solid var(--gold-border);">
+      <button class="rc-back" onclick="showSection('social')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </button>
+      <h2 style="font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--text-dark);">Saved posts</h2>
+      <span id="savedPostsCount" style="font-size:13px;color:var(--text-muted);margin-left:auto;"></span>
+    </div>
+    <div id="savedPostsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECTION 9: NEW POST COMPOSER
+══════════════════════════════════════ -->
+<section id="new-post" style="padding-top:64px;padding-bottom:80px;">
+  <div style="max-width:860px;margin:0 auto;padding:32px 24px 0;">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:0.5px solid var(--gold-border);">
+      <button class="rc-back" onclick="showSection('social')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </button>
+      <h2 style="font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--text-dark);">New post</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div>
+        <div style="font-size:10px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Caption</div>
+        <textarea id="newPostCaption" style="width:100%;min-height:80px;background:var(--cream);border:0.5px solid var(--gold-border);border-radius:8px;padding:10px 12px;font-size:13px;font-family:var(--font-body);color:var(--text-dark);outline:none;resize:vertical;margin-bottom:18px;" placeholder=""></textarea>
+        <div style="font-size:10px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Photos</div>
+        <div style="margin-bottom:18px;">
+          <label style="width:72px;height:72px;border-radius:10px;border:0.5px dashed var(--gold-border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--text-muted);font-size:10px;cursor:pointer;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add
+            <input type="file" accept="image/*" style="display:none;" multiple>
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-top:0.5px solid var(--gold-border);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+          <span style="font-size:11px;color:var(--text-muted);flex-shrink:0;">Hashtags</span>
+          <input id="newPostHashtags" type="text" style="flex:1;background:var(--cream);border:0.5px solid var(--gold-border);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--text-dark);font-family:var(--font-body);outline:none;" placeholder="#OOTD #Zara">
+        </div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Tag items in this outfit</div>
+        <div id="newPostTaggedItems"></div>
+        <button onclick="showSection('feed')" style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:0.5px dashed var(--gold-border);border-radius:8px;font-size:11px;color:var(--text-muted);background:none;width:100%;cursor:pointer;margin-top:4px;font-family:var(--font-body);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Tag another item from Drape
+        </button>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:32px;">
+      <button onclick="submitNewPost()" class="btn-primary">Post</button>
+    </div>
+  </div>
+</section>
 
 <!-- ─── BOTTOM NAV ─── -->
 <nav class="bottom-nav">
@@ -790,16 +849,19 @@
   </button>
 </nav>
 
-
 <!-- Compose FAB (social only) -->
-<button class="compose-btn" id="composeFab" style="display:none;" title="New post">
+<button class="compose-btn" id="composeFab" style="display:none;" title="New post" onclick="return showSection('new-post')">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+<!-- Saved posts FAB (social only) -->
+<button class="compose-btn" id="savedFab" style="display:none;bottom:140px;" title="Saved posts" onclick="return showSection('saved-posts')">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
 </button>
 
 
 <script>const ANTHROPIC_API_KEY = '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';</script>
 <script>
-  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product'];
+  const sections = ['feed', 'stylist', 'social', 'profile', 'retailer', 'cart', 'product', 'saved-posts', 'new-post'];
   const BASE_SECTIONS = ['feed', 'stylist', 'social', 'profile', 'cart'];
 
 
@@ -808,9 +870,9 @@
     sections.forEach(s => {
       const el = document.getElementById(s);
       el.classList.toggle('active', s === id);
-      if (['stylist', 'social', 'retailer', 'cart', 'product'].includes(s)) {
-        el.style.display = s === id ? (s === 'stylist' ? 'flex' : 'block') : 'none';
-      }
+      if (['stylist', 'social', 'retailer', 'cart', 'product', 'saved-posts', 'new-post'].includes(s)) {
+      el.style.display = s === id ? (s === 'stylist' ? 'flex' : 'block') : 'none';
+    }
     });
     sections.forEach(s => {
       const navEl = document.getElementById('nav-' + s);
@@ -819,10 +881,14 @@
       if (bEl) bEl.classList.toggle('active', s === id);
     });
     document.getElementById('composeFab').style.display = 'none';
+    document.getElementById('savedFab').style.display = 'none';
     if (id === 'social') {
+      document.getElementById('composeFab').style.display = 'flex';
+      document.getElementById('savedFab').style.display = 'flex';
       const rf = document.getElementById('reelsFeed');
       if (rf) rf.scrollTop = 0;
     }
+    if (id === 'saved-posts') renderSavedPostsPage();
     window.scrollTo(0, 0);
   }
 
@@ -1715,6 +1781,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       isSaved: i => state.saves.includes(i),
       setLike: (i, on) => { state.likes = state.likes.filter(x => x !== i); if (on) state.likes.push(i); persist(); },
       setSave: (i, on) => { state.saves = state.saves.filter(x => x !== i); if (on) state.saves.push(i); persist(); },
+      getSaves: () => state.saves.slice(),
       reset:   () => { state = { likes: [], saves: [] }; persist(); }
     };
   })();
@@ -1722,54 +1789,64 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
 
   function renderReel(post, i) {
     const garments = `<img src="${OUTFIT_IMGS[i % OUTFIT_IMGS.length]}" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;border-radius:inherit;" alt="outfit">`;
-    const chips    = post.items.map((it, j) => `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`).join('');
     const hashtags = post.hashtags.map(h => `<span class="hashtag">${h}</span>`).join('');
     const capName  = post.handle.replace('@', '');
+
+    const shopChips = post.items.map((it, j) =>
+      `<div class="reel-chip" onclick="openProductFromChip(${i}, ${j})">${it.n} · ${it.p}<span class="reel-chip-go">›</span></div>`
+    ).join('');
+
+    const addAllId = 'addall-' + i;
+
     return `
       <div class="reel" data-idx="${i}">
-        <div class="reel-frame">
+        <div class="reel-frame" style="gap:0;">
           <div class="reel-card">
             <div class="reel-media">
               <div class="post-illustration-row">${garments}</div>
               <div class="reel-tags">
                 <div class="reel-match">${post.match}% match for you</div>
-                ${chips}
               </div>
-              <div class="reel-info">
-                <div class="reel-poster">
+            </div>
+            <div class="reel-bottom">
+              <div class="reel-bottom-main">
+                <div class="reel-poster" style="margin-bottom:6px;">
                   <div class="post-av">${post.av}</div>
                   <div>
                     <div class="reel-poster-name">${post.user}</div>
-                    <div class="reel-poster-handle">${post.handle} · ${post.time}</div>
+                    <div class="reel-poster-handle">${post.handle}</div>
                   </div>
                 </div>
-                <div class="reel-caption"><strong>${capName}</strong> ${post.caption}</div>
-                <div class="reel-hashtags">${hashtags}</div>
+                <div class="reel-caption" style="margin-bottom:5px;"><strong>${capName}</strong> ${post.caption}</div>
+                <div class="reel-hashtags" style="margin-bottom:10px;">${hashtags}</div>
+                <div class="reel-shop-panel">
+                  <div class="reel-shop-label">Shop this look</div>
+                  <div class="reel-shop-chips">${shopChips}</div>
+                  <button class="reel-add-all" id="${addAllId}" onclick="addLookToCart(${i}, this)">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Add all to cart
+                  </button>
+                </div>
+              </div>
+              <div class="reel-actions-col">
+                <button class="reel-action-btn rail-like${Social.isLiked(i) ? ' on' : ''}" onclick="toggleReelLike(this, ${i})" aria-label="Like">
+                  <span class="reel-action-icon">${railHeart(Social.isLiked(i))}</span>
+                  <span class="reel-action-count" data-likes>${post.likes + (Social.isLiked(i) ? 1 : 0)}</span>
+                </button>
+                <button class="reel-action-btn" onclick="openComments(${i})" aria-label="Comments">
+                  <span class="reel-action-icon">${RAIL_COMMENT}</span>
+                  <span class="reel-action-count">${post.comments}</span>
+                </button>
+                <button class="reel-action-btn" onclick="bumpRail(this)" aria-label="Share">
+                  <span class="reel-action-icon">${RAIL_SHARE}</span>
+                  <span class="reel-action-count">Share</span>
+                </button>
+                <button class="reel-action-btn rail-save${Social.isSaved(i) ? ' on' : ''}" onclick="toggleSave(this, ${i})" aria-label="Save">
+                  <span class="reel-action-icon">${railSave(Social.isSaved(i))}</span>
+                  <span class="reel-action-count">${Social.isSaved(i) ? 'Saved' : 'Save'}</span>
+                </button>
               </div>
             </div>
-          </div>
-          <div class="reel-rail">
-            <div class="rail-avatar">${post.av}</div>
-            <button class="rail-btn rail-like${Social.isLiked(i) ? ' on' : ''}" onclick="toggleReelLike(this, ${i})" aria-label="Like">
-              <span class="rail-icon">${railHeart(Social.isLiked(i))}</span>
-              <span class="rail-count" data-likes>${post.likes + (Social.isLiked(i) ? 1 : 0)}</span>
-            </button>
-            <button class="rail-btn" onclick="openComments(${i})" aria-label="Comments">
-              <span class="rail-icon">${RAIL_COMMENT}</span>
-              <span class="rail-count">${post.comments}</span>
-            </button>
-            <button class="rail-btn" onclick="bumpRail(this)" aria-label="Share">
-              <span class="rail-icon">${RAIL_SHARE}</span>
-              <span class="rail-count">Share</span>
-            </button>
-            <button class="rail-btn rail-save${Social.isSaved(i) ? ' on' : ''}" onclick="toggleSave(this, ${i})" aria-label="Save">
-              <span class="rail-icon">${railSave(Social.isSaved(i))}</span>
-              <span class="rail-count">${Social.isSaved(i) ? 'Saved' : 'Save'}</span>
-            </button>
-            <button class="rail-btn rail-cart" onclick="addLookToCart(${i}, this)" aria-label="Add to cart">
-              <span class="rail-icon">${RAIL_CART}</span>
-              <span class="rail-count">Add</span>
-            </button>
           </div>
         </div>
       </div>`;
@@ -1782,19 +1859,64 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   }
   function toggleReelLike(btn, i) {
     const liked = !Social.isLiked(i);
-    Social.setLike(i, liked);                 // persist per user
+    Social.setLike(i, liked);
     btn.classList.toggle('on', liked);
-    btn.querySelector('.rail-icon').innerHTML = railHeart(liked);
+    btn.querySelector('.reel-action-icon').innerHTML = railHeart(liked);
     btn.querySelector('[data-likes]').textContent = POSTS[i].likes + (liked ? 1 : 0);
     bumpRail(btn);
   }
   function toggleSave(btn, i) {
     const saved = !Social.isSaved(i);
-    Social.setSave(i, saved);                 // persist per user
+    Social.setSave(i, saved);
     btn.classList.toggle('on', saved);
-    btn.querySelector('.rail-icon').innerHTML = railSave(saved);
-    btn.querySelector('.rail-count').textContent = saved ? 'Saved' : 'Save';
+    btn.querySelector('.reel-action-icon').innerHTML = railSave(saved);
+    btn.querySelector('.reel-action-count').textContent = saved ? 'Saved' : 'Save';
     bumpRail(btn);
+  }
+
+  function renderSavedPostsPage() {
+    const grid = document.getElementById('savedPostsGrid');
+    const countEl = document.getElementById('savedPostsCount');
+    if (!grid) return;
+    const saved = Social.getSaves();
+    if (countEl) countEl.textContent = saved.length + ' post' + (saved.length === 1 ? '' : 's');
+    if (!saved.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;font-family:var(--font-display);font-size:20px;color:var(--warm-stone);">No saved posts yet — tap the bookmark on any post.</div>';
+      return;
+    }
+    grid.innerHTML = saved.map(i => {
+      const post = POSTS[i];
+      if (!post) return '';
+      return `
+        <div style="border:0.5px solid var(--gold-border);border-radius:12px;overflow:hidden;cursor:pointer;background:var(--cream);" onclick="showSection('social'); setTimeout(()=>goToReel(${i}), 80);">
+          <div style="height:140px;background:var(--rc-item-bg);position:relative;display:flex;align-items:center;justify-content:center;">
+            <img src="${OUTFIT_IMGS[i % OUTFIT_IMGS.length]}" style="width:100%;height:100%;object-fit:cover;" alt="outfit">
+            <div style="position:absolute;top:8px;left:8px;background:var(--gold);color:var(--on-gold);font-size:10px;font-weight:500;padding:2px 9px;border-radius:10px;">${post.match}%</div>
+            <button onclick="event.stopPropagation(); removeSavedPost(${i}, this.closest('[data-saved-card]'))" data-remove="${i}"
+              style="position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--warm-white);border:0.5px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);cursor:pointer;">✕</button>
+          </div>
+          <div style="padding:8px 10px 10px;background:var(--warm-white);" data-saved-card>
+            <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px;">${post.handle}</div>
+            <div style="font-size:11px;color:var(--text-dark);line-height:1.3;">${post.caption.slice(0, 60)}${post.caption.length > 60 ? '…' : ''}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function removeSavedPost(i, cardEl) {
+    Social.setSave(i, false);
+    const reelEl = document.querySelector(`.reel[data-idx="${i}"] .reel-action-btn.rail-save`);
+    if (reelEl) {
+      reelEl.classList.remove('on');
+      reelEl.querySelector('.reel-action-icon').innerHTML = railSave(false);
+      reelEl.querySelector('.reel-action-count').textContent = 'Save';
+    }
+    renderSavedPostsPage();
+  }
+
+  function submitNewPost() {
+    toast('Post shared!');
+    showSection('social');
   }
   /* Adds the whole look (every tagged item) to the unified cart — see addLookToCart below */
 

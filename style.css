@@ -1440,3 +1440,62 @@ section.active { display: block; }
 .ob-gender-btn:hover { border-color: var(--gold); color: var(--gold); }
 .ob-gender-btn.active { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
 .ob-gender-icon { font-size: 16px; }
+
+/* ─── REEL BOTTOM (new layout) ─── */
+.reel-bottom {
+  display: flex;
+  align-items: flex-end;
+  background: var(--warm-white);
+  border-top: 0.5px solid var(--gold-border);
+  flex-shrink: 0;
+}
+.reel-bottom-main {
+  flex: 1;
+  padding: 12px 14px;
+  min-width: 0;
+}
+.reel-shop-panel {
+  border-top: 0.5px solid var(--gold-border);
+  padding-top: 9px;
+}
+.reel-shop-label {
+  font-size: 9px; font-weight: 500; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;
+}
+.reel-shop-chips {
+  display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px;
+}
+.reel-add-all {
+  width: 100%; padding: 7px; background: var(--gold); border: none;
+  border-radius: 7px; font-size: 11px; font-weight: 500; color: var(--on-gold);
+  cursor: pointer; font-family: var(--font-body);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  transition: opacity 0.2s;
+}
+.reel-add-all:hover { opacity: 0.88; }
+.reel-actions-col {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 12px 12px 12px 8px;
+  border-left: 0.5px solid var(--gold-border);
+  flex-shrink: 0;
+}
+.reel-action-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  background: none; border: none; cursor: pointer; padding: 0;
+  font-family: var(--font-body);
+}
+.reel-action-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--cream); border: 0.5px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); transition: transform 0.15s, background 0.15s;
+}
+.reel-action-btn:hover .reel-action-icon { background: var(--gold-pale); transform: translateY(-2px); }
+.reel-action-btn.on .reel-action-icon { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
+.reel-action-btn.rail-like.on .reel-action-icon { background: var(--terracotta); color: var(--warm-white); border-color: var(--terracotta); }
+.reel-action-btn.pop .reel-action-icon { animation: railPop 0.35s ease; }
+.reel-action-count { font-size: 10px; font-weight: 500; color: var(--text-mid); }
+
+/* override reel-card to allow bottom panel */
+.reel-card { overflow: visible; }
+.reel-media { border-radius: 24px 24px 0 0; overflow: hidden; }
