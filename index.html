@@ -2476,20 +2476,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
   };
 
   // Map style tags to "what DRAPE knows" preference bars
-  const DNA_TO_KNOWS = {
-    'Quiet luxury':       { label: 'Quiet luxury',      pct: 88 },
-    'Relaxed tailoring':  { label: 'Relaxed tailoring', pct: 82 },
-    'Soft feminine':      { label: 'Soft feminine',     pct: 78 },
-    'Minimalist':         { label: 'Minimalist',        pct: 85 },
-    'Streetwear':         { label: 'Streetwear',        pct: 72 },
-    'Y2K':                { label: 'Y2K',               pct: 68 },
-    'Coastal':            { label: 'Coastal',           pct: 74 },
-    'Office siren':       { label: 'Office siren',      pct: 80 },
-    'Smart casual':       { label: 'Smart casual',      pct: 76 },
-    'Earthy tones':       { label: 'Earthy tones',      pct: 83 },
-    'Cosy knits':         { label: 'Cosy knits',        pct: 79 },
-    'Statement pieces':   { label: 'Statement pieces',  pct: 65 },
-  };
+  const TAG_PCT = {};
 
   function loadUserProfile() {
     let profile;
@@ -2506,16 +2493,9 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       avatarEl.textContent = parts.map(p => p[0]).join('').toUpperCase().slice(0, 2);
     }
 
-    // Subtitle: size + height
+    // Subtitle: blank for now, can be extended later
     const subEl = document.getElementById('profileSub');
-    if (subEl && profile.sizes) {
-      const s = profile.sizes;
-      const topSize = s.tshirt || s.dress || s.shirt || s.knit || '';
-      const parts = [];
-      if (topSize) parts.push('Size ' + topSize);
-      if (s.height && s.height.trim() !== "'") parts.push(s.height);
-      subEl.textContent = parts.join(' · ');
-    }
+    if (subEl) subEl.textContent = '';
 
     // Stats — derive from cart + social data where possible, else 0
     const cartState = Cart.get();
@@ -2525,18 +2505,17 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     document.getElementById('statOrdered') && (document.getElementById('statOrdered').textContent = '0');
     document.getElementById('statPosts') && (document.getElementById('statPosts').textContent = '0');
 
-    // What DRAPE knows — built from style DNA tags
+   // What DRAPE knows — built from style DNA tags
     const knowsEl = document.getElementById('knowsRows');
     if (knowsEl && profile.styleDNA && profile.styleDNA.length) {
-      const rows = profile.styleDNA.slice(0, 5).map(tag => {
-        const k = DNA_TO_KNOWS[tag] || { label: tag, pct: 70 };
+      knowsEl.innerHTML = profile.styleDNA.slice(0, 5).map(tag => {
+        const pct = TAG_PCT[tag] || 0;
         return `<div class="knows-row">
-          <span class="knows-label">${k.label}</span>
-          <div class="knows-track"><div class="knows-fill" style="width:${k.pct}%"></div></div>
-          <span class="knows-pct">${k.pct}%</span>
+          <span class="knows-label">${tag}</span>
+          <div class="knows-track"><div class="knows-fill" style="width:${pct}%"></div></div>
+          <span class="knows-pct">${pct}%</span>
         </div>`;
       }).join('');
-      knowsEl.innerHTML = rows || '<div style="font-size:13px;color:var(--text-muted);">Complete onboarding to see your style profile.</div>';
     } else if (knowsEl) {
       knowsEl.innerHTML = '<div style="font-size:13px;color:var(--text-muted);">Complete onboarding to see your style profile.</div>';
     }
@@ -2573,8 +2552,7 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     const s = profile.sizes;
     if (s) {
       const heightEl = document.getElementById('profileHeight');
-      if (heightEl && s.height && s.height.trim() !== "'") heightEl.textContent = s.height;
-      else if (heightEl) heightEl.textContent = '—';
+      if (heightEl) heightEl.textContent = (s.height && s.height.trim().length > 1) ? s.height : '—';
 
       const sizeEl = document.getElementById('profileSize');
       if (sizeEl) {
@@ -2780,9 +2758,11 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       const gender = obCurrentGender === 'men' ? "Men's" : "Women's";
       const system = 'UK';
       const isCm = document.querySelector('#obHeightUnit .ob-sf-toggle-btn.active')?.textContent.trim() === 'cm';
+      const ftVal = document.getElementById('obHeightFt').value.trim();
+      const inVal = document.getElementById('obHeightIn').value.trim();
       const height = isCm
-        ? (document.getElementById('obHeightFt').value.trim() + ' cm')
-        : (document.getElementById('obHeightFt').value.trim() + "'" + document.getElementById('obHeightIn').value.trim());
+        ? (ftVal ? ftVal + ' cm' : '')
+        : (ftVal || inVal) ? (ftVal ? ftVal + "'" : '') + (inVal ? inVal + '"' : '') : '';
       return {
         gender, system, height,
         tshirt:   document.getElementById('obSizeTshirt').value,
@@ -2882,12 +2862,14 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       };
       localStorage.setItem('drape_onboarded', '1');
       localStorage.setItem('drape_profile', JSON.stringify(profile));
-      // A brand-new account starts with nothing liked or saved.
+      console.log('Profile saved:', profile.styleDNA);
+
       if (isSignup) {
         Social.reset();
         reelsEl.innerHTML = POSTS.map(renderReel).join('');
       }
       document.getElementById('onboarding').style.display = 'none';
+      loadUserProfile();
       showSection('social');
     };
 
