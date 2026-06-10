@@ -86,25 +86,20 @@
       </div>
 
       <div class="ob-sf-section-label">Gender sizing</div>
-      <div class="ob-sf-toggle" id="obGenderToggle">
-        <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obGenderToggle', this)">Women's</button>
-        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obGenderToggle', this)">Men's</button>
-        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obGenderToggle', this)">Both</button>
-      </div>
-
-      <div class="ob-sf-section-label" style="margin-top:14px;">Size system</div>
-      <div class="ob-sf-toggle" id="obSystemToggle">
-        <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obSystemToggle', this)">UK</button>
-        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">EU</button>
-        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">US</button>
-        <button class="ob-sf-toggle-btn" onclick="obSetToggle('obSystemToggle', this)">AUS</button>
+      <div style="display:flex;gap:10px;margin-bottom:4px;">
+        <button class="ob-gender-btn active" id="obGenderWomen" onclick="obSelectGender('women',this)">
+          <span class="ob-gender-icon">♀</span> Women's
+        </button>
+        <button class="ob-gender-btn" id="obGenderMen" onclick="obSelectGender('men',this)">
+          <span class="ob-gender-icon">♂</span> Men's
+        </button>
       </div>
 
       <div class="ob-sf-divider"></div>
       <div class="ob-sf-section-label">Height</div>
       <div class="ob-sf-height-row">
-        <input class="ob-sf-text-input ob-sf-short" id="obHeightFt" type="text" placeholder="5">
-        <input class="ob-sf-text-input ob-sf-short" id="obHeightIn" type="text" placeholder='4"'>
+        <input class="ob-sf-text-input ob-sf-short" id="obHeightFt" type="text" placeholder="ft">
+        <input class="ob-sf-text-input ob-sf-short" id="obHeightIn" type="text" placeholder='in'>
         <div class="ob-sf-unit-toggle" id="obHeightUnit">
           <button class="ob-sf-toggle-btn active" onclick="obSetToggle('obHeightUnit', this); obToggleHeightUnit(this)">ft / in</button>
           <button class="ob-sf-toggle-btn" onclick="obSetToggle('obHeightUnit', this); obToggleHeightUnit(this)">cm</button>
@@ -176,8 +171,12 @@
           <div class="ob-sf-field-label">Shoe size</div>
           <select class="ob-sf-select" id="obSizeShoe">
             <option value="">—</option>
-            <option>3</option><option>4</option><option>5</option><option>6</option>
-            <option>7</option><option>8</option><option>9</option><option>10</option>
+            <option>2</option><option>2.5</option><option>3</option><option>3.5</option>
+            <option>4</option><option>4.5</option><option>5</option><option>5.5</option>
+            <option>6</option><option>6.5</option><option>7</option><option>7.5</option>
+            <option>8</option><option>8.5</option><option>9</option><option>9.5</option>
+            <option>10</option><option>10.5</option><option>11</option><option>11.5</option>
+            <option>12</option><option>13</option>
           </select>
         </div>
         <div class="ob-sf-field"></div>
@@ -2645,19 +2644,22 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
       });
     }
 
-    window.obSetToggle = function(groupId, btn) {
-      document.getElementById(groupId).querySelectorAll('.ob-sf-toggle-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (groupId === 'obGenderToggle') obApplyGender(btn.textContent.trim());
-      if (groupId === 'obSystemToggle') obApplySizeSystem(btn.textContent.trim());
-    };
+    let obCurrentGender = 'women';
 
-    function obApplyGender(gender) {
-      const isMen = gender === "Men's";
+    window.obSelectGender = function(gender, btn) {
+      obCurrentGender = gender;
+      document.getElementById('obGenderWomen').classList.toggle('active', gender === 'women');
+      document.getElementById('obGenderMen').classList.toggle('active', gender === 'men');
+      const isMen = gender === 'men';
       document.querySelectorAll('#ob4 [data-gender="women"]').forEach(el => {
         el.style.display = isMen ? 'none' : '';
       });
-    }
+    };
+
+    window.obSetToggle = function(groupId, btn) {
+      document.getElementById(groupId).querySelectorAll('.ob-sf-toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
 
     function obApplySizeSystem(system) {
       // Update shoe size options based on system
@@ -2724,8 +2726,8 @@ Keep responses short and conversational. Only include the RECOMMENDATIONS block 
     };
 
     function obCollectSizes() {
-      const gender = document.querySelector('#obGenderToggle .ob-sf-toggle-btn.active')?.textContent.trim() || '';
-      const system = document.querySelector('#obSystemToggle .ob-sf-toggle-btn.active')?.textContent.trim() || 'UK';
+      const gender = obCurrentGender === 'men' ? "Men's" : "Women's";
+      const system = 'UK';
       const isCm = document.querySelector('#obHeightUnit .ob-sf-toggle-btn.active')?.textContent.trim() === 'cm';
       const height = isCm
         ? (document.getElementById('obHeightFt').value.trim() + ' cm')

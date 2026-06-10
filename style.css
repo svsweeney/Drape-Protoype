@@ -1428,3 +1428,15 @@ section.active { display: block; }
 }
 .ob-body-scroll::-webkit-scrollbar { width: 4px; }
 .ob-body-scroll::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
+
+/* ─── ONBOARDING GENDER BUTTONS ─── */
+.ob-gender-btn {
+  flex: 1; padding: 12px 16px; border-radius: 10px;
+  border: 1.5px solid var(--gold-border); background: var(--cream);
+  font-size: 14px; font-weight: 500; font-family: var(--font-body);
+  color: var(--text-mid); cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.ob-gender-btn:hover { border-color: var(--gold); color: var(--gold); }
+.ob-gender-btn.active { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
+.ob-gender-icon { font-size: 16px; }
