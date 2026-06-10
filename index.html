@@ -499,7 +499,11 @@
       </div>
       <div class="chat-input-row">
         <button class="chat-new" onclick="resetStylistChat()" title="New chat">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
         </button>
         <textarea class="chat-input" id="chatInput" placeholder="Reply to your stylist…" onkeydown="handleEnter(event)"></textarea>
         <button class="chat-send" onclick="sendMessage()">Send →</button>
@@ -675,7 +679,7 @@
         </a>
       </div>
       <!-- AI Stylist button -->
-      <div class="rc-stylist-bar" onclick="openStylistFromRetailer()"></div>
+      <div class="rc-stylist-bar" onclick="openStylistFromRetailer()">
         <div class="rc-stylist-bar-left">
           <div class="rc-stylist-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
