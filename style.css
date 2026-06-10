@@ -1499,3 +1499,12 @@ section.active { display: block; }
 /* override reel-card to allow bottom panel */
 .reel-card { overflow: visible; }
 .reel-media { border-radius: 24px 24px 0 0; overflow: hidden; }
+
+.chat-new {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: var(--cream); border: 1px solid var(--gold-border);
+  border-right: none; border-radius: 8px 0 0 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+}
+.chat-new:hover { background: var(--gold-pale); color: var(--gold); }
