@@ -498,6 +498,13 @@
         </div>
       </div>
       <div class="chat-input-row">
+        <button class="chat-new" onclick="resetStylistChat()" title="New chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+        </button>
         <textarea class="chat-input" id="chatInput" placeholder="Reply to your stylist…" onkeydown="handleEnter(event)"></textarea>
         <button class="chat-send" onclick="sendMessage()">Send →</button>
       </div>
@@ -672,7 +679,7 @@
         </a>
       </div>
       <!-- AI Stylist button -->
-      <div class="rc-stylist-bar" onclick="return showSection('stylist')">
+      <div class="rc-stylist-bar" onclick="openStylistFromRetailer()">
         <div class="rc-stylist-bar-left">
           <div class="rc-stylist-icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1714" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -968,6 +975,52 @@
   function setAdvisor(btn) {
     document.querySelectorAll('.advisor-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+  }
+
+  function openStylistFromRetailer() {
+    const key = storeState.key;
+    const r = key ? RETAILERS[key] : null;
+    showSection('stylist');
+    if (!r) return;
+
+    // Inject a system-level context message into the chat
+    const cw = document.getElementById('chatWindow');
+    const contextBubble = document.createElement('div');
+    contextBubble.className = 'chat-bubble bot fade-up';
+    contextBubble.innerHTML = `<div class="bubble-tag">DRAPE AI</div>You're browsing <strong>${r.name}</strong> — I'll only suggest items from here. What are you looking for?`;
+    cw.innerHTML = '';
+    cw.appendChild(contextBubble);
+    cw.scrollTop = cw.scrollHeight;
+
+    // Reset conversation and inject retailer restriction into the message history
+    stylistMessages.length = 0;
+    stylistMessages.push({
+      role: 'assistant',
+      content: `You're browsing ${r.name} — I'll only suggest items from here. What are you looking for?`
+    });
+
+    // Override the system prompt context for this session by prepending a user-side instruction
+    stylistMessages.unshift({
+      role: 'user',
+      content: `For this conversation, only recommend items from ${r.name}. Do not suggest items from any other retailer.`
+    });
+    stylistMessages.splice(1, 0, {
+      role: 'assistant',
+      content: `Understood — I'll only recommend items from ${r.name} for this session.`
+    });
+  }
+
+  function resetStylistChat() {
+    stylistMessages.length = 0;
+    hasRecommended = false;
+    const cw = document.getElementById('chatWindow');
+    cw.innerHTML = '';
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bot fade-up';
+    bubble.innerHTML = '<div class="bubble-tag">DRAPE AI</div>Hi! What can I help you with today?';
+    cw.appendChild(bubble);
+    const rating = document.getElementById('chat-rating');
+    if (rating) rating.style.display = 'none';
   }
 
 
